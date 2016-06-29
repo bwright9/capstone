@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  rent: false
+  buy: false
+  housing_costs: 1
+  school_ratings: false
+  median_age: 1
+  safety: false
+  restaurants: false
+  arts_culture: false
+  shopping: false
+  parks_nature: false
+  nightlife: false
+  walk_score: false
+
+two:
+  rent: false
+  buy: false
+  housing_costs: 1
+  school_ratings: false
+  median_age: 1
+  safety: false
+  restaurants: false
+  arts_culture: false
+  shopping: false
+  parks_nature: false
+  nightlife: false
+  walk_score: false

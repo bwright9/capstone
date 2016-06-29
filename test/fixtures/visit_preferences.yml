@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  nightlife: false
+  safety: false
+  restaurants: false
+  arts_culture: false
+  shopping: false
+  parks_nature: false
+  walk_score: false
+  profile_id: 
+
+two:
+  nightlife: false
+  safety: false
+  restaurants: false
+  arts_culture: false
+  shopping: false
+  parks_nature: false
+  walk_score: false
+  profile_id: 

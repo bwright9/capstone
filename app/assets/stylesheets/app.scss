@@ -1,0 +1,29 @@
+
+header, main, footer {
+  padding-left: 240px;
+}
+
+@media only screen and (max-width : 992px) {
+  header, main, footer {
+    padding-left: 0;
+  }
+}
+
+
+#search {
+	padding-left: 30px;
+}
+
+.brand-logo {
+	margin-left: 30px;
+}
+
+
+.side-nav {
+	margin-top: 64px;
+	
+}
+
+#city {
+
+}

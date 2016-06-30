@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router';
 
-const App = () => (
+const App = ({ children }) => (
 	
   <div>
 
@@ -20,7 +21,7 @@ const App = () => (
       		<input id="search" placeholder="Search" />
       	</div>
       </li>
-      <li><a href="#!">Move</a></li>
+      <li><Link to="/move">Move</Link></li>
       <li><a href="#!">Visit</a></li>
       <li><a href="#!">Discover</a></li>
       <li><a href="#!">Favorites</a></li>
@@ -31,8 +32,11 @@ const App = () => (
 
     <h1 className="center">Hello World</h1>
 
+    { children }
+
+
+
   </div>
 )
 
 export default App;
-

@@ -13,3 +13,15 @@
  *= require_tree .
  *= require_self
  */
+
+@font-face {
+    font-family: 'AvenirNext-Demi';
+    src: url('/assets/AvenirNext-Demi.ttf') format('truetype');
+}@font-face {
+    font-family: 'AvenirNext-Medium';
+    src: url('/assets/AvenirNext-Medium.ttf') format('truetype');
+}@font-face {
+    font-family: 'AvenirNext-Regular';
+    src: url('/assets/AvenirNext-Regular.ttf') format('truetype');
+}
+    

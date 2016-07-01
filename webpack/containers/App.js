@@ -1,42 +1,54 @@
 import React from 'react';
+import Navbar from '../components/Navbar';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import {loggedIn, logout } from '../components/auth/actions';
+import Sidenav from '../components/Sidenav';
 
-const App = ({ children }) => (
-	
-  <div>
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.sideNav = this.sideNav.bind(this);
+  }
 
-		<nav>
-	    <div className="nav-wrapper">
-	      <a href="#" className="brand-logo">s o m e T h e r e</a>
-	      <ul id="nav-mobile" className="right hide-on-med-and-down">
-	        <li><a href="#!" className="btn">Login</a></li>
-	      </ul>
-	    </div>
-	  </nav>
+  componentWillMount() {
+  const userId = localStorage.getItem('userId');
+  const apiKey = localStorage.getItem('apiKey');
+  if(!this.props.auth && userId)
+    this.props.dispatch(loggedIn(userId, apiKey))
+  else
+    this.props.dispatch(logout())        
+  }
 
-		
-    <ul id="slide-out" className="side-nav fixed">
-      <li className="search">
-      	<div className="search-wrapper  focused">
-      		<input id="search" placeholder="Search" />
-      	</div>
-      </li>
-      <li><Link to="/move">Move</Link></li>
-      <li><Link to="/visit">Visit</Link></li>
-      <li><Link to="/discover">Discover</Link></li>
-      <li><Link to="/favorites">Favorites</Link></li>
-      <li><p className="" id="city">Current City: </p></li>
+  sideNav() {
+    if(this.props.auth)
+      return(
+        <Sidenav />
+      )
+  }
 
-    </ul>
-    <a href="#" data-activates="slide-out" className="button-collapse"><i className="mdi-navigation-menu"></i></a>
+  render() {
+    return (
+    <div>
+      <Navbar auth={this.props.auth} history={this.props.history} />
+      {this.sideNav()}
+      <h1 className="center">Hello World</h1>
+      { this.props.children }
+    </div>
+    )
+  }
+}
 
-    <h1 className="center">Hello World</h1>
+const mapStateToProps = (state) => {
+  if(state.auth) {
+    return {
+      auth: state.auth.isAuthenticated
+    }
+  } else {
+    return state;
+  }
+}
 
-    { children }
+export default connect(mapStateToProps)(App);
 
 
-
-  </div>
-)
-
-export default App;

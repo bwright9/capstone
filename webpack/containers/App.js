@@ -7,7 +7,7 @@ const App = ({ children }) => (
 
 		<nav>
 	    <div className="nav-wrapper">
-	      <a href="#" className="brand-logo">somethere</a>
+	      <a href="#" className="brand-logo">s o m e T h e r e</a>
 	      <ul id="nav-mobile" className="right hide-on-med-and-down">
 	        <li><a href="#!" className="btn">Login</a></li>
 	      </ul>
@@ -22,9 +22,9 @@ const App = ({ children }) => (
       	</div>
       </li>
       <li><Link to="/move">Move</Link></li>
-      <li><a href="#!">Visit</a></li>
-      <li><a href="#!">Discover</a></li>
-      <li><a href="#!">Favorites</a></li>
+      <li><Link to="/visit">Visit</Link></li>
+      <li><Link to="/discover">Discover</Link></li>
+      <li><Link to="/favorites">Favorites</Link></li>
       <li><p className="" id="city">Current City: </p></li>
 
     </ul>

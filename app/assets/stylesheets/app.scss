@@ -2,6 +2,7 @@ body {
 	font-family: "AvenirNext-Regular";
 }
 
+
 header, main, footer {
   padding-left: 240px;
 }
@@ -12,6 +13,19 @@ header, main, footer {
   }
 }
 
+footer {
+	background-color: gray;
+}
+
+.center {
+	text-align: center;
+}
+
+.wrapper {
+	min-height: calc(100vh - 169px);
+	padding-left: 240px;
+
+}
 
 #search {
 	padding-left: 30px;
@@ -33,4 +47,16 @@ header, main, footer {
 
 .btn {
 	background-color: #F19F4D;
+}
+
+.login {
+    letter-spacing: 5px;
+}
+
+.brand-logo {
+	letter-spacing: 10px;
+}
+
+.footer-copyright {
+	margin-top: -20px;
 }

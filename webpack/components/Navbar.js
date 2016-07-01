@@ -16,25 +16,27 @@ class Navbar extends React.Component {
 	authLink() {
 		if(this.props.auth)
 			return(
-				<li><a href='#' onClick={this.logout.bind(this)}>Logout</a></li>
+				<li><a className='logo-header'href='#' onClick={this.logout.bind(this)}>Logout</a></li>
 			)
 		else {
 			return(
-				<li><Link to='login' className='btn'>Login</Link></li>
+				<li><Link to='login' className='login'>login</Link></li>
 			)
 		}
 	}
 
 	render() {
 		return(
-			<nav>
-				<div className="nav-wrapper">
-				  <Link to="/" className="brand-logo">s o m e T h e r e</Link>
-				    <ul id="nav-mobile" className="right hide-on-med-and-down">
-				      { this.authLink() }
-				    </ul>
-				</div>
-			</nav>
+			<div className='navbar-fixed'>
+				<nav>
+					<div className="nav-wrapper">
+					  <Link to="/" className="brand-logo">someThere</Link>
+					    <ul id="nav-mobile" className="right hide-on-med-and-down">
+					      { this.authLink() }
+					    </ul>
+					</div>
+				</nav>
+			</div>
 		)
 	}
 

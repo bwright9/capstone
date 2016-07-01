@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import {loggedIn, logout } from '../components/auth/actions';
 import Sidenav from '../components/Sidenav';
-
+import Footer from '../components/Footer';
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -27,14 +27,19 @@ class App extends React.Component {
       )
   }
 
+
+
   render() {
     return (
-    <div>
-      <Navbar auth={this.props.auth} history={this.props.history} />
-      {this.sideNav()}
-      <h1 className="center">Hello World</h1>
-      { this.props.children }
-    </div>
+      <div>
+        <Navbar auth={this.props.auth} history={this.props.history} />
+        <div className='wrapper'>
+          {this.sideNav()}
+          <h1 className="center">Hello World</h1>
+          { this.props.children }
+        </div>
+        <Footer />
+      </div>
     )
   }
 }

@@ -2,7 +2,6 @@ body {
 	font-family: "AvenirNext-Regular";
 }
 
-
 header, main, footer {
   padding-left: 240px;
 }
@@ -22,9 +21,8 @@ footer {
 }
 
 .wrapper {
-	min-height: calc(100vh - 169px);
+	min-height: calc(100vh - 171px);
 	padding-left: 240px;
-
 }
 
 #search {
@@ -38,11 +36,10 @@ footer {
 
 .side-nav {
 	margin-top: 64px;
-	
 }
 
 #city {
-
+	margin-top: 250px;
 }
 
 .btn {
@@ -60,3 +57,29 @@ footer {
 .footer-copyright {
 	margin-top: -20px;
 }
+
+// Discover
+
+.collapsible {
+	margin: 30px;
+}
+
+.calculator {
+	padding: 20px 30px 30px 30px;
+}
+
+.hamilton-list {
+	padding: 30px 30px 30px 60px;
+}
+
+.fiber, .fiber-list {
+	padding-left: 30px;
+}
+
+.fiber {
+	padding-bottom: 30px;
+}
+
+
+
+

@@ -1,10 +1,13 @@
 import React from 'react';
 import { Route, IndexRoute } from 'react-router';
 import App from './containers/App';
+import Home from './components/Home';
 import Move from './components/Move';
 import Visit from './components/Visit';
 import Discover from './components/Discover';
 import Favorites from './components/Favorites';
+import About from './components/About';
+import Contact from './components/Contact';
 import Login from './components/auth/Login';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
@@ -19,12 +22,14 @@ const UserIsAuthenticated = UserAuthWrapper({
 export default (
   <Route>
     <Route path="/" component={App}>
-    	<IndexRoute  />
+    	<IndexRoute component={Home}/>
     	<Route path="move" component={Move}></Route>
-        <Route path="login" component={Login} />
+      <Route path="login" component={Login} />
     	<Route path="visit" component={Visit}></Route>
     	<Route path="discover" component={Discover}></Route>
     	<Route path="favorites" component={Favorites}></Route>
+      <Route path="about" component={About}></Route>
+      <Route path="contact" component={Contact}></Route>
     </Route>
     <Route path="*" status={404} />
   </Route>

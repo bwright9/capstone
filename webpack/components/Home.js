@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-class About extends React.Component {
+class Home extends React.Component {
 	constructor(props) {
 		super(props);
 		
@@ -10,11 +10,10 @@ class About extends React.Component {
 	render() {
 		return(
 			<div className="center">
-				<h1>About Component</h1>
+				<h1>Home</h1>
 			</div>
-
 		)
 	}
 }
 
-export default About;
+export default Home;

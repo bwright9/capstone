@@ -29,7 +29,7 @@ export default (
       <Route path="login" component={Login} />
       <Route path="signup" component={Signup} />
     	<Route path="visit" component={Visit}></Route>
-    	<Route path="discover" component={Discover}></Route>
+    	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>
       <Route path="profile" component={Profile}></Route>
       <Route path="about" component={About}></Route>

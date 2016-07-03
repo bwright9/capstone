@@ -5,7 +5,7 @@ const Sidenav = () => (
   <div>
     <ul id="slide-out" className="side-nav fixed">
       <li className="search">
-        <div className="search-wrapper  focused">
+        <div className="search-wrapper focused">
           <input id="search" placeholder="Search" />
         </div>
       </li>

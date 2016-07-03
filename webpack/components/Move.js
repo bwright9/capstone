@@ -11,6 +11,7 @@ class Move extends React.Component {
 		return(
 			<div className="center">
 				<h1>Move Component</h1>
+
 			</div>
 
 		)

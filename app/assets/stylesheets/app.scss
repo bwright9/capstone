@@ -33,7 +33,6 @@ footer {
 	margin-left: 30px;
 }
 
-
 .side-nav {
 	margin-top: 64px;
 }
@@ -47,7 +46,7 @@ footer {
 }
 
 .login {
-    letter-spacing: 5px;
+  letter-spacing: 5px;
 }
 
 .brand-logo {
@@ -58,7 +57,13 @@ footer {
 	margin-top: -20px;
 }
 
-// Discover
+
+/*
+  ========================================
+  Discover
+  ========================================
+*/
+
 
 .collapsible {
 	margin: 30px;
@@ -68,18 +73,19 @@ footer {
 	padding: 20px 30px 30px 30px;
 }
 
-.hamilton-list {
-	padding: 30px 30px 30px 60px;
-}
-
-.fiber, .fiber-list {
-	padding-left: 30px;
+.hamilton-cities {
+	padding-top: 30px;
 }
 
 .fiber {
-	padding-bottom: 30px;
+	padding-left: 30px;
 }
 
+.state-selector {
+	margin-left: -10px;
+}
 
-
+.states-list {
+	margin-top: -10px;
+}
 

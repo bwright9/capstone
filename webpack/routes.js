@@ -26,7 +26,7 @@ export default (
     	<Route path="move" component={Move}></Route>
       <Route path="login" component={Login} />
     	<Route path="visit" component={Visit}></Route>
-    	<Route path="discover" component={Discover}></Route>
+    	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>
       <Route path="about" component={About}></Route>
       <Route path="contact" component={Contact}></Route>

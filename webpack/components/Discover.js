@@ -13,6 +13,10 @@ class Discover extends React.Component {
 	  $(element).ready(function() {
 	    $('select').material_select();
 	  });
+
+	  $(document).ready(function(){
+	    $('.collapsible').collapsible();
+	  });
 	}
 
 	render() {
@@ -26,8 +30,8 @@ class Discover extends React.Component {
 			      	<div className="row state-selector">
 				      	<div className="input-field">
 				      		<div className="col s2">Choose your state:</div>
-						      <select ref="dropdown" className="col s4 states-list" defaultValue="1">
-						        <option value="" disabled></option>
+						      <select ref="dropdown" className="col s4 states-list">
+						        <option value="" disabled>Choose your state</option>
 						        <option value="AL">Alabama</option>
 										<option value="AK">Alaska</option>
 										<option value="AZ">Arizona</option>

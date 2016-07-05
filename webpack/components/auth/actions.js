@@ -35,6 +35,29 @@ export const handleLogin = (email, password, history) => {
 	}
 }
 
+export const handleSignup = (email, password, first_name, last_name, history) => {
+	return(dispatch) => {
+		$.ajax({
+			url: '/users',
+			type: 'POST',
+			data: {user: { email, password, first_name, last_name }},
+			dataType: 'JSON'
+		}).done( response => {
+			// set localStorage apiKey
+			localStorage.setItem('apiKey', response.api_key);
+			// set localStorage userId
+			localStorage.setItem('userId', response.id);
+			// dispatch the login action
+			dispatch(loggedIn(response.id, response.api_key));
+			// redirect
+			history.push('/')
+		}).fail( response => {
+			alert( response.responseText)
+		});
+	}
+}
+
+
 export const handleLogout = (history) => {
 	return(dispatch) => {
 		$.ajax({

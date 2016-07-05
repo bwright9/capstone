@@ -19,8 +19,9 @@ class Navbar extends React.Component {
 				<li><a className='logo-header'href='#' onClick={this.logout.bind(this)}>Logout</a></li>
 			)
 		else {
-			return(
-				<li><Link to='login' className='login'>login</Link></li>
+			return( 
+				[<li><Link to='login' className='login'>login</Link></li>, 
+				<li><Link to='signup'>Sign Up</Link></li>]
 			)
 		}
 	}

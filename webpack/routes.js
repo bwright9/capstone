@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import Login from './components/auth/Login';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
+import Signup from './components/auth/Signup'; 
 
 
 const UserIsAuthenticated = UserAuthWrapper({
@@ -23,7 +24,8 @@ export default (
     <Route path="/" component={App}>
     	<IndexRoute  />
     	<Route path="move" component={Move}></Route>
-        <Route path="login" component={Login} />
+      <Route path="login" component={Login} />
+      <Route path="signup" component={Signup} />
     	<Route path="visit" component={Visit}></Route>
     	<Route path="discover" component={Discover}></Route>
     	<Route path="favorites" component={Favorites}></Route>

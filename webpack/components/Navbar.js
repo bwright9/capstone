@@ -32,6 +32,7 @@ class Navbar extends React.Component {
 					<div className="nav-wrapper">
 					  <Link to="/" className="brand-logo">someThere</Link>
 					    <ul id="nav-mobile" className="right hide-on-med-and-down">
+					    <li><Link to="/profile">Profile</Link></li>
 					      { this.authLink() }
 					    </ul>
 					</div>

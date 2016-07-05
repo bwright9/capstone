@@ -50,6 +50,7 @@ GEM
       execjs
     coffee-script-source (1.10.0)
     concurrent-ruby (1.0.2)
+    curb (0.9.3)
     debug_inspector (0.0.2)
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -169,11 +170,13 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.1.0)
+  curb
   devise (~> 3.4.0)
   foreman
   jbuilder (~> 2.0)
   jquery-rails
   materialize-sass
+  nokogiri
   pg (~> 0.15)
   pry
   rails (= 4.2.6)

@@ -13,6 +13,7 @@ const Sidenav = () => (
       <li><Link to="/visit">Visit</Link></li>
       <li><Link to="/discover">Discover</Link></li>
       <li><Link to="/favorites">Favorites</Link></li>
+      <li><img src="assets/states/alabama.png" /></li>
       <li><p className= "center" id="city">Current City: Anywhere, USA</p></li>
     </ul>
     <a href="#" data-activates="slide-out" className="button-collapse"><i className="mdi-navigation-menu"></i></a>

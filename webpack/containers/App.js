@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import {loggedIn, logout } from '../components/auth/actions';
 import Sidenav from '../components/Sidenav';
 import Footer from '../components/Footer';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 class App extends React.Component {
   constructor(props) {
@@ -13,12 +14,12 @@ class App extends React.Component {
   }
 
   componentWillMount() {
-  const userId = localStorage.getItem('userId');
-  const apiKey = localStorage.getItem('apiKey');
-  if(!this.props.auth && userId)
-    this.props.dispatch(loggedIn(userId, apiKey))
-  else
-    this.props.dispatch(logout())        
+    const userId = localStorage.getItem('userId');
+    const apiKey = localStorage.getItem('apiKey');
+    if(!this.props.auth && userId)
+      this.props.dispatch(loggedIn(userId, apiKey))
+    else
+      this.props.dispatch(logout())        
   }
 
   sideNav() {
@@ -30,14 +31,16 @@ class App extends React.Component {
 
   render() {
     return (
-      <div>
-        <Navbar auth={this.props.auth} history={this.props.history} />
-        <div className='wrapper'>
-          { this.sideNav() }
-          { this.props.children }
+      <MuiThemeProvider>
+        <div>
+          <Navbar auth={this.props.auth} history={this.props.history} />
+          <div className='wrapper'>
+            { this.sideNav() }
+            { this.props.children }
+          </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </MuiThemeProvider>
     )
   }
 }

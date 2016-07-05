@@ -1,22 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = { stateSelect: '' };
 	}
 
 	componentDidMount() {
-	  var element = ReactDOM.findDOMNode(this.refs.dropdown)
+	  $('.collapsible').collapsible();
+	  $('select').material_select();
+	}
 
-	  $(element).ready(function() {
-	    $('select').material_select();
-	  });
-
-	  $(document).ready(function(){
-	    $('.collapsible').collapsible();
-	  });
+	handleSelect(event, index, value) {
+		this.setState({stateSelect: value});
 	}
 
 	render() {
@@ -30,60 +30,60 @@ class Discover extends React.Component {
 			      	<div className="row state-selector">
 				      	<div className="input-field">
 				      		<div className="col s2">Choose your state:</div>
-						      <select ref="dropdown" className="col s4 states-list">
-						        <option value="" disabled>Choose your state</option>
-						        <option value="AL">Alabama</option>
-										<option value="AK">Alaska</option>
-										<option value="AZ">Arizona</option>
-										<option value="AR">Arkansas</option>
-										<option value="CA">California</option>
-										<option value="CO">Colorado</option>
-										<option value="CT">Connecticut</option>
-										<option value="DE">Delaware</option>
-										<option value="DC">District of Columbia</option>
-										<option value="FL">Florida</option>
-										<option value="GA">Georgia</option>
-										<option value="HI">Hawaii</option>
-										<option value="ID">Idaho</option>
-										<option value="IL">Illinois</option>
-										<option value="IN">Indiana</option>
-										<option value="IA">Iowa</option>
-										<option value="KS">Kansas</option>
-										<option value="KY">Kentucky</option>
-										<option value="LA">Louisiana</option>
-										<option value="ME">Maine</option>
-										<option value="MD">Maryland</option>
-										<option value="MA">Massachusetts</option>
-										<option value="MI">Michigan</option>
-										<option value="MN">Minnesota</option>
-										<option value="MS">Mississippi</option>
-										<option value="MO">Missouri</option>
-										<option value="MT">Montana</option>
-										<option value="NE">Nebraska</option>
-										<option value="NV">Nevada</option>
-										<option value="NH">New Hampshire</option>
-										<option value="NJ">New Jersey</option>
-										<option value="NM">New Mexico</option>
-										<option value="NY">New York</option>
-										<option value="NC">North Carolina</option>
-										<option value="ND">North Dakota</option>
-										<option value="OH">Ohio</option>
-										<option value="OK">Oklahoma</option>
-										<option value="OR">Oregon</option>
-										<option value="PA">Pennsylvania</option>
-										<option value="RI">Rhode Island</option>
-										<option value="SC">South Carolina</option>
-										<option value="SD">South Dakota</option>
-										<option value="TN">Tennessee</option>
-										<option value="TX">Texas</option>
-										<option value="UT">Utah</option>
-										<option value="VT">Vermont</option>
-										<option value="VA">Virginia</option>
-										<option value="WA">Washington</option>
-										<option value="WV">West Virginia</option>
-										<option value="WI">Wisconsin</option>
-										<option value="WY">Wyoming</option>
-						      </select>
+				      		<SelectField className="states-list" value={this.state.stateSelect} onChange={this.handleSelect.bind(this)}>
+				      		  <MenuItem value="" disabled>Choose your state</MenuItem>
+						        <MenuItem value="Alabama" primaryText="Alabama" />
+										<MenuItem value="Alaska" primaryText="Alaska" />
+										<MenuItem value="Arizona" primaryText="Arizona" />
+										<MenuItem value="Arkansas" primaryText="Arkansas" />
+										<MenuItem className="chosen-state" value="California" primaryText="California" />
+										<MenuItem value="Colorado" primaryText="Colorado" />
+										<MenuItem value="Connecticut" primaryText="Connecticut" />
+										<MenuItem value="Delaware" primaryText="Delaware" />
+										<MenuItem value="District of Columbia" primaryText="District of Columbia" />
+										<MenuItem value="Florida" primaryText="Florida" />
+										<MenuItem value="Georgia" primaryText="Georgia" />
+										<MenuItem value="Hawaii" primaryText="Hawaii" />
+										<MenuItem value="Idaho" primaryText="Idaho" />
+										<MenuItem value="Illinois" primaryText="Illinois" />
+										<MenuItem value="Indiana" primaryText="Indiana" />
+										<MenuItem value="Iowa" primaryText="Iowa" />
+										<MenuItem value="Kansas" primaryText="Kansas" />
+										<MenuItem value="Kentucky" primaryText="Kentucky" />
+										<MenuItem value="Louisiana" primaryText="Louisiana" />
+										<MenuItem value="Maine" primaryText="Maine" />
+										<MenuItem value="Maryland" primaryText="Maryland" />
+										<MenuItem value="Massachusetts" primaryText="Massachusetts" />
+										<MenuItem value="Michigan" primaryText="Michigan" />
+										<MenuItem value="Minnesota" primaryText="Minnesota" />
+										<MenuItem value="Mississippi" primaryText="Mississippi" />
+										<MenuItem value="Missouri" primaryText="Missouri" />
+										<MenuItem value="Montana" primaryText="Montana" />
+										<MenuItem value="Nebraska" primaryText="Nebraska" />
+										<MenuItem value="Nevada" primaryText="Nevada" />
+										<MenuItem value="New Hampshire" primaryText="New Hampshire" />
+										<MenuItem value="New Jersey" primaryText="New Jersey" />
+										<MenuItem value="New Mexico" primaryText="New Mexico" />
+										<MenuItem value="New York" primaryText="New York" />
+										<MenuItem value="North Carolina" primaryText="North Carolina" />
+										<MenuItem value="North Dakota" primaryText="North Dakota" />
+										<MenuItem value="Ohio" primaryText="Ohio" />
+										<MenuItem value="Oklahoma" primaryText="Oklahoma" />
+										<MenuItem value="Oregon" primaryText="Oregon" />
+										<MenuItem value="Pennsylvania" primaryText="Pennsylvania" />
+										<MenuItem value="Rhode Island" primaryText="Rhode Island" />
+										<MenuItem value="South Carolina" primaryText="South Carolina" />
+										<MenuItem value="South Dakota" primaryText="South Dakota" />
+										<MenuItem value="Tennessee" primaryText="Tennessee" />
+										<MenuItem value="Texas" primaryText="Texas" />
+										<MenuItem value="Utah" primaryText="Utah" />
+										<MenuItem value="Vermont" primaryText="Vermont" />
+										<MenuItem value="Virginia" primaryText="Virginia" />
+										<MenuItem value="Washington" primaryText="Washington" />
+										<MenuItem value="West Virginia" primaryText="West Virginia" />
+										<MenuItem value="Wisconsin" primaryText="Wisconsin" />
+										<MenuItem value="Wyoming" primaryText="Wyoming" />
+	    		        </SelectField>
 						    </div>
 						  </div>
 
@@ -104,7 +104,7 @@ class Discover extends React.Component {
 									<p>After-Tax Income: $</p>
 								</div>
 								<div className="center">
-									<button className="btn">Show neighborhoods in Texas</button>
+									<button className="btn">Show neighborhoods in {this.state.stateSelect}</button>
 								</div>
 							</div>							
 

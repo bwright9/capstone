@@ -4,6 +4,9 @@ import { Router } from 'react-router';
 import routes from './routes';
 import { Provider } from 'react-redux';
 import store, { history } from './store';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+
+injectTapEventPlugin();
 
 ReactDOM.render(
   <Provider store={store}>

@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   root 'home#index'
 
-  
+	namespace :api do 
+		get "neighborhoods", to: "zillow#neighborhoods"
+	end  
 
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
 

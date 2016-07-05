@@ -1,7 +1,5 @@
 source 'https://rubygems.org'
 
-
-
 gem 'rails', '4.2.6'
 
 gem 'pg', '~> 0.15'
@@ -15,6 +13,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'webpack-rails-react'
 gem 'materialize-sass'
 gem 'devise', '~> 3.4.0'
+gem 'curb'
+gem 'nokogiri'
 
 group :development, :test do
   gem 'pry'
@@ -22,9 +22,7 @@ end
 
 group :development do
   gem 'web-console', '~> 2.0'
-
   gem 'spring'
 end
-
 
 gem 'foreman'

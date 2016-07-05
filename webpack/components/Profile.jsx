@@ -4,11 +4,25 @@ import { Link } from 'react-router';
 class Profile extends React.Component {
 	constructor(props) {
 		super(props);
-		
+		this.state = { profile: [] };
+		this.showProfile = this.showProfile.bind(this);
+		this.updateProfile = this.updateProfile.bind(this);
+	}
+
+	componentWillMount() {
+		$.ajax({
+			url: '',
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( user => {
+			this.setState({ profile })
+		}).fail( data => {
+			console.log('Something went wrong'); 
+		});
 	}
 
 	showProfile() {
-		let profile = this.state.user.profile;
+		let profile = this.state.profile;
 		if(this.state.user.profile) {
 			return(
 				<div className="center blue lighten-3 container" style={{borderRadius: '20px', paddingBottom: '10px', marginTop: '40px', marginBottom: '30px'}}>
@@ -27,7 +41,7 @@ class Profile extends React.Component {
 							<input ref='current_city' type='text' placeholder="Current City" />
 							<input ref='current_state' type='text' placeholder="Current State" />
 							<input ref='current_neighborhood' type='text' placeholder="Current Neighborhood" />
-							<input ref='current_zipcode' type='text' placeholder="Current Zip Code" />
+							<input ref='current_zipcode' type='number' placeholder="Current Zip Code" />
 						</form>
 					</div>
 				</div>
@@ -43,10 +57,10 @@ class Profile extends React.Component {
 		let current_zipcode = this.refs.current_zipcode.value
 		this.refs.profileForm.reset()
 		$.ajax({
-			url: `/api/users/${this.state.user.id}`,
+			url: ``,
 			type: 'PUT',
 			dataType: 'JSON',
-			data: { user: { current_city } }
+			data: { user: {  } }
 		}).done( user => {
 			this.setState({ user })
 		}).fail( data => {
@@ -57,7 +71,7 @@ class Profile extends React.Component {
 	render() {
 		return(
 			<div className="center">
-				<h1>Profile Component</h1>
+				<h1>{this.showProfile()}</h1>
 			</div>
 
 		)

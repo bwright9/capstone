@@ -27,7 +27,7 @@ export const handleLogin = (email, password, history) => {
 			// dispatch the login action
 			dispatch(loggedIn(response.id, response.api_key));
 			// redirect
-			history.push('/')
+			history.push('/discover')
 		}).fail( response => {
 			// TODO: hand this better
 			console.log(response);

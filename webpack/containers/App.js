@@ -30,18 +30,31 @@ class App extends React.Component {
   }
 
   render() {
-    return (
-      <MuiThemeProvider>
-        <div>
-          <Navbar auth={this.props.auth} history={this.props.history} />
-          <div className='wrapper'>
-            { this.sideNav() }
-            { this.props.children }
+    if(!this.props.auth) {
+      return (
+        <MuiThemeProvider>
+          <div>
+            <Navbar auth={this.props.auth} history={this.props.history} />
+              { this.props.children }
+            <Footer />
           </div>
-          <Footer />
-        </div>
-      </MuiThemeProvider>
-    )
+        </MuiThemeProvider>
+
+      )
+    } else {
+      return (
+        <MuiThemeProvider>
+          <div>
+            <Navbar auth={this.props.auth} history={this.props.history} />
+            <div className='wrapper'>
+              {this.sideNav()}
+              { this.props.children }
+            </div>
+            <Footer />
+          </div>
+        </MuiThemeProvider>
+      )
+    }
   }
 }
 

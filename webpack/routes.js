@@ -8,6 +8,7 @@ import Favorites from './components/Favorites';
 import Login from './components/auth/Login';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
+import  NoMatch from './components/NoMatch';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -26,7 +27,7 @@ export default (
     	<Route path="discover" component={Discover}></Route>
     	<Route path="favorites" component={Favorites}></Route>
     </Route>
-    <Route path="*" status={404} />
+    <Route path="*" status={404} component={NoMatch} />
   </Route>
 )
 

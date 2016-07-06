@@ -2,7 +2,7 @@ class Api::ZillowController < ApplicationController
 
 	def neighborhoods
 		neighborhood_names = []
-		http = Curl.get("http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=#{ENV['zillow_api_key']}&state=WA&city=Seattle&childtype=neighborhood")
+		http = Curl.get("http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=#{ENV['zillow_api_key']}&state=#{params[:geoState]}&city=#{params[:city]}&childtype=neighborhood")
 		names = Nokogiri::XML(http.body_str).search("name")
 		names.each do |name|
 			neighborhood_names << name.children.first.text

@@ -6,7 +6,7 @@ import Request from 'superagent';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: '', geoState: '', neighborhoods: [] };
+		this.state = { city: null, geoState: '', neighborhoods: null };
 		this.handleSelect = this.handleSelect.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
@@ -34,17 +34,27 @@ class Move extends React.Component {
 	}
 
 	showNeighborhoods() {
-		if(this.state.city) {
-			return this.state.neighborhoods.map( neighborhood => {
-				return(
-					<ul>
-	  	      <li>{neighborhood}</li>
-	        </ul>
-				)
-			})
-		} else {
+		if(this.state.neighborhoods === null) {
 			return(
 				<div></div>
+			)
+		} else if (this.state.neighborhoods.names.length === 0 ) {
+			return(
+				<div>No neighborhoods, sorry</div>
+			)
+		} else {
+			let names = this.state.neighborhoods.names.map( neighborhood => {
+				return(
+	  	    <li>{neighborhood}</li>
+				)
+			})
+			return(
+				<div>				
+					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.state.city}, {this.state.geoState}.</p>
+					<ul>
+						{ names }
+					</ul>
+				</div>
 			)
 		}
 	}
@@ -60,7 +70,6 @@ class Move extends React.Component {
 
 						<input type='submit' className='btn' />
 					</form>
-
 				{ this.showNeighborhoods() }
 
 			  </div>

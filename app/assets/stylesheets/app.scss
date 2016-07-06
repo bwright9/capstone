@@ -32,7 +32,12 @@ footer {
 }
 
 .brand-logo {
-	margin-left: 30px;
+	margin-left: 20px;
+}
+
+.logo-img {
+	width: 250px;
+	height: 64px;
 }
 
 
@@ -47,6 +52,10 @@ footer {
 
 .btn {
 	background-color: #F19F4D;
+}
+
+.btn:hover {
+	background-color: #ec8800;
 }
 
 .login {

@@ -6,28 +6,48 @@ import Request from 'superagent';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: '', geoState: '' };
+		this.state = { city: '', geoState: '', neighborhoods: [] };
 		this.handleSelect = this.handleSelect.bind(this);
+		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
+
 	}
 
 	handleSelect(e) {
 		e.preventDefault();
 		this.setState( { city: this.refs.city.value, geoState: this.refs.geoState.value }, function stateUpdated () {
-			this.showNeighborhoods() 
+			this.fetchNeighborhoods() 
+		})
+	}
+
+	fetchNeighborhoods() {
+		$.ajax({
+			url: "/api/neighborhoods",
+			type: 'GET',
+			data: { city: this.state.city, geoState: this.state.geoState },
+			dataType: 'JSON'
+		}).done( neighborhoods => {
+			console.log(neighborhoods)
+			this.setState({ neighborhoods });
+		}).fail( data => {
+			console.log(data);
 		})
 	}
 
 	showNeighborhoods() {
-		$.ajax({
-			url: "/api/neighborhoods",
-			type: 'GET',
-			dataType: 'JSON'
-		}).done( neighborhoods => {
-			console.log(neighborhoods)
-		}).fail( data => {
-			console.log(data);
-		})
+		if(this.state.city) {
+			return this.state.neighborhoods.map( neighborhood => {
+				return(
+					<ul>
+	  	      <li>{neighborhood}</li>
+	        </ul>
+				)
+			})
+		} else {
+			return(
+				<div></div>
+			)
+		}
 	}
 
 	render() {
@@ -40,8 +60,10 @@ class Move extends React.Component {
 						<input ref='geoState' type='text' placeholder='WA' />
 						<input type='submit' className='btn' />
 					</form>
+
+				{ this.showNeighborhoods() }
+
 			  </div>
- 				<p>You are looking at neighborhoods in {this.state.city}, {this.state.geoState}.</p>
 			</div>
 		)
 	}

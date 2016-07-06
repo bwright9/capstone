@@ -10,7 +10,6 @@ class Move extends React.Component {
 		this.handleSelect = this.handleSelect.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
-
 	}
 
 	handleSelect(e) {
@@ -58,6 +57,7 @@ class Move extends React.Component {
 			    <form onSubmit={this.handleSelect}>
 						<input ref='city' type='text' placeholder='Seattle' />
 						<input ref='geoState' type='text' placeholder='WA' />
+
 						<input type='submit' className='btn' />
 					</form>
 

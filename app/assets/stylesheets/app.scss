@@ -25,16 +25,19 @@ footer {
 	padding-left: 240px;
 }
 
-#search {
-	padding-left: 30px;
+.btn {
+	background-color: #F19F4D;
 }
+
+
+/*
+  ========================================
+  Navbar
+  ========================================
+*/
 
 .brand-logo {
 	margin-left: 30px;
-}
-
-.btn {
-	background-color: #F19F4D;
 }
 
 .login {
@@ -43,10 +46,6 @@ footer {
 
 .brand-logo {
 	letter-spacing: 10px;
-}
-
-.footer-copyright {
-	margin-top: -20px;
 }
 
 
@@ -60,6 +59,11 @@ footer {
 	margin-top: 64px;
 }
 
+#search {
+	padding-left: 30px;
+	width: 210px;
+}
+
 .home-state {
 	width: 200px;	
 	margin-top: 85px;
@@ -68,6 +72,18 @@ footer {
 #city {
 	margin-top: -30px;
 }
+
+
+/*
+  ========================================
+  Footer
+  ========================================
+*/
+
+.footer-copyright {
+	margin-top: -20px;
+}
+
 
 /*
   ========================================

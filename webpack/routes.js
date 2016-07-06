@@ -10,6 +10,9 @@ import Profile from './components/Profile';
 import About from './components/About';
 import Contact from './components/Contact';
 import Login from './components/auth/Login';
+import LandingSwitch from './components/LandingSwitch';
+import About from './components/About';
+import Contact from './components/Contact';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
 import Signup from './components/auth/Signup'; 
@@ -21,13 +24,15 @@ const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated'
 });
 
+
 export default (
   <Route>
     <Route path="/" component={App}>
-    	<IndexRoute component={Home}/>
+    	<IndexRoute component={LandingSwitch}  />
+      <Route path="signup" component={Signup} />
+      <Route path="landing" component={LandingSwitch}></Route>
     	<Route path="move" component={Move}></Route>
       <Route path="login" component={Login} />
-      <Route path="signup" component={Signup} />
     	<Route path="visit" component={Visit}></Route>
     	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>

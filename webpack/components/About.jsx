@@ -1,10 +1,8 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 class About extends React.Component {
 	constructor(props) {
 		super(props);
-		
 	}
 
 	render() {
@@ -12,7 +10,6 @@ class About extends React.Component {
 			<div className="center">
 				<h1>About Component</h1>
 			</div>
-
 		)
 	}
 }

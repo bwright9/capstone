@@ -1,3 +1,4 @@
+/* general document */
 body {
 	font-family: "AvenirNext-Regular";
 }
@@ -12,10 +13,6 @@ header, main, footer {
   }
 }
 
-footer {
-	background-color: gray;
-}
-
 .center {
 	text-align: center;
 }
@@ -25,6 +22,7 @@ footer {
 	padding-left: 240px;
 }
 
+<<<<<<< 69ea1ddff973ea759e69667d30e9066ded2770bc
 .btn {
 	background-color: #F19F4D;
 }
@@ -73,6 +71,61 @@ footer {
 	margin-top: -30px;
 }
 
+.btn-large {
+	background-color: #F19F4D;
+}
+
+.btn-large:hover {
+    background-color: #ee8c2b;
+}
+
+/* Landing page*/
+.card img {
+	height: 900px;
+	border-width: 0px;
+	opacity: 0.85;
+
+}
+
+.image {
+	background-image: url(balcony.jpg);
+	height: 700px;
+	width: 350px;
+
+	.card .card-image .card-title {
+	color: #fff;
+	position: absolute;
+	top: 50px;
+	right: 30px;
+	padding: 20px;
+	font-size: 40px;
+	letter-spacing: 15px;
+	text-shadow: 0px 2px 8px #4A4A4A;
+	text-align: right;
+}
+
+.card .card-image .btn {
+	position: absolute;
+	bottom: 20px;
+	left: 181px;
+	letter-spacing: 10px;
+}
+
+.dialog-box {
+	background-color: rgba(0, 0, 0, 0.5);
+	position: absolute;
+	top: 200px;
+	bottom: 200px;
+	margin: 0 20px 0 20px;
+}
+
+.dialog-box h5 {
+	color: white;
+	margin: 100px 10px 0px 10px;
+	text-shadow: 0px 2px 8px #4A4A4A;
+}
+
+
 
 /*
   ========================================
@@ -83,6 +136,7 @@ footer {
 .footer-copyright {
 	margin-top: -20px;
 }
+
 
 
 /*
@@ -100,6 +154,7 @@ footer {
 	padding: 20px 30px 30px 30px;
 }
 
+
 .hamilton-cities {
 	padding-top: 30px;
 }
@@ -115,5 +170,47 @@ footer {
 .states-list {
 	margin-top: -10px;	
 }
+
+/* Navbar */
+
+.brand-logo {
+	margin-left: 30px;
+	letter-spacing: 10px;
+}
+
+.login {
+  letter-spacing: 5px;
+}
+
+.logo-header {
+	letter-spacing: 5px;
+}
+/* Side Nav*/
+
+#search {
+	padding-left: 30px;
+}
+.side-nav {
+	margin-top: 64px;
+	
+}
+
+/* About */
+
+.team-member {
+	padding: 10px 10px 10px 10px;
+}
+/* Footer*/
+
+.footer {
+	color: #F19F4D;
+	letter-spacing: 5px;
+}
+
+.footer-copyright {
+	margin-top: -20px;
+}
+
+
 
 

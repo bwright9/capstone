@@ -13,10 +13,12 @@ class Navbar extends React.Component {
 		this.props.dispatch(handleLogout(this.props.history));
 	}
 
+
+
 	authLink() {
 		if(this.props.auth)
 			return(
-				<li><a className='logo-header' href='#' onClick={this.logout.bind(this)}>Logout</a></li>
+				<li><a className='logo-header'href='#' onClick={this.logout.bind(this)}>logout</a></li>
 			)
 		else {
 			return( 

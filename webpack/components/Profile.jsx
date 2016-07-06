@@ -1,79 +1,99 @@
 import React from 'react';
-import { Link } from 'react-router';
 
 class Profile extends React.Component {
 	constructor(props) {
-		super(props);
-		this.state = { profile: [] };
-		this.showProfile = this.showProfile.bind(this);
-		this.updateProfile = this.updateProfile.bind(this);
+		super(props)
+		this.state = { profile: [] }
+		this.displayProfile = this.displayProfile.bind(this)
 	}
 
 	componentWillMount() {
 		$.ajax({
-			url: '',
+			url:'/api/profiles',
 			type: 'GET',
 			dataType: 'JSON'
-		}).done( user => {
+		}).done( profile => {
 			this.setState({ profile })
 		}).fail( data => {
-			console.log('Something went wrong'); 
-		});
+			alert('Something went wrong')
+		})
 	}
 
-	showProfile() {
-		let profile = this.state.profile;
-		if(this.state.user.profile) {
-			return(
-				<div className="center blue lighten-3 container" style={{borderRadius: '20px', paddingBottom: '10px', marginTop: '40px', marginBottom: '30px'}}>
-					<h3>Current City: ${current_city}</h3>
-					<h5>Current State: ${current_state}</h5>
-					<h5>Current Neighborhood: ${current_neighborhood}</h5>
-					<h5>Current Zip Code: ${current_zipcode}</h5>
-				</div>
-			)
-		} else {
-			return(
-				<div>
-					<h3 className="center">Please update your current neighborhood</h3>
-					<div className="col s6 m4 offset-s3 offset-m4">
-						<form ref='profileForm' onSubmit={this.updateProfile}>
-							<input ref='current_city' type='text' placeholder="Current City" />
-							<input ref='current_state' type='text' placeholder="Current State" />
-							<input ref='current_neighborhood' type='text' placeholder="Current Neighborhood" />
-							<input ref='current_zipcode' type='number' placeholder="Current Zip Code" />
-						</form>
-					</div>
-				</div>
-			)
-		}
-	}
-
-	updateProfile(e) {
+	addProfile(e) {
 		e.preventDefault();
-		let current_city = this.refs.current_city.value
-		let current_state = this.refs.current_state.value
-		let current_neighborhood = this.refs.current_neighborhood.value
-		let current_zipcode = this.refs.current_zipcode.value
-		this.refs.profileForm.reset()
+		let current_city = this.refs.currentCity.value
+		let current_state = this.refs.currentState.value
+		let current_neighborhood = this.refs.currentNeighborhood.value
+		let current_zipcode = this.refs.currentZipcode.value
+		let age = this.refs.age.value
 		$.ajax({
-			url: ``,
-			type: 'PUT',
+			url: `/api/profiles/${this.state.userId}/profiles`,
+			type: 'POST',
 			dataType: 'JSON',
-			data: { user: {  } }
-		}).done( user => {
-			this.setState({ user })
-		}).fail( data => {
-			alert('Could not update profile')
+			data: { profile: { current_city, current_state, current_neighborhood, current_zipcode, age } }
+		}).done( profile => {
+			this.setState({ profile: [
+					{...profile},
+					...this.state.profile
+				]
+			})
+		})
+		this.refs.addProfileForm.reset()
+	}
+
+	updateProfile(profile) {
+		let profiles = this.state.profile
+		let index = profile.findIndex( p => p.id === profile.id)
+		this.setState({
+			profile: [
+				...profile.slice(0, index),
+				{...profile},
+				...profile.slice(index + 1, profile.length)
+			]
+		})
+	}
+
+	deleteProfile(id) {
+		$.ajax({
+			url: `/api/users/${this.props.params.userId}/profiles/${id}`,
+			type: 'DELETE',
+			dataType: 'JSON'
+		}).done( data => {
+			let profile = this.state.profile
+			let index = profile.findIndex( p => p.id === id)
+			this.setState({
+				profile: [
+					...profile.slice(0, index),
+					...profile.slice(index + 1, profile.length)
+				]
+			})
+		})
+	}
+
+	displayProfile() {
+		return this.state.profile.map( profile => {
+			return (
+				<Profile key={profile.id} profile={profile} userId={this.props.params.userId} deleteProfile={this.deleteProfile.bind(this)} updateProfile={this.updateProfile.bind(this)}/>
+			)
 		})
 	}
 
 	render() {
 		return(
-			<div className="center">
-				<h1>{this.showProfile()}</h1>
+			<div className='row'>
+				<h1 className="center">Profile</h1>
+				<div className="container">
+					<form ref='addProfileForm' onSubmit={this.addProfile.bind(this)}>
+						<input ref='currentCity' type='text' placeholder='Current City' />
+						<input ref='currentState' type='text' step='any' placeholder='Current State' />
+						<input ref='currentNeighborhood' type='text' step='any' placeholder='Current Neighborhood' />
+						<input ref='currentZipcode' type='number' step='any' placeholder='Current Zip Code' />
+						<input ref='age' type='number' step='any' placeholder='Age' />
+						<button type='submit' className='btn'>Create Profile</button>
+					</form>
+				</div>
+				{this.displayProfile()}
 			</div>
-
 		)
 	}
 }

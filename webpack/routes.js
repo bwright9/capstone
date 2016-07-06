@@ -11,8 +11,6 @@ import About from './components/About';
 import Contact from './components/Contact';
 import Login from './components/auth/Login';
 import LandingSwitch from './components/LandingSwitch';
-import About from './components/About';
-import Contact from './components/Contact';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
 import Signup from './components/auth/Signup'; 

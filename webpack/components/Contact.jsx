@@ -1,8 +1,5 @@
 import React from 'react';
-<<<<<<< 69ea1ddff973ea759e69667d30e9066ded2770bc
 import { Link } from 'react-router';
-=======
->>>>>>> landing page
 
 class Contact extends React.Component {
 	constructor(props) {

@@ -14,6 +14,7 @@ import LandingSwitch from './components/LandingSwitch';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
 import Signup from './components/auth/Signup'; 
+import  NoMatch from './components/NoMatch';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -21,7 +22,6 @@ const UserIsAuthenticated = UserAuthWrapper({
   redirectAction: () => handleLogout(browserHistory),
   wrapperDisplayName: 'UserIsAuthenticated'
 });
-
 
 export default (
   <Route>

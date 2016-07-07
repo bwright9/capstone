@@ -38,6 +38,6 @@ export default (
       <Route path="about" component={About}></Route>
       <Route path="contact" component={Contact}></Route>
     </Route>
-    <Route path="*" status={404} />
+    <Route path="*" status={404} component={NoMatch} />
   </Route>
 )

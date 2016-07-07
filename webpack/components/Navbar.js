@@ -33,7 +33,7 @@ class Navbar extends React.Component {
 			<div className='navbar-fixed'>
 				<nav>
 					<div className="nav-wrapper">
-					  <Link to="/" className="brand-logo">someThere</Link>
+					  <Link to="/" className="brand-logo"><img className="logo-img" src="assets/logosomethere.png" alt="LOGO" /></Link>
 					    <ul id="nav-mobile" className="right hide-on-med-and-down">
 					    <li><Link to="/profile">Profile</Link></li>
 					      { this.authLink() }

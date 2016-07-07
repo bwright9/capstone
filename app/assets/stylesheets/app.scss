@@ -168,6 +168,21 @@ header, main, footer {
 	margin-top: -10px;	
 }
 
+
+/*
+  ========================================
+  Move
+  ========================================
+*/
+
+
+.neighborhoods-list {
+	-webkit-columns: 100px 3; /* Chrome, Safari, Opera */
+	-moz-columns: 100px 3; /* Firefox */
+	columns: 100px 3;
+}
+
+
 /* Navbar */
 
 .brand-logo {

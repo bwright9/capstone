@@ -51,7 +51,7 @@ class Move extends React.Component {
 			return(
 				<div>				
 					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.state.city}, {this.state.geoState}.</p>
-					<ul>
+					<ul className="neighborhoods-list">
 						{ names }
 					</ul>
 				</div>

@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
+import MoveMap from './MoveMap';
 
 class Move extends React.Component {
 	constructor(props) {
@@ -49,9 +50,10 @@ class Move extends React.Component {
 				<div>No neighborhoods, sorry</div>
 			)
 		} else {
-			let names = this.state.neighborhoods.names.map( neighborhood => {
+			let names = this.state.neighborhoods.names.map( (neighborhood, index) => {
+				console.log(index);
 				return(
-	  	    <li><a href="#" ref="geoHood" onClick={this.selectNeighborhood}>{neighborhood}</a></li>
+	  	    <li><a href="#" key={`hood-${index}`} onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
 				)
 			})
 			return(
@@ -65,9 +67,9 @@ class Move extends React.Component {
 		}
 	}
 
-	selectNeighborhood(e) {
+	selectNeighborhood(e, neighborhood) {
 		e.preventDefault();
-		this.setState({geoHood: this.refs.geoHood.text});
+		this.setState({geoHood: neighborhood});
 	}
 
 	showCoordinates() {
@@ -80,15 +82,10 @@ class Move extends React.Component {
 			let index = this.state.neighborhoods.names.indexOf(hood);
 			let hood_lat = this.state.neighborhoods.lat[index];
 			let hood_long = this.state.neighborhoods.long[index];
-			let base_url = `https://www.google.com/maps/embed/v1/view?key=API_KEY_HERE&zoom=15&center=`;
-			let coordinates = `${hood_lat}` + "," + `${hood_long}`;
-			let url = base_url + coordinates;
 			return(
 				<div>				
 					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
-					<iframe width="840" height="450" frameborder="0" style={{border:0}} 
-						src={url} allowfullscreen>
-					</iframe>
+					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
 				</div>
 			)
 		}

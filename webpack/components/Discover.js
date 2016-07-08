@@ -30,7 +30,8 @@ class Discover extends React.Component {
 			      	<div className="row state-selector">
 				      	<div className="input-field">
 				      		<div className="col s2">Choose your state:</div>
-				      		<SelectField className="states-list" value={this.state.stateSelect} onChange={this.handleSelect.bind(this)}>
+				      		
+					      	<SelectField className="states-list" value={this.state.stateSelect} onChange={this.handleSelect.bind(this)}>
 				      		  <MenuItem value="" disabled>Choose your state</MenuItem>
 						        <MenuItem value="Alabama" primaryText="Alabama" />
 										<MenuItem value="Alaska" primaryText="Alaska" />
@@ -84,6 +85,7 @@ class Discover extends React.Component {
 										<MenuItem value="Wisconsin" primaryText="Wisconsin" />
 										<MenuItem value="Wyoming" primaryText="Wyoming" />
 	    		        </SelectField>
+				      
 						    </div>
 						  </div>
 

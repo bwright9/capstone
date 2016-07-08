@@ -5,17 +5,19 @@ import TextField from 'material-ui/TextField';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null };
-		this.handleSelect = this.handleSelect.bind(this);
+		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null };
+		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
+		this.selectNeighborhood = this.selectNeighborhood.bind(this);
+		this.showCoordinates = this.showCoordinates.bind(this);
 	}
 
 	componentDidMount() {
 	  $('select').material_select();
 	}
 
-	handleSelect(e) {
+	selectRegion(e) {
 		e.preventDefault();
 		let city = this.refs.city.value.replace(/[ ]+/g, "").trim();
 		this.setState( { city: city, geoState: this.refs.geoState.value }, function stateUpdated () {
@@ -49,15 +51,36 @@ class Move extends React.Component {
 		} else {
 			let names = this.state.neighborhoods.names.map( neighborhood => {
 				return(
-	  	    <li>{neighborhood}</li>
+	  	    <li><a href="#" ref="geoHood" onClick={this.selectNeighborhood}>{neighborhood}</a></li>
 				)
 			})
 			return(
 				<div>				
 					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
-					<ul className="neighborhoods-list">
+					<ul className="neighborhoods-list" >
 						{ names }
 					</ul>
+				</div>
+			)
+		}
+	}
+
+	selectNeighborhood(e) {
+		e.preventDefault();
+		this.setState({geoHood: this.refs.geoHood.text});
+	}
+
+	showCoordinates() {
+		if(this.state.geoHood === null) {
+			return(
+				<div></div>
+			)
+		} else {
+			let hood = this.state.geoHood
+			let index = this.state.neighborhoods.names.indexOf(hood);
+			return(
+				<div>				
+					<p>The coordinates of {this.state.geoHood} are {this.state.neighborhoods.lat[index]}, {this.state.neighborhoods.long[index]}.</p>
 				</div>
 			)
 		}
@@ -69,7 +92,7 @@ class Move extends React.Component {
 				<h1 className="center">Move Component</h1>
 				<div className="container">
 			    
-			    <form onSubmit={this.handleSelect}>
+			    <form onSubmit={this.selectRegion}>
 						<input ref='city' type='text' placeholder='Choose your city' />
 						<select ref='geoState'>
 				      <option value="" disabled selected>Choose your state</option>
@@ -129,6 +152,7 @@ class Move extends React.Component {
 						<input type='submit' className='btn' />
 					</form>
 				{ this.showNeighborhoods() }
+				{ this.showCoordinates() }
 
 			  </div>
 			</div>

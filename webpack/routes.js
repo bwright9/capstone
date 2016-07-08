@@ -26,7 +26,7 @@ const UserIsAuthenticated = UserAuthWrapper({
 export default (
   <Route>
     <Route path="/" component={App}>
-    	<IndexRoute component={LandingSwitch}  />
+    	<IndexRoute component={LandingSwitch} />
       <Route path="signup" component={Signup} />
       <Route path="landing" component={LandingSwitch}></Route>
     	<Route path="move" component={Move}></Route>

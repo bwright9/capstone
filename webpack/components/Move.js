@@ -76,11 +76,19 @@ class Move extends React.Component {
 				<div></div>
 			)
 		} else {
-			let hood = this.state.geoHood
+			let hood = this.state.geoHood;
 			let index = this.state.neighborhoods.names.indexOf(hood);
+			let hood_lat = this.state.neighborhoods.lat[index];
+			let hood_long = this.state.neighborhoods.long[index];
+			let base_url = `https://www.google.com/maps/embed/v1/view?key=API_KEY_HERE&zoom=15&center=`;
+			let coordinates = `${hood_lat}` + "," + `${hood_long}`;
+			let url = base_url + coordinates;
 			return(
 				<div>				
-					<p>The coordinates of {this.state.geoHood} are {this.state.neighborhoods.lat[index]}, {this.state.neighborhoods.long[index]}.</p>
+					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
+					<iframe width="840" height="450" frameborder="0" style={{border:0}} 
+						src={url} allowfullscreen>
+					</iframe>
 				</div>
 			)
 		}

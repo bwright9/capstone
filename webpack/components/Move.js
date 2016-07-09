@@ -6,8 +6,13 @@ import MoveMap from './MoveMap';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
+<<<<<<< HEAD
 		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null };
 		this.selectRegion = this.selectRegion.bind(this);
+=======
+		this.state = { city: null, geoState: '', neighborhoods: null, ws_lat: null, ws_lon: null };
+		this.handleSelect = this.handleSelect.bind(this);
+>>>>>>> rachel
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
@@ -39,6 +44,7 @@ class Move extends React.Component {
 			console.log(data);
 		})
 	}
+
 
 	showNeighborhoods() {
 		if(this.state.neighborhoods === null) {
@@ -158,7 +164,6 @@ class Move extends React.Component {
 					</form>
 				{ this.showNeighborhoods() }
 				{ this.showCoordinates() }
-
 			  </div>
 			</div>
 		)

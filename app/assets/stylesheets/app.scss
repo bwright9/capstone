@@ -37,7 +37,8 @@ header, main, footer {
 */
 
 .brand-logo {
-	margin-left: 20px;
+	margin-left: 30px;
+	letter-spacing: 10px;
 }
 
 .login {
@@ -48,6 +49,19 @@ header, main, footer {
 	letter-spacing: 10px;
 }
 
+.logo-img {
+	  width: 180px;
+    height: 45px;
+    margin-top: 10px;
+}
+
+.logo-header {
+	letter-spacing: 5px;
+}
+
+nav {
+	background-color: #4484CE;
+}
 
 /*
   ========================================
@@ -81,7 +95,11 @@ header, main, footer {
     background-color: #ee8c2b;
 }
 
-/* Landing page*/
+/*
+  ========================================
+  Landing Page
+  ========================================
+*/
 .card img {
 	height: 900px;
 	border-width: 0px;
@@ -136,7 +154,26 @@ header, main, footer {
 
 .footer-copyright {
 	margin-top: -20px;
+	background-color: #4484CE;
 }
+
+.white-links {
+	color: white;
+}
+
+.footer {
+	letter-spacing: 5px;
+	background-color: #4484CE;
+}
+
+.footer- {
+	background-color: #4484CE;
+}
+
+footer.page-footer .footer-copyright {
+	background-color: #4484CE;
+}
+
 
 /*
   ========================================
@@ -168,6 +205,7 @@ header, main, footer {
 	margin-top: -10px;	
 }
 
+
 .home-state {
 	margin-top: 0px;
 }
@@ -198,34 +236,26 @@ header, main, footer {
   letter-spacing: 5px;
 }
 
-.logo-header {
-	letter-spacing: 5px;
+.state {
+	height: 90.02px;
+	width: 88.59px;
 }
 
-.logo-img {
-	width: 150px;
-	height: 64px;
+/*
+  ========================================
+  About
+  ========================================
+*/
+
+.team {
+	border-radius: 50%;
+	display: block;
+	margin: auto;
+	width: 80%;
 }
 
-/* Side Nav*/
-
-#search {
-	padding-left: 30px;
-}
-.side-nav {
-	margin-top: 64px;
-}
-
-/* About */
-
-.team-member {
-	padding: 10px 10px 10px 10px;
-}
-/* Footer*/
-
-.footer {
-	color: #F19F4D;
-	letter-spacing: 5px;
+.team-members {
+	margin-top: 70px;
 }
 
 .footer-copyright {
@@ -240,10 +270,4 @@ header, main, footer {
 .profile_desc {
 	margin-left: 30px;
 }
-
-
-
-
-
-
 

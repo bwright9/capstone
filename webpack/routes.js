@@ -15,6 +15,9 @@ import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
 import Signup from './components/auth/Signup'; 
 import  NoMatch from './components/NoMatch';
+import movePreferences from './components/movePreferences';
+import travelPreferences from './components/travelPreferences';
+import preferenceSelect from './components/preferenceSelect';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -34,7 +37,10 @@ export default (
     	<Route path="visit" component={Visit}></Route>
     	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>
-      <Route path="profile" component={Profile}></Route>
+      <Route path="profile" component={UserIsAuthenticated(Profile)}></Route>
+      <Route path="movePreferences" component={UserIsAuthenticated(movePreferences)}></Route>
+      <Route path="travelPreferences" component={UserIsAuthenticated(travelPreferences)}></Route>
+      <Route path="preferenceSelect" component={UserIsAuthenticated(preferenceSelect)}></Route>
       <Route path="about" component={About}></Route>
       <Route path="contact" component={Contact}></Route>
     </Route>

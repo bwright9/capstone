@@ -1,13 +1,17 @@
 class Api::ProfilesController < ApplicationController
-	before_action :user_instance
-	before_action :profile_instance, except: [:index, :create]
+	# before_action :user_instance, except: [:index]
+	# before_action :profile_instance, except: [:index, :create, :show, :create]
  	
  	def index
  		render json: current_user.profile
  	end
+
+ 	def show
+    render json: current_user.profile
+ 	end
  	
  	def create
- 		profile = @user.profiles.new(profile_params)
+ 		profile = Profile.new(profile_params)
  		if profile.save
  			render json: profile
  		else
@@ -32,11 +36,15 @@ class Api::ProfilesController < ApplicationController
  	
  	def profile_params
  		params.require(:profile).permit(:current_city, :current_state, :current_neighborhood,
- 																		:current_zipcode, :age)
+ 																		:current_zipcode, :age, :user_id)
+ 	end
+
+ 	def profile
+    @profile = Profile.find_by(user_id: params[:id])
  	end
  	
  	def user_instance
- 		@user = User.find_by(id: params[:user_id])
+ 		@user = User.find_by(id: params[:id])
  	end
  	
  	def profile_instance

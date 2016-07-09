@@ -8,14 +8,14 @@ import Slider from 'material-ui/Slider';
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: '', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
+		this.state = { stateSelect: 'california', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
 		this.showGeoState = this.showGeoState.bind(this);
 		this.calculateTax = this.calculateTax.bind(this);
 	}
 
 	componentWillMount() {
 		let firstSalary = this.state.salary * 0.85;
-  	this.setState({afterTaxCurrent: firstSalary});
+  	this.setState({afterTaxCurrent: firstSalary, afterTaxNew: firstSalary});
 	}
 
 	componentDidMount() {
@@ -24,8 +24,10 @@ class Discover extends React.Component {
 	}
 
 	handleSelect(event, index, value) {
-		this.setState({stateSelect: value});
-	}
+		this.setState({stateSelect: value}, function afterStateUpdated() {
+ 	    this.calculateTax();    	
+    });
+  }
 
 	handleFirstSlider(event, value) {
     this.setState({salary: value}, function afterNumberChanges() {
@@ -34,19 +36,83 @@ class Discover extends React.Component {
   }
 
   calculateTax() {
+    let oldSalary = 0;
     let newSalary = 0;
-    if (this.state.salary < 9225) {
-    	newSalary = this.state.salary * 0.9
-    } else if (this.state.salary >= 9225 && this.state.salary < 37450) {
-	   	newSalary = this.state.salary * 0.85
-    } else if (this.state.salary >= 37450 && this.state.salary < 90750) {
-    	newSalary = this.state.salary * 0.75
-    } else if (this.state.salary >= 90750 && this.state.salary < 189300) {
-    	newSalary = this.state.salary * 0.72
-    } else {
-    	newSalary = this.state.salary * 0.67
+    let flatTaxBrackets = {
+    		"alabama": 0.05,
+				"alaska": 0,
+				"arizona": 0.0454,
+				"arkansas": 0.07,
+				"california": 0.09999, //fix this one
+				"colorado": 0.0463,
+				"connecticut": 0.06,
+				"delaware": 0.066,
+				"dc": 0.085,
+				"florida": 0,
+				"georgia": 0.06,
+				"hawaii": 0.09,
+				"idaho": 0.074,
+				"illinois": 0.05,
+				"indiana": 0.034,
+				"iowa": 0.0898,
+				"kansas": 0.049,
+				"kentucky": 0.06,
+				"louisiana": 0.06,
+				"maine": 0.0795,
+				"maryland": 0.0575,
+				"massachusetts": 0.051,
+				"michigan": 0.0425,
+				"minnesota": 0.08,
+				"mississippi": 0.05,
+				"missouri": 0.06,
+				"montana": 0.069,
+				"nebraska": 0.0684,
+				"nevada": 0,
+				"newhampshire": 0,
+				"newjersey": 0.0637,
+				"newmexico": 0.049,
+				"newyork": 0.0685,
+				"northcarolina": 0.0575,
+				"northdakota": 0.0399,
+				"ohio": 0.0499,
+				"oklahoma": 0.0525,
+				"oregon": 0.099,
+				"pennsylvania": 0.0307,
+				"rhodeisland": 0.05,
+				"southcarolina": 0.07,
+				"southdakota": 0,
+				"tennessee": 0.06,
+				"texas": 0,
+				"utah": 0.05,
+				"vermont": 0.08,
+				"virginia": 0.0575,
+				"washington": 0,
+				"westvirginia": 0.065,
+				"wisconsin": 0.07,
+				"wyoming": 0
     }
-		this.setState({afterTaxCurrent: newSalary});
+    let graduatedTaxBrackets = {
+    	"california": {
+    	}
+    }
+    let stateTax = 0;
+    graduatedTaxBrackets[this.state.stateSelect]
+    let federalTax = 0;
+    if (this.state.salary < 9225) {
+    	federalTax = (this.state.salary*0.1)
+    } else if (this.state.salary >= 9225 && this.state.salary < 37450) {
+	   	federalTax = (9225*0.1) + ((this.state.salary-9225)*0.15)
+    } else if (this.state.salary >= 37450 && this.state.salary < 90750) {
+    	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((this.state.salary-37450)*0.25)
+    } else if (this.state.salary >= 90750 && this.state.salary < 189300) {
+    	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((90750-37450)*0.25) + ((this.state.salary-90750)*0.28)
+    } else {
+    	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((90750-37450)*0.25) + ((189300-90750)*0.28) + ((this.state.salary-189300)*0.33)
+    }
+    oldSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets["california"]) );
+		this.setState({afterTaxCurrent: oldSalary});
+    newSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets[this.state.stateSelect]) );
+		this.setState({afterTaxNew: newSalary});
   }
 
   showGeoState() {
@@ -147,12 +213,12 @@ class Discover extends React.Component {
 			        
 							<div className="row">
 								<div className="compare-states col s6 center">
-									<img className="home-state" src="assets/states/alabama.png" />
-									<p>After-Tax Income: ${this.state.afterTaxCurrent.toLocaleString()}</p>
+									<img className="home-state" src="assets/states/california.png" />
+									<p>After-Tax Income: ${Math.round(this.state.afterTaxCurrent).toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">
 									{ this.showGeoState() }
-									<p>After-Tax Income: ${this.state.salary.toLocaleString()}</p>
+									<p>After-Tax Income: ${Math.round(this.state.afterTaxNew).toLocaleString()}</p>
 								</div>
 							</div>
 

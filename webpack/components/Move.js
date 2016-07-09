@@ -6,7 +6,7 @@ import Request from 'superagent';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null };
+		this.state = { city: null, geoState: '', neighborhoods: null, ws_lat: null, ws_lon: null };
 		this.handleSelect = this.handleSelect.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
@@ -32,6 +32,7 @@ class Move extends React.Component {
 			console.log(data);
 		})
 	}
+
 
 	showNeighborhoods() {
 		if(this.state.neighborhoods === null) {
@@ -70,8 +71,7 @@ class Move extends React.Component {
 
 						<input type='submit' className='btn' />
 					</form>
-				{ this.showNeighborhoods() }
-
+					{ this.showNeighborhoods() }
 			  </div>
 			</div>
 		)

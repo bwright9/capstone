@@ -5,9 +5,9 @@ const Footer = () => (
 	<footer className='page-footer'>
 	<div className="footer-copyright center">
 	    <div className="container footer">
-      		<Link to="/about">about</Link>|
-      		<Link to="/contact">contact</Link>|
-      		<a href="https://github.com/bwright9/capstone">github</a>
+      		<Link to="/about" className='white-links'> about </Link>|
+      		<Link to="/contact" className='white-links'> contact </Link>|
+      		<a href="https://github.com/bwright9/capstone" className='white-links's> github</a>
 	    </div>
 	  </div>
 	</footer>

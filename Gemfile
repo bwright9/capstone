@@ -15,6 +15,7 @@ gem 'materialize-sass'
 gem 'devise', '~> 3.4.0'
 gem 'curb'
 gem 'nokogiri'
+gem 'walkscore'
 
 group :development, :test do
   gem 'pry'

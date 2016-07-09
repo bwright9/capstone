@@ -8,32 +8,30 @@ class Contact extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div className='team-members'>
 				<h2 className='center'>About the Team:</h2> 
-				<div className="center">
-					<div className='row'>
-						<div className='team-member col m2'>
-							<img src='assets/balcony.jpg' />
-							<h3 className='center'>Anamika Anand</h3>
-      				<a href="https://www.linkedin.com/in/aanamikanand">LinkedIn</a>
+					<div className='row team-members'>
+						<div className='col m3 center'>
+							<img className='team' src='assets/team/anamika.jpg' />
+							<h4>Anamika Anand</h4>
+      				<a href="https://www.linkedin.com/in/aanamikanand" target="_blank">LinkedIn</a>
 						</div>
-						<div className='team-member col m2'>
-							<img src='assets/balcony.jpg' />
-							<h3 className='center'>Tom Lynam</h3>
-      				<a href="https://www.linkedin.com/in/tomlynam">LinkedIn</a>
+						<div className='col m3 center'>
+							<img className='team' src='assets/team/Tom.jpg' />
+							<h4 className='center'>Tom Lynam</h4>
+      				<a href="https://www.linkedin.com/in/tomlynam" target="_blank">LinkedIn</a>
 						</div>
-						<div className='team-member col m2'>
-							<img src='assets/balcony.jpg' />
-							<h3 className='center'>Rachel Prows</h3>
-      				<a href="https://www.linkedin.com/in/rachelprows">LinkedIn</a>
+						<div className='col m3 center'>
+							<img className='team' src='assets/team/Rachel.jpg' />
+							<h4 className='center'>Rachel Prows</h4>
+      				<a href="https://www.linkedin.com/in/rachelprows" target="_blank">LinkedIn</a>
 						</div>
-						<div className='team-member col m2'>
-							<img src='assets/balcony.jpg' />
-							<h3 className='center'>Brant Wright</h3>
-      				<a href="https://www.linkedin.com/in/bwright9">LinkedIn</a>
+						<div className='col m3 center'>
+							<img className='team' src='assets/team/brant.jpg' />
+							<h4 className='center'>Brant Wright</h4>
+      				<a href="https://www.linkedin.com/in/bwright9" target="_blank">LinkedIn</a>
 						</div>
 					</div>     
-				</div>
 			</div>
 		)
 	}

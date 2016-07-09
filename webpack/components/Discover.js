@@ -8,8 +8,14 @@ import Slider from 'material-ui/Slider';
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: '', firstSlider: 35000 };
+		this.state = { stateSelect: '', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
 		this.showGeoState = this.showGeoState.bind(this);
+		this.calculateTax = this.calculateTax.bind(this);
+	}
+
+	componentWillMount() {
+		let firstSalary = this.state.salary * 0.85;
+  	this.setState({afterTaxCurrent: firstSalary});
 	}
 
 	componentDidMount() {
@@ -22,7 +28,25 @@ class Discover extends React.Component {
 	}
 
 	handleFirstSlider(event, value) {
-    this.setState({firstSlider: value});
+    this.setState({salary: value}, function afterNumberChanges() {
+ 	    this.calculateTax();    	
+    });
+  }
+
+  calculateTax() {
+    let newSalary = 0;
+    if (this.state.salary < 9225) {
+    	newSalary = this.state.salary * 0.9
+    } else if (this.state.salary >= 9225 && this.state.salary < 37450) {
+	   	newSalary = this.state.salary * 0.85
+    } else if (this.state.salary >= 37450 && this.state.salary < 90750) {
+    	newSalary = this.state.salary * 0.75
+    } else if (this.state.salary >= 90750 && this.state.salary < 189300) {
+    	newSalary = this.state.salary * 0.72
+    } else {
+    	newSalary = this.state.salary * 0.67
+    }
+		this.setState({afterTaxCurrent: newSalary});
   }
 
   showGeoState() {
@@ -40,7 +64,6 @@ class Discover extends React.Component {
 	}
   
 	render() {
-		
 		return(
 			<div>
 				<ul className="collapsible" data-collapsible="accordion">
@@ -110,7 +133,7 @@ class Discover extends React.Component {
 
 		      		<div className="row state-selector">
 		      			<div className="col s3">Salary: </div>
-		      			<span>${this.state.firstSlider.toLocaleString()}</span>
+		      			<span>${this.state.salary.toLocaleString()}</span>
 		      		</div>
 
 							<Slider
@@ -118,18 +141,18 @@ class Discover extends React.Component {
 			          min={0}
 			          max={400000}
 			          step={1}
-			          value={this.state.firstSlider}
+			          value={this.state.salary}
 			          onChange={this.handleFirstSlider.bind(this)}
 			        />
 			        
 							<div className="row">
 								<div className="compare-states col s6 center">
 									<img className="home-state" src="assets/states/alabama.png" />
-									<p>After-Tax Income: ${this.state.firstSlider.toLocaleString()}</p>
+									<p>After-Tax Income: ${this.state.afterTaxCurrent.toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">
 									{ this.showGeoState() }
-									<p>After-Tax Income: ${this.state.firstSlider.toLocaleString()}</p>
+									<p>After-Tax Income: ${this.state.salary.toLocaleString()}</p>
 								</div>
 							</div>
 
@@ -147,28 +170,28 @@ class Discover extends React.Component {
 
 			      	<div className="row">
 								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="https://www.shnsf.com/Online/default.asp?BOparam::WScontent::loadArticle::permalink=hamilton&BOparam::WScontent::loadArticle::context_id=" target="_blank">San Francisco, CA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Atlanta, GA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="http://hollywoodpantages.com/showinfo.php?id=75" target="_blank">Los Angeles, CA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Austin, TX</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/dc.png' />
-									<p><a href="https://medium.com/@kennedycenter/hamilton-at-the-kennedy-center-4245b945b0f4?promotionno=227963#.oi6v6ol6n" target="_blank">Washington D.C.</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Kansas City, MO</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/georgia.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Atlanta, GA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Kansas City, KS</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/massachusetts.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Boston, MA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Nashville, TN</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/northcarolina.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Charlotte, NC</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Provo, UT</p>
 								</div>
 							</div>
 
@@ -176,28 +199,28 @@ class Discover extends React.Component {
 
 			      	<div className="row">
 								<div className="col s4 center">
-									<img className='state' src='assets/states/ohio.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Cleveland, OH</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Charlotte, NC</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Costa Mesa, CA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Huntsville, AL</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/colorado.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Denver, CO</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Raleigh-Durham, NC</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/iowa.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Des Moines, IA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Salt Lake City, UT</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/texas.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Houston, TX</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>San Antonio, TX</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/nevada.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Las Vegas, NV</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>San Francisco, CA</p>
 								</div>
 							</div>
 			      </div>
@@ -207,80 +230,81 @@ class Discover extends React.Component {
 			      <div className="collapsible-body">
 			      	<div className="row hamilton-cities">
 								<div className="col s4 center">
-									<img className='state' src='assets/states/oregon.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Portland, OR</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>San Francisco, CA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/utah.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Salt Lake City, UT</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Los Angeles, CA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">San Diego, CA</a></p>
+									<i className="large material-icons">terrain</i>
+									<p>Washington, D.C.</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/washington.png' />
-									<p>Seattle, WA</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/missouri.png' />
-									<p>St. Louis, MO</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/arizona.png' />
-									<p>Tempe, AZ</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/georgia.png' />
+									<i className="large material-icons">terrain</i>
 									<p>Atlanta, GA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/texas.png' />
-									<p>Austin, TX</p>
+									<i className="large material-icons">terrain</i>
+									<p>Boston, MA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/missouri.png' />
-									<p>Kansas City, MO</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/kansas.png' />
-									<p>Kansas City, KS</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/tennessee.png' />
-									<p>Nashville, TN</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/utah.png' />
-									<p>Provo, UT</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/northcarolina.png' />
+									<i className="large material-icons">terrain</i>
 									<p>Charlotte, NC</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/alabama.png' />
-									<p>Huntsville, AL</p>
+									<i className="large material-icons">terrain</i>
+									<p>Cleveland, OH</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/northcarolina.png' />
-									<p>Raleigh-Durham, NC</p>
+									<i className="large material-icons">terrain</i>
+									<p>Costa Mesa, CA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/utah.png' />
+									<i className="large material-icons">terrain</i>
+									<p>Denver, CO</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Des Moines, IA</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Houston, TX</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Las Vegas, NV</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Portland, OR</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
 									<p>Salt Lake City, UT</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/texas.png' />
-									<p>San Antonio, TX</p>
+									<i className="large material-icons">terrain</i>
+									<p>San Diego, CA</p>
 								</div>
 								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p>San Francisco, CA</p>
+									<i className="large material-icons">terrain</i>
+									<p>Seattle, WA</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>St. Louis, MO</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Tempe, AZ</p>
 								</div>
 							</div>				
+
 			      </div>
-			    </li>  
+			    </li>
 			  </ul>
 			</div>
 		)

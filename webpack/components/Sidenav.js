@@ -3,7 +3,8 @@ import { Link } from 'react-router';
  
 // change this to class
 // when sidenav mounts
-// make ajax call to get user profile data on a component will mount
+// make ajax call to get user profile data 
+// on a component will mount
 
 const Sidenav = () => (
   <div>

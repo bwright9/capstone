@@ -3,11 +3,13 @@ import { Link } from 'react-router';
 import ReactDOM from 'react-dom';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+import Slider from 'material-ui/Slider';
 
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: '' };
+		this.state = { stateSelect: '', firstSlider: 35000 };
+		this.showGeoState = this.showGeoState.bind(this);
 	}
 
 	componentDidMount() {
@@ -19,7 +21,26 @@ class Discover extends React.Component {
 		this.setState({stateSelect: value});
 	}
 
+	handleFirstSlider(event, value) {
+    this.setState({firstSlider: value});
+  }
+
+  showGeoState() {
+	  if(this.state.stateSelect) {
+			return(
+				<img className="home-state" src={`assets/states/${this.state.stateSelect}.png`} />
+			)
+		} else {
+			return(
+				<div>				
+					<i className="large material-icons">terrain</i>
+				</div>
+			)
+		}
+	}
+  
 	render() {
+		
 		return(
 			<div>
 				<ul className="collapsible" data-collapsible="accordion">
@@ -29,87 +50,156 @@ class Discover extends React.Component {
 
 			      	<div className="row state-selector">
 				      	<div className="input-field">
-				      		<div className="col s2">Choose your state:</div>
-				      		
+				      		<div className="col s3">Choose your state:</div>
 					      	<SelectField className="states-list" value={this.state.stateSelect} onChange={this.handleSelect.bind(this)}>
 				      		  <MenuItem value="" disabled>Choose your state</MenuItem>
-						        <MenuItem value="Alabama" primaryText="Alabama" />
-										<MenuItem value="Alaska" primaryText="Alaska" />
-										<MenuItem value="Arizona" primaryText="Arizona" />
-										<MenuItem value="Arkansas" primaryText="Arkansas" />
-										<MenuItem className="chosen-state" value="California" primaryText="California" />
-										<MenuItem value="Colorado" primaryText="Colorado" />
-										<MenuItem value="Connecticut" primaryText="Connecticut" />
-										<MenuItem value="Delaware" primaryText="Delaware" />
-										<MenuItem value="District of Columbia" primaryText="District of Columbia" />
-										<MenuItem value="Florida" primaryText="Florida" />
-										<MenuItem value="Georgia" primaryText="Georgia" />
-										<MenuItem value="Hawaii" primaryText="Hawaii" />
-										<MenuItem value="Idaho" primaryText="Idaho" />
-										<MenuItem value="Illinois" primaryText="Illinois" />
-										<MenuItem value="Indiana" primaryText="Indiana" />
-										<MenuItem value="Iowa" primaryText="Iowa" />
-										<MenuItem value="Kansas" primaryText="Kansas" />
-										<MenuItem value="Kentucky" primaryText="Kentucky" />
-										<MenuItem value="Louisiana" primaryText="Louisiana" />
-										<MenuItem value="Maine" primaryText="Maine" />
-										<MenuItem value="Maryland" primaryText="Maryland" />
-										<MenuItem value="Massachusetts" primaryText="Massachusetts" />
-										<MenuItem value="Michigan" primaryText="Michigan" />
-										<MenuItem value="Minnesota" primaryText="Minnesota" />
-										<MenuItem value="Mississippi" primaryText="Mississippi" />
-										<MenuItem value="Missouri" primaryText="Missouri" />
-										<MenuItem value="Montana" primaryText="Montana" />
-										<MenuItem value="Nebraska" primaryText="Nebraska" />
-										<MenuItem value="Nevada" primaryText="Nevada" />
-										<MenuItem value="New Hampshire" primaryText="New Hampshire" />
-										<MenuItem value="New Jersey" primaryText="New Jersey" />
-										<MenuItem value="New Mexico" primaryText="New Mexico" />
-										<MenuItem value="New York" primaryText="New York" />
-										<MenuItem value="North Carolina" primaryText="North Carolina" />
-										<MenuItem value="North Dakota" primaryText="North Dakota" />
-										<MenuItem value="Ohio" primaryText="Ohio" />
-										<MenuItem value="Oklahoma" primaryText="Oklahoma" />
-										<MenuItem value="Oregon" primaryText="Oregon" />
-										<MenuItem value="Pennsylvania" primaryText="Pennsylvania" />
-										<MenuItem value="Rhode Island" primaryText="Rhode Island" />
-										<MenuItem value="South Carolina" primaryText="South Carolina" />
-										<MenuItem value="South Dakota" primaryText="South Dakota" />
-										<MenuItem value="Tennessee" primaryText="Tennessee" />
-										<MenuItem value="Texas" primaryText="Texas" />
-										<MenuItem value="Utah" primaryText="Utah" />
-										<MenuItem value="Vermont" primaryText="Vermont" />
-										<MenuItem value="Virginia" primaryText="Virginia" />
-										<MenuItem value="Washington" primaryText="Washington" />
-										<MenuItem value="West Virginia" primaryText="West Virginia" />
-										<MenuItem value="Wisconsin" primaryText="Wisconsin" />
-										<MenuItem value="Wyoming" primaryText="Wyoming" />
+						        <MenuItem value="alabama" primaryText="Alabama" />
+										<MenuItem value="alaska" primaryText="Alaska" />
+										<MenuItem value="arizona" primaryText="Arizona" />
+										<MenuItem value="arkansas" primaryText="Arkansas" />
+										<MenuItem value="california" primaryText="California" />
+										<MenuItem value="colorado" primaryText="Colorado" />
+										<MenuItem value="connecticut" primaryText="Connecticut" />
+										<MenuItem value="delaware" primaryText="Delaware" />
+										<MenuItem value="dc" primaryText="District of Columbia" />
+										<MenuItem value="florida" primaryText="Florida" />
+										<MenuItem value="georgia" primaryText="Georgia" />
+										<MenuItem value="hawaii" primaryText="Hawaii" />
+										<MenuItem value="idaho" primaryText="Idaho" />
+										<MenuItem value="illinois" primaryText="Illinois" />
+										<MenuItem value="indiana" primaryText="Indiana" />
+										<MenuItem value="iowa" primaryText="Iowa" />
+										<MenuItem value="kansas" primaryText="Kansas" />
+										<MenuItem value="kentucky" primaryText="Kentucky" />
+										<MenuItem value="louisiana" primaryText="Louisiana" />
+										<MenuItem value="maine" primaryText="Maine" />
+										<MenuItem value="maryland" primaryText="Maryland" />
+										<MenuItem value="massachusetts" primaryText="Massachusetts" />
+										<MenuItem value="michigan" primaryText="Michigan" />
+										<MenuItem value="minnesota" primaryText="Minnesota" />
+										<MenuItem value="mississippi" primaryText="Mississippi" />
+										<MenuItem value="missouri" primaryText="Missouri" />
+										<MenuItem value="montana" primaryText="Montana" />
+										<MenuItem value="nebraska" primaryText="Nebraska" />
+										<MenuItem value="nevada" primaryText="Nevada" />
+										<MenuItem value="newhampshire" primaryText="New Hampshire" />
+										<MenuItem value="newjersey" primaryText="New Jersey" />
+										<MenuItem value="newmexico" primaryText="New Mexico" />
+										<MenuItem value="newyork" primaryText="New York" />
+										<MenuItem value="northcarolina" primaryText="North Carolina" />
+										<MenuItem value="northdakota" primaryText="North Dakota" />
+										<MenuItem value="ohio" primaryText="Ohio" />
+										<MenuItem value="oklahoma" primaryText="Oklahoma" />
+										<MenuItem value="oregon" primaryText="Oregon" />
+										<MenuItem value="pennsylvania" primaryText="Pennsylvania" />
+										<MenuItem value="rhodeisland" primaryText="Rhode Island" />
+										<MenuItem value="southcarolina" primaryText="South Carolina" />
+										<MenuItem value="southdakota" primaryText="South Dakota" />
+										<MenuItem value="tennessee" primaryText="Tennessee" />
+										<MenuItem value="texas" primaryText="Texas" />
+										<MenuItem value="utah" primaryText="Utah" />
+										<MenuItem value="vermont" primaryText="Vermont" />
+										<MenuItem value="virginia" primaryText="Virginia" />
+										<MenuItem value="washington" primaryText="Washington" />
+										<MenuItem value="westvirginia" primaryText="West Virginia" />
+										<MenuItem value="wisconsin" primaryText="Wisconsin" />
+										<MenuItem value="wyoming" primaryText="Wyoming" />
 	    		        </SelectField>
-				      
 						    </div>
 						  </div>
 
-			      	<label for="salary">Salary</label>
-			      	<input className="mdl-slider mdl-js-slider" type="range" min="0" max="400000" step="1" defaultValue="35000" id="salary" />
+		      		<div className="row state-selector">
+		      			<div className="col s3">Salary: </div>
+		      			<span>${this.state.firstSlider.toLocaleString()}</span>
+		      		</div>
 
-							<br />
-							<br />
-							<br />
-
+							<Slider
+			          defaultValue={35000}
+			          min={0}
+			          max={400000}
+			          step={1}
+			          value={this.state.firstSlider}
+			          onChange={this.handleFirstSlider.bind(this)}
+			        />
+			        
 							<div className="row">
 								<div className="compare-states col s6 center">
-									<i className="large material-icons">terrain</i>
-									<p>After-Tax Income: $</p>
+									<img className="home-state" src="assets/states/alabama.png" />
+									<p>After-Tax Income: ${this.state.firstSlider.toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">
-									<i className="large material-icons">terrain</i>
-									<p>After-Tax Income: $</p>
+									{ this.showGeoState() }
+									<p>After-Tax Income: ${this.state.firstSlider.toLocaleString()}</p>
 								</div>
-								<div className="center">
+							</div>
+
+							<div className="center">
 									<button className="btn">Show neighborhoods in {this.state.stateSelect}</button>
-								</div>
 							</div>							
 
+			      </div>
+			    </li>
+			    <li>
+			      <div className="collapsible-header"><i className="material-icons">wifi</i>Google Fiber</div>
+			      <div className="collapsible-body">
+
+			      	<h3 className="fiber">Current Cities</h3>
+
+			      	<div className="row">
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Atlanta, GA</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Austin, TX</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Kansas City, MO</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Kansas City, KS</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Nashville, TN</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Provo, UT</p>
+								</div>
+							</div>
+
+			      	<h3 className="fiber">Upcoming Cities</h3>
+
+			      	<div className="row">
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Charlotte, NC</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Huntsville, AL</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Raleigh-Durham, NC</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>Salt Lake City, UT</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>San Antonio, TX</p>
+								</div>
+								<div className="col s4 center">
+									<i className="large material-icons">terrain</i>
+									<p>San Francisco, CA</p>
+								</div>
+							</div>
 			      </div>
 			    </li>
 			    <li>
@@ -192,75 +282,7 @@ class Discover extends React.Component {
 
 			      </div>
 			    </li>
-			    <li>
-			      <div className="collapsible-header"><i className="material-icons">check_circle</i>Rock the Vote</div>
-			      <div className="collapsible-body">
-			      	<p>Lorem ipsum dolor sit amet.</p>
-			      </div>
-			    </li>
-			    <li>
-			      <div className="collapsible-header"><i className="material-icons">wifi</i>Google Fiber</div>
-			      <div className="collapsible-body">
-
-			      	<h3 className="fiber">Current Cities</h3>
-
-			      	<div className="row">
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Atlanta, GA</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Austin, TX</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Kansas City, MO</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Kansas City, KS</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Nashville, TN</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Provo, UT</p>
-								</div>
-							</div>
-
-			      	<h3 className="fiber">Upcoming Cities</h3>
-
-			      	<div className="row">
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Charlotte, NC</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Huntsville, AL</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Raleigh-Durham, NC</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>Salt Lake City, UT</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>San Antonio, TX</p>
-								</div>
-								<div className="col s4 center">
-									<i className="large material-icons">terrain</i>
-									<p>San Francisco, CA</p>
-								</div>
-							</div>
-			      </div>
-			    </li>
+			    
 			  </ul>
 			</div>
 		)

@@ -1,8 +1,11 @@
-export const loggedIn = (id, apiKey) => {
+export const loggedIn = (id, apiKey, firstName, lastName) => {
 	return {
 		type: 'LOGIN',
 		id,
-		apiKey
+		apiKey,
+		firstName,
+		lastName
+
 	}
 }
 
@@ -25,7 +28,7 @@ export const handleLogin = (email, password, history) => {
 			// set localStorage userId
 			localStorage.setItem('userId', response.id);
 			// dispatch the login action
-			dispatch(loggedIn(response.id, response.api_key));
+			dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
 			// redirect
 			history.push('/discover')
 		}).fail( response => {

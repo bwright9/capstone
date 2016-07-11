@@ -1,12 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import ProfileEdit from './ProfileEdit';
+import { Link, browserHistory } from 'react-router';
 
 class Profile extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { profile: undefined }
+		this.state = { profile: null, edit: false }
 	}
 
 	componentWillMount() {
@@ -19,6 +18,29 @@ class Profile extends React.Component {
 		}).fail( data => {
 			alert('Something went wrong')
 		})
+	}
+
+	toggleEdit() {
+	  this.setState({ edit: !this.state.edit })
+	}
+
+	handleSubmit(e) {
+		// TODO ensure variables are called corrently 
+	  e.preventDefault();
+	  let current_city = this.refs.current_city.value
+	  let current_state = this.refs.current_state.value
+	  let current_neigborhood = this.refs.current_neigborhood.value
+	  let current_zipcode = this.refs.current_zipcode.value
+	  let age = this.refs.age.value
+	  this.toggleEdit();
+	  $.ajax({
+	    url:`/api/profiles/${this.props.id}`,
+	    type: 'PUT',
+	    dataType: 'JSON',
+	    data: { ProfileEdit: { current_city, current_state, current_neigborhood, current_zipcode, age } }
+	  }).done( ProfileEdit => {
+	    this.props.updateProfileEdit(ProfileEdit)
+	  })
 	}
 
 	addProfile(e) {
@@ -50,55 +72,84 @@ class Profile extends React.Component {
 			]
 		})
 	}
+
+	newProfile() {
+		return(
+			<div className='row'>
+				<h1 className="center">Profile</h1>
+				<div className="container">
+					<form ref='addProfileForm' onSubmit={this.addProfile.bind(this)}>
+						<input ref='currentCity' type='text' placeholder='Current City' />
+						<input ref='currentState' type='text' step='any' placeholder='Current State' />
+						<input ref='currentNeighborhood' type='text' step='any' placeholder='Current Neighborhood' />
+						<input ref='currentZipcode' type='number' step='any' placeholder='Current Zip Code' />
+						<input ref='age' type='number' step='any' placeholder='Age' />
+						<button type='submit' className='btn'>Create Profile</button>
+					</form>
+				</div>
+			</div>
+		)
+	}
+
+	show() {
+		return (
+			<div>
+		  	<div key={this.props.id} className="col s12 m6">
+			    <div className="card grey lighten-5">
+			      <div className="card-content">
+			        <p>Current City: {this.state.profile.current_city}</p>
+			        <p>Current State: {this.state.profile.current_state}</p>
+			        <p>Current Neighborhood: {this.state.profile.current_neigborhood}</p>
+			        <p>Current Zipcode: {this.state.profile.current_zipcode}</p>
+			        <p>Age: {this.state.profile.age}</p>
+			      </div>
+			      <div className="card-action">
+			        <button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
+			    </div>
+			  </div>
+			</div>
+			<div className='profile_desc col 2'>
+			 	<p>someThere helps you match your current neighborhood with other similar neighborhoods.
+			  		You can also customize your own preferences.</p> 
+				<p>Select from the options below:</p>
+			 	<button className="btn">Current Neighborhood</button>
+			 	<button className='btn blue-grey'><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
+			</div>
+		</div>
+		
+		)
+	}
+
+	edit() {
+		return (
+		  <div key={this.state.profile.id} className="col s12 m6">
+		    <div className="card grey lighten-3">
+		      <div className="card-content">
+		        <form onSubmit={this.handleSubmit.bind(this)}>
+		          <input ref="name" placeholder="Current City" defaultValue={this.state.profile.current_city} />
+		          <input ref="name" placeholder="Current State" defaultValue={this.state.profile.current_state} />
+		          <input ref="name" placeholder="Current Neighborhood" defaultValue={this.state.profile.current_neigborhood} />
+		          <input ref="number" placeholder="Current Zipcode" defaultValue={this.state.profile.current_zipcode} />
+		          <input ref="number" placeholder="Age" defaultValue={this.state.profile.age} />
+		          <button type="submit" className="btn">Update</button>
+		          <button type="button" className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Cancel</button>
+		        </form>
+		      </div>
+		    </div>
+		  </div>
+		)
+	}
+
 	render() {
 		let profile = this.state.profile;
 		if (!profile) {
-			return(
-				<div className='row'>
-					<h1 className="center">Profile</h1>
-					<div className="container">
-						<form ref='addProfileForm' onSubmit={this.addProfile.bind(this)}>
-							<input ref='currentCity' type='text' placeholder='Current City' />
-							<input ref='currentState' type='text' step='any' placeholder='Current State' />
-							<input ref='currentNeighborhood' type='text' step='any' placeholder='Current Neighborhood' />
-							<input ref='currentZipcode' type='number' step='any' placeholder='Current Zip Code' />
-							<input ref='age' type='number' step='any' placeholder='Age' />
-							<button type='submit' className='btn'>Create Profile</button>
-						</form>
-					</div>
-				</div>
-			)
+			return this.newProfile()
 		} else {
-			return(
-				<div>
-					<div className="row">
-						<div className='profile'>
-					  	<div className="col s12 m6">
-			  	    		<div className="card grey lighten 2">
-			  	      		<div className="card-content white-text">
-			  	        		<p>Current City: {profile.current_city}</p>
-			  	        		<p>Current State: {profile.current_state}</p>
-			  	        		<p>Current Neighborhood: {profile.current_neighborhood}</p>
-			  	        		<p>Current Zip Code: {profile.current_zipcode}</p>
-			  	        		<p>Age: {profile.age}</p>
-			  	      		</div>
-			  	     		<div className="card-action">
-			  	       		<a href="#">Edit</a>
-			  	      	</div>
-			  	    	</div>
-			  	  	</div>
-			  	 	</div>
-			  	 	<div>
-			    <div className='profile_desc col 2'><p>someThere helps you match your current neighborhood with other similar neighborhoods.
-			    		You can also customize your own preferences.</p> 
-			    		<p>Select from the options below:</p>
-			   			<button className="btn">Current Neighborhood</button>
-			   			<button className='btn blue-grey'><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
-			  		</div>
-			  		</div>
-			  	</div>
-			  </div>
-			)
+			if (this.state.edit) {
+				return this.edit();
+			} else {
+				return this.show(); 
+			}
 		}
 	}
 }

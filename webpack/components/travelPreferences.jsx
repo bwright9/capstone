@@ -13,7 +13,7 @@ class travelPreferences extends React.Component {
 			<div>
 				<div>
 				<div className='container'>
-					<h3>Travel Preferences</h3>
+					<h3>Visit Preferences</h3>
 						</div>
 								<Table>
 				   			 <TableBody>

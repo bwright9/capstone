@@ -30,6 +30,14 @@ header, main, footer {
 	background-color: #ec8800;
 }
 
+a {
+	color: white;
+}
+
+a:hover {
+
+}
+
 /*
   ========================================
   Navbar
@@ -268,6 +276,7 @@ footer.page-footer .footer-copyright {
 }
 
 .profile_desc {
-	margin-left: 30px;
+	padding-top: 20px;
+	margin-left: 20px;
 }
 

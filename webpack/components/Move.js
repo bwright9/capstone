@@ -6,13 +6,9 @@ import MoveMap from './MoveMap';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-<<<<<<< HEAD
 		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null };
 		this.selectRegion = this.selectRegion.bind(this);
-=======
 		this.state = { city: null, geoState: '', neighborhoods: null, ws_lat: null, ws_lon: null };
-		this.handleSelect = this.handleSelect.bind(this);
->>>>>>> rachel
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);

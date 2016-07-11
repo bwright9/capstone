@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 	namespace :api do 
 		get "neighborhoods", to: "zillow#neighborhoods"
 		get 'maps_key', to: 'move#maps_key'
+    get 'walkscore_map', to: 'move#walkscore_map'
 		resources :profiles
   	resources :move
 	end  

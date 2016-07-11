@@ -4,12 +4,19 @@ import ReactDOM from 'react-dom';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Slider from 'material-ui/Slider';
-
+ 
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: '', firstSlider: 35000 };
+		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
 		this.showGeoState = this.showGeoState.bind(this);
+		this.calculateTax = this.calculateTax.bind(this);
+	}
+
+	componentWillMount() {
+		let firstSalary = this.state.salary * 0.85;
+  	this.setState({afterTaxCurrent: firstSalary, afterTaxNew: firstSalary});
+  	this.calculateTax();
 	}
 
 	componentDidMount() {
@@ -18,29 +25,127 @@ class Discover extends React.Component {
 	}
 
 	handleSelect(event, index, value) {
-		this.setState({stateSelect: value});
-	}
-
-	handleFirstSlider(event, value) {
-    this.setState({firstSlider: value});
+		this.setState({stateSelect: value}, function afterStateUpdated() {
+ 	    this.calculateTax();    	
+    });
   }
 
-  showGeoState() {
-	  if(this.state.stateSelect) {
-			return(
-				<img className="home-state" src={`assets/states/${this.state.stateSelect}.png`} />
-			)
-		} else {
-			return(
-				<div>				
-					<i className="large material-icons">terrain</i>
-				</div>
-			)
-		}
-	}
+	handleFirstSlider(event, value) {
+    this.setState({salary: value}, function afterNumberChanges() {
+ 	    this.calculateTax();    	
+    });
+  }
+
+  calculateTax() {
+    let oldSalary = 0;
+    let newSalary = 0;
+    let flatTaxBrackets = {
+    		"alabama": 0.05,
+				"alaska": 0,
+				"arizona": 0.0454,
+				"arkansas": 0.07,
+				"colorado": 0.0463,
+				"connecticut": 0.06,
+				"delaware": 0.066,
+				"dc": 0.085,
+				"florida": 0,
+				"georgia": 0.06,
+				"hawaii": 0.09,
+				"idaho": 0.074,
+				"illinois": 0.05,
+				"indiana": 0.034,
+				"iowa": 0.0898,
+				"kansas": 0.049,
+				"kentucky": 0.06,
+				"louisiana": 0.06,
+				"maine": 0.0795,
+				"maryland": 0.0575,
+				"massachusetts": 0.051,
+				"michigan": 0.0425,
+				"minnesota": 0.08,
+				"mississippi": 0.05,
+				"missouri": 0.06,
+				"montana": 0.069,
+				"nebraska": 0.0684,
+				"nevada": 0,
+				"newhampshire": 0,
+				"newjersey": 0.0637,
+				"newmexico": 0.049,
+				"newyork": 0.0685,
+				"northcarolina": 0.0575,
+				"northdakota": 0.0399,
+				"ohio": 0.0499,
+				"oklahoma": 0.0525,
+				"oregon": 0.099,
+				"pennsylvania": 0.0307,
+				"rhodeisland": 0.05,
+				"southcarolina": 0.07,
+				"southdakota": 0,
+				"tennessee": 0.06,
+				"texas": 0,
+				"utah": 0.05,
+				"vermont": 0.08,
+				"virginia": 0.0575,
+				"washington": 0,
+				"westvirginia": 0.065,
+				"wisconsin": 0.07,
+				"wyoming": 0
+    }
+    let stateTax = 0;
+    let federalTax = 0;
+    if (this.state.salary < 9225) {
+    	federalTax = (this.state.salary*0.1)
+    } else if (this.state.salary >= 9225 && this.state.salary < 37450) {
+	   	federalTax = (9225*0.1) + ((this.state.salary-9225)*0.15)
+    } else if (this.state.salary >= 37450 && this.state.salary < 90750) {
+    	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((this.state.salary-37450)*0.25)
+    } else if (this.state.salary >= 90750 && this.state.salary < 189300) {
+    	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((90750-37450)*0.25) + ((this.state.salary-90750)*0.28)
+    } else {
+    	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((90750-37450)*0.25) + ((189300-90750)*0.28) + ((this.state.salary-189300)*0.33)
+    }
+    if (this.state.stateSelect === "california") {
+    	if (this.state.salary < 7582) {
+	    	stateTax = (this.state.salary*0.01)
+	    } else if (this.state.salary >= 7582 && this.state.salary < 17976) {
+		   	stateTax = (7582*0.01) + ((this.state.salary-7582)*0.02)
+	    } else if (this.state.salary >= 17976 && this.state.salary < 28371) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((this.state.salary-17976)*0.04)
+	    } else if (this.state.salary >= 28371 && this.state.salary < 39384) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((this.state.salary-28371)*0.06)
+	    } else if (this.state.salary >= 39384 && this.state.salary < 49774) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((this.state.salary-39384)*0.08)
+	    } else if (this.state.salary >= 49774 && this.state.salary < 254250) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((49774-39384)*0.08) + ((this.state.salary-49774)*0.093)
+	    } else if (this.state.salary >= 254250 && this.state.salary < 305100) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((49774-39384)*0.08) + ((254250-49774)*0.093) + ((this.state.salary-254250)*0.0103)
+	    } else {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((49774-39384)*0.08) + ((254250-49774)*0.093) + ((305100-254250)*0.0103) + ((this.state.salary-305100)*0.0113)
+	    }
+    } else {
+    	stateTax = this.state.salary * (flatTaxBrackets[this.state.stateSelect])
+    }
+    oldSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets["utah"]) );
+		this.setState({afterTaxCurrent: oldSalary});
+    newSalary = this.state.salary - federalTax - stateTax;
+		this.setState({afterTaxNew: newSalary});
+  }
   
+   showGeoState() {
+    if(this.state.stateSelect) {
+      return(
+        <img className="home-state" src={`assets/states/${this.state.stateSelect}.png`} />
+      )
+    } else {
+      return(
+        <div>             
+          <i className="large material-icons">terrain</i>
+        </div>
+      )
+    }
+  }
+   
 	render() {
-		
 		return(
 			<div>
 				<ul className="collapsible" data-collapsible="accordion">
@@ -110,7 +215,7 @@ class Discover extends React.Component {
 
 		      		<div className="row state-selector">
 		      			<div className="col s3">Salary: </div>
-		      			<span>${this.state.firstSlider.toLocaleString()}</span>
+		      			<span>${this.state.salary.toLocaleString()}</span>
 		      		</div>
 
 							<Slider
@@ -118,18 +223,18 @@ class Discover extends React.Component {
 			          min={0}
 			          max={400000}
 			          step={1}
-			          value={this.state.firstSlider}
+			          value={this.state.salary}
 			          onChange={this.handleFirstSlider.bind(this)}
 			        />
 			        
 							<div className="row">
 								<div className="compare-states col s6 center">
-									<img className="home-state" src="assets/states/alabama.png" />
-									<p>After-Tax Income: ${this.state.firstSlider.toLocaleString()}</p>
+									<img className="home-state" src="assets/states/utah.png" />
+									<p>After-Tax Income: ${Math.round(this.state.afterTaxCurrent).toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">
 									{ this.showGeoState() }
-									<p>After-Tax Income: ${this.state.firstSlider.toLocaleString()}</p>
+									<p>After-Tax Income: ${Math.round(this.state.afterTaxNew).toLocaleString()}</p>
 								</div>
 							</div>
 
@@ -140,151 +245,148 @@ class Discover extends React.Component {
 			      </div>
 			    </li>
 			    <li>
-			      <div className="collapsible-header"><i className="material-icons">wifi</i>Google Fiber</div>
-			      <div className="collapsible-body">
-
-			      	<h3 className="fiber">Current Cities</h3>
-
-			      	<div className="row">
-								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="https://www.shnsf.com/Online/default.asp?BOparam::WScontent::loadArticle::permalink=hamilton&BOparam::WScontent::loadArticle::context_id=" target="_blank">San Francisco, CA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="http://hollywoodpantages.com/showinfo.php?id=75" target="_blank">Los Angeles, CA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/dc.png' />
-									<p><a href="https://medium.com/@kennedycenter/hamilton-at-the-kennedy-center-4245b945b0f4?promotionno=227963#.oi6v6ol6n" target="_blank">Washington D.C.</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/georgia.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Atlanta, GA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/massachusetts.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Boston, MA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/northcarolina.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Charlotte, NC</a></p>
-								</div>
-							</div>
-
-			      	<h3 className="fiber">Upcoming Cities</h3>
-
-			      	<div className="row">
-								<div className="col s4 center">
-									<img className='state' src='assets/states/ohio.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Cleveland, OH</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Costa Mesa, CA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/colorado.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Denver, CO</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/iowa.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Des Moines, IA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/texas.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Houston, TX</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/nevada.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Las Vegas, NV</a></p>
-								</div>
-							</div>
-			      </div>
-			    </li>
-			    <li>
-			      <div className="collapsible-header"><i className="material-icons">event_seat</i>Hamilton</div>
-			      <div className="collapsible-body">
-			      	<div className="row hamilton-cities">
-								<div className="col s4 center">
-									<img className='state' src='assets/states/oregon.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Portland, OR</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/utah.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">Salt Lake City, UT</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p><a href="http://www.hamiltonbroadway.com/tour.php" target="_blank">San Diego, CA</a></p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/washington.png' />
-									<p>Seattle, WA</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/missouri.png' />
-									<p>St. Louis, MO</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/arizona.png' />
-									<p>Tempe, AZ</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/georgia.png' />
-									<p>Atlanta, GA</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/texas.png' />
-									<p>Austin, TX</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/missouri.png' />
-									<p>Kansas City, MO</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/kansas.png' />
-									<p>Kansas City, KS</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/tennessee.png' />
-									<p>Nashville, TN</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/utah.png' />
-									<p>Provo, UT</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/northcarolina.png' />
-									<p>Charlotte, NC</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/alabama.png' />
-									<p>Huntsville, AL</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/northcarolina.png' />
-									<p>Raleigh-Durham, NC</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/utah.png' />
-									<p>Salt Lake City, UT</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/texas.png' />
-									<p>San Antonio, TX</p>
-								</div>
-								<div className="col s4 center">
-									<img className='state' src='assets/states/california.png' />
-									<p>San Francisco, CA</p>
-								</div>
-							</div>				
-			      </div>
-			    </li>  
+            <div className="collapsible-header"><i className="material-icons">wifi</i>Google Fiber</div>
+            <div className="collapsible-body">
+              <h3 className="fiber">Current Cities</h3>
+              <div className="row">
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/georgia.png' />
+                    <p>Atlanta, GA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/texas.png' />
+                    <p>Austin, TX</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/missouri.png' />
+                    <p>Kansas City, MO</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/kansas.png' />
+                    <p>Kansas City, KS</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/tennessee.png' />
+                    <p>Nashville, TN</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/utah.png' />
+                    <p>Provo, UT</p>
+                </div>
+              </div>
+              <h3 className="fiber">Upcoming Cities</h3>
+              <div className="row">
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/northcarolina.png' />
+                    <p>Charlotte, NC</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/alabama.png' />
+                    <p>Huntsville, AL</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/northcarolina.png' />
+                    <p>Raleigh-Durham, NC</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/utah.png' />
+                    <p>Salt Lake City, UT</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/texas.png' />
+                    <p>San Antonio, TX</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/california.png' />
+                    <p>San Francisco, CA</p>
+                </div>
+              </div>
+            </div>
+          </li>
+          
+          <li>
+            <div className="collapsible-header"><i className="material-icons">event_seat</i>Hamilton</div>
+            <div className="collapsible-body">
+              <div className="row hamilton-cities">
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/california.png' />
+                    <p>San Francisco, CA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/california.png' />
+                    <p>Los Angeles, CA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/dc.png' />
+                    <p>Washington, D.C.</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/georgia.png' />
+                    <p>Atlanta, GA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/massachusetts.png' />
+                    <p>Boston, MA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/northcarolina.png' />
+                    <p>Charlotte, NC</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/ohio.png' />
+                    <p>Cleveland, OH</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/california.png' />
+                    <p>Costa Mesa, CA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/colorado.png' />
+                    <p>Denver, CO</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/iowa.png' />
+                    <p>Des Moines, IA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/texas.png' />
+                    <p>Houston, TX</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/nevada.png' />
+                    <p>Las Vegas, NV</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/oregon.png' />
+                    <p>Portland, OR</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/utah.png' />
+                    <p>Salt Lake City, UT</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/california.png' />
+                    <p>San Diego, CA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/washington.png' />
+                    <p>Seattle, WA</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/missouri.png' />
+                    <p>St. Louis, MO</p>
+                </div>
+                <div className="col s4 center">
+                    <img className= 'state' src='assets/states/arizona.png' />
+                    <p>Tempe, AZ</p>
+                </div>
+              </div>                
+            </div>
+          </li>
 			  </ul>
 			</div>
 		)
 	}
 }
-
+ 
 export default Discover;

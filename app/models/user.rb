@@ -6,7 +6,15 @@ class User < ActiveRecord::Base
   has_one :profile
 
   before_create do |user|
-  	user.api_key = user.generate_api_key
+    user.api_key = user.generate_api_key
+  end
+
+  def self.from_third_party_auth(provider, auth)
+      name_arr = auth[:name].split(' ')
+      where(provider: provider, uid: auth[:userID], first_name: name_arr.first, last_name: name_arr.last).first_or_create do |user|
+      user.email = auth[:email]
+      user.password = Devise.friendly_token
+    end
   end
 
   def generate_api_key

@@ -1,0 +1,392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0169)https://www.walkscore.com/serve-walkscore-tile.php?wsid=9d8b9aab2f4f59b04bed3837e4ca9xxx&s=1060-Lombard-Street-San-Francisco-CA&o=h&ts=t&c=t&mm=all&e=2&h=426&fh=18&w=600 -->
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">.gm-style-pbc{transition:opacity ease-in-out;background-color:black;text-align:center}.gm-style-pbt{font-size:22px;color:white;font-family:Roboto,Arial,sans-serif;position:relative;margin:0;top:50%;-webkit-transform:translateY(-50%);-ms-transform:translateY(-50%);transform:translateY(-50%)}</style><link type="text/css" rel="stylesheet" href="./css"><style type="text/css">.gm-style .gm-style-cc span,.gm-style .gm-style-cc a,.gm-style .gm-style-mtc div{font-size:10px}</style><style type="text/css">@media print {  .gm-style .gmnoprint, .gmnoprint {    display:none  }}@media screen {  .gm-style .gmnoscreen, .gmnoscreen {    display:none  }}</style><style type="text/css">.gm-style{font-family:Roboto,Arial,sans-serif;font-size:11px;font-weight:400;text-decoration:none}.gm-style img{max-width:none}</style>
+<meta http-equiv="X-UA-Compatible" content="IE=9">
+<title>Walk Score - Helping homebuyers, renters, and real estate agents find houses and apartments in great neighborhoods.</title>
+
+<meta name="description" content="Walk Score helps home buyers and renters find houses and apartments in great neighborhoods. Walk Score calculates the walkability of any address.">
+
+<link rel="stylesheet" type="text/css" href="./_neighborhood-map-bundle_vcnyvsr4.css">
+<link rel="stylesheet" href="./neighborhood-map-hd_vcnyvsr4.css" media="only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio:1.5)">
+
+<script src="./commute-map_vcnyvsr4.js"></script><script src="./commute_vcnyvsr4.js"></script><script src="./js"></script><script async="" src="./analytics.js"></script><script async="" type="text/javascript" src="./gpt.js"></script><script type="text/javascript" src="./jquery.min(1).js"></script>
+<script type="text/javascript" src="./underscore-min.js"></script>
+<script src="./_tile-start-bundle_vcnyvsr4.js" type="text/javascript"></script>
+
+<style type="text/css">
+a, a:link {
+  color: #444;
+}
+a:hover {
+  color: #777;
+}
+
+#tile-container {
+  width: 600px;
+  overflow:hidden;
+  position:relative;
+  
+}
+
+.header {
+  width: 100%;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 41px;
+  overflow: visible;
+}
+
+
+#out-of-100 {
+  font-size: 9px;
+  line-height: 12px;
+  padding-top: 5px;
+  margin-left: 4px;
+  float: left;
+  color: #777;
+  display: none;
+}
+
+/***** MAP *****/
+#map-wrapper {
+  left: 250px;
+  top: 4px;
+  width: 346px;
+  height: 418px;
+  position: absolute;
+  margin-bottom: 10px;
+}
+#map-frame {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 344px;
+  height: 416px;
+  border: 1px solid #999;
+}
+
+#map-frame.make-room-above {
+  top: 20px;
+  height: 396px;
+}
+
+#pano-popup-message {
+  width: 219px;
+}
+
+#splash {
+  position         : absolute;
+  top              : 0px;
+  left             : 0px;
+  width            : 600px;
+  height           : 426px;
+  background-color : #fff;
+  z-index          : 100000;
+}
+
+#powered-by {
+  position         : absolute;
+  left             : 0px;
+  padding-left     : 10px;
+  top              : 426px;
+  width            : 234px;
+  height           : 0px;
+  background-color : #fff;
+  z-index          : 100;
+}
+.no-head #powered-by { display: none; }
+
+#content {
+  position: relative;
+  width: 100%;
+  height: 426px;
+}
+.scrollable {
+  overflow:hidden;
+  position: absolute;
+  left: 6px;
+  top: 0px;
+  width: 239px;
+  height: 426px;
+}
+.scrollable .items {
+  /* this cannot be too large */
+  width:20000em;
+  position:absolute;
+}
+.scrollable .items > div {
+  float:left;
+  position: relative;
+  width: 239px;
+  height: 426px;
+}
+.menu-items, .commute-panel, .nearby-panel {
+  position: absolute;
+  left: 0;
+  width: 239px;
+}
+.commute-panel {
+  width: 238px;
+}
+.menu-items, .commute-panel, .nearby-panel {
+  top: 41px;
+  height: 385px;
+}
+.no-head .h .commute-panel { top: 0; }
+#root-card .menu-items {
+  top: 41px;
+  height: 385px;
+}
+.menu-item {
+  height: 37px;
+}
+
+.menu-item div.left, .menu-item div.right {
+  width            : 239px;
+}
+.menu-item h3, .menu-item h4, .menu-item h5, .menu-item h6 {
+  color: #777;
+}
+.one-line .menu-item h3, .one-line .menu-item h4,
+.one-line .menu-item h5, .one-line .menu-item h6 {
+  height: 37px;
+}
+.menu-item h3, .menu-item h4 {
+  width: 232px;
+}
+.one-line .menu-item div.left, .menu-item h3, .menu-item h4 {
+  width: 181px;
+}
+.one-line .menu-item.final div.left, .menu-item.final h4 {
+  width: 200px;
+}
+.one-line .menu-item.wide div.left, .menu-item.wide h4 {
+  width: 218px;
+}
+.one-line .menu-item.wide.final div.left, .menu-item.wide.final h4 {
+  width: 239px;
+}
+.menu-item.wide h3, .menu-item.wide h4 {
+  width: 209px;
+}
+.menu-item.final h3, .menu-item.final.wide h4 {
+  width: 232px;
+}
+.one-line #commute.menu-item .commute-query {
+  width: 189px;
+}
+.one-line #commute.menu-item .go-button {
+  position: absolute;
+  right: 0;
+}
+/* color rules - order matters */
+.menu-item.final h3 { color: #444; }
+.menu-item h3 { color: #444; }
+
+#dialog {
+  width: 600px;
+}
+
+.iw .iw-title, .iw .iw-title a, .iw .iw-contact-info, .iw .iw-body {
+  max-width        : 187px;
+}
+
+.ws_miniwindow.IE7 .ws_miniwindow_body { width: 187px }
+.ws_miniwindow.IE8 { max-width: 187px }
+
+.nearby-panel .nearby-query,
+.commute-panel .commute-query {
+  width: 165px;
+}
+
+.nearby-panel .nearby-results,
+.commute-panel .commute-results {
+  height: 356px;
+}
+
+.commute-results #elevation-chart {
+  width: 228px;
+}
+
+.commute-results #commute-controls div.live {
+  width: 236px;
+}
+
+</style><!--[if lt IE 11]>
+<style type="text/css">
+input.nearby-query, input.commute-query {
+padding-bottom: 6px;
+}
+</style>
+<![endif]-->
+
+
+<!--[if lt IE 9]>
+<style type="text/css">
+#pub-transit.menu-item .box-score h2 { padding-top: 2px; }
+.menu-items .menu-item div.left, .menu-items .menu-item div.right, .menu-items .menu-item h3,
+.menu-items .menu-item h4 {
+  text-overflow: clip;
+  -o-text-overflow: clip;
+}
+input.nearby-query, input.commute-query {
+padding-top: 6px;
+padding-bottom: 6px;
+}
+</style>
+<![endif]-->
+
+<!--[if lt IE 8]>
+<style type="text/css">
+.menu-items .menu-item.rail h3, .menu-items .menu-item.bus h3, .menu-items .menu-item.other h3 {
+  padding-left: 0;
+  background: none;
+}
+</style>
+<![endif]-->
+
+
+<script type="text/javascript">
+  var url_street = "1060 Lombard Street San Francisco CA";
+
+  var ws_auth_wsid = '9d8b9aab2f4f59b04bed3837e4ca9xxx';
+  var ws_auth_domain = 'www.walkscore.com';
+  var width = 600;
+  var height = 426;
+  var results_w = 239;
+  var results_h = 426;
+  var commute_results_w = 236;
+  var commute_results_h = 356;
+  var footheight = 18;
+  var layout = 'h';
+  var menuItemSize = 'two-line';
+  var menuItemsHeight = 385;
+  var itemHeight = 38;
+  var showSearchNearby = true;
+  var removeMoreAmenitiesLink = true; // To start with, at least;
+  var industry = 'residential';
+  var iconType = 'center-pin';
+  var hide_scores_below = 0;
+  var nolink_bubbles = true; // To start with, at least;
+  var tileDomain = 'walkscore.com';
+  var bigMapLink = 'https://www.walkscore.com/score/1060-Lombard-Street-San-Francisco-CA/?utm_source=walkscore.com&utm_campaign=ws_tile';
+  var edition = Number('2'); //make a number
+
+  var ws_paid_parameters = [ ["hide_bigger_map", "", ""], ["show_reviews", "", ""], ["custom_pin", "", ""], ["polygon", "", ""], ["transit_score", "t", ""], ["public_transit", "", ""], ["no_link_description", "", ""], ["no_link_info_bubbles", "", ""] ];
+  var ws_free_parameters = [ ["map_zoom", "", ""], ["commute", "t", ""], ["commute_address", "", ""], ["commute_display_address", "", ""], ["fixed_commute", "", ""], ["disable_street_view", "", ""], ["is_apartments", "", ""], ["map_modules", "all", "default"], ["default_view", "", "default"], ["base_map", "", "google_map"], ["amenity_profile", "", "walkscore"], ["no_head", "", ""] ];
+
+  window.google_ready = function(){}; //app loader not invoked till after load event,
+  //need dummy func for google maps callback to call if app loader not called by then
+
+  $(window).load(function(){
+    trackEventNonInteractive('wsid tracking', '9d8b9aab2f4f59b04bed3837e4ca9xxx', 'walkscore.com');
+    trackEventNonInteractive('tile', 'https view', 'walkscore.com');
+
+    if ('')
+      trackEventNonInteractive('tile', 'IE Refresh', '');
+  });
+</script>
+<script type="text/javascript" charset="utf-8">
+  $.ajaxSetup({
+    timeout: 9000 //9 second global timeout -- can be overridden for particular calls
+  });
+  var ACTIVE_COMPONENT = "tile";
+</script>
+<!-- DFP init code -->
+<script type="text/javascript">
+var googletag = googletag || {};
+googletag.cmd = googletag.cmd || [];
+(function() {
+var gads = document.createElement('script');
+gads.async = true;
+gads.type = 'text/javascript';
+var useSSL = 'https:' == document.location.protocol;
+gads.src = (useSSL ? 'https:' : 'http:') +
+'//www.googletagservices.com/tag/js/gpt.js';
+var node = document.getElementsByTagName('script')[0];
+node.parentNode.insertBefore(gads, node);
+})();
+</script>
+
+<script type="text/javascript">
+googletag.cmd.push(function() {
+googletag.defineSlot('/1357474/amenity_map_text_ad', [230, 32], 'div-gpt-ad-1401925358882-0').addService(googletag.pubads());
+googletag.pubads().enableSingleRequest();
+googletag.enableServices();
+});
+</script>
+
+<script type="text/javascript">
+  var dataFetcher = new DataFetcher(); // make the dataFetcher global, instantiate early so ads can access it
+</script>
+<script src="./pubads_impl_90.js" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-4/html/container.html?n=2"><script type="text/javascript" charset="UTF-8" src="./common.js"></script><script type="text/javascript" charset="UTF-8" src="./map.js"></script><script type="text/javascript" charset="UTF-8" src="./util.js"></script><script type="text/javascript" charset="UTF-8" src="./streetview.js"></script><script type="text/javascript" charset="UTF-8" src="./onion.js"></script><script type="text/javascript" charset="UTF-8" src="./marker.js"></script><script type="text/javascript" charset="UTF-8" src="./stats.js"></script><script type="text/javascript" charset="UTF-8" src="./controls.js"></script><script type="text/javascript" charset="UTF-8" src="./usage.js"></script></head>
+
+
+<body class=" " marginwidth="0" marginheight="0">
+<div id="splash" style="display: none;"></div>
+<div id="powered-by" class="hide">
+  Powered by:
+  <a href="https://www.walkscore.com/" target="_blank"></a>
+</div>
+<div id="tile-container" class="h two-line">
+
+  <div id="content">
+        <!-- root element for scrollable -->
+    <div id="scroll-menu" class="scrollable">
+      <!-- root element for the items -->
+      <div class="items">
+        <div id="root-card" class="results">
+          <div class="header">
+      <div id="primary">
+        <a id="logo" href="https://www.walkscore.com/?utm_source=walkscore.com&amp;utm_medium=logo&amp;utm_campaign=ws_tile" target="_blank" onclick="trackEvent(&quot;tile&quot;, &quot;logo clickthrough&quot;)"><span>Walk Score</span></a>
+        <div id="score-prefix" class=""></div>
+        <div id="score-text">94</div><div id="out-of-100" style="display: block;">out of 100</div><a id="qmark" class="b-btn light " href="https://www.walkscore.com/how-it-works/?utm_source=walkscore.com&amp;utm_medium=question_mark&amp;utm_campaign=ws_tile" target="_blank" style="display: block;">
+            <div id="question-mark"></div>
+          </a></div><a href="http://www.walkscore.com/how-it-works.shtml?utm_source=walkscore.com&amp;utm_medium=walk_description&amp;utm_campaign=ws_tile" id="score-description-link" target="_blank" class="active"><p id="score-description" class="active">Walker’s Paradise</p></a></div>          <div class="menu-items">
+            <div id="dfp-slot" class="menu-item wide final"><div class="left"><!-- AmenityMapSlide_ATF_TextAd230x32 -->
+  <div id="div-gpt-ad-1401925358882-0" style="width:230px; height:32px;">
+  </div><div class="popout"></div></div></div><div id="result-panels"><div id="pg-restaurants" class="menu-item"><div class="left"><h3>Restaurants:</h3><h4>Zarzuela</h4></div><div class="right"><h5>&nbsp;</h5><h6>.1mi</h6></div><div class="next-icon"></div></div><div id="pg-coffee" class="menu-item"><div class="left"><h3>Coffee:</h3><h4>Blue Cafe</h4></div><div class="right"><h5>&nbsp;</h5><h6>.2mi</h6></div><div class="next-icon"></div></div><div id="pg-bars" class="menu-item"><div class="left"><h3>Bars:</h3><h4>International Sports Club</h4></div><div class="right"><h5>&nbsp;</h5><h6>.3mi</h6></div><div class="next-icon"></div></div><div id="pg-groceries" class="menu-item"><div class="left"><h3>Groceries:</h3><h4>Maria Manetti Farrow Est Llc</h4></div><div class="right"><h5>&nbsp;</h5><h6>.1mi</h6></div><div class="next-icon"></div></div><div id="pg-parks" class="menu-item"><div class="left"><h3>Parks:</h3><h4>George Sterling Memorial</h4></div><div class="right"><h5>&nbsp;</h5><h6>.03mi</h6></div><div class="next-icon"></div></div><div id="pg-schools" class="menu-item"><div class="left"><h3>Schools:</h3><h4>Yick WO Elementary School</h4></div><div class="right"><h5>&nbsp;</h5><h6>.2mi</h6></div><div class="next-icon"></div></div><div id="pg-shopping" class="menu-item"><div class="left"><h3>Shopping:</h3><h4>Anica boutique</h4></div><div class="right"><h5>&nbsp;</h5><h6>.2mi</h6></div><div class="next-icon"></div></div><div id="pg-entertainment" class="menu-item"><div class="left"><h3>Entertainment:</h3><h4>Online Art Consignment Gallery</h4></div><div class="right"><h5>&nbsp;</h5><h6>.1mi</h6></div><div class="next-icon"></div></div></div><div id="pub-transit"></div><div id="end_of_main_results" style="display: none;"></div><div id="more-cats-8" class="menu-item highlight wide"><div class="left"><h3>More Places:</h3><h4></h4></div><div class="next-icon"></div></div><div id="commute" class="menu-item final noclick custom commute-menu-item wide last" style="display: block;"><div class="left"><input type="text" name="query" class="commute-query example-text" placeholder="Where do you commute?"><div class="go-button b-btn">Go</div></div></div>          </div>
+        </div>
+      </div>
+    </div>
+    <div id="map-wrapper">
+      <div id="above-map" class="active"><div id="view-full-map" class="active"><a href="https://www.walkscore.com/score/1060-Lombard-Street-San-Francisco-CA/?utm_source=walkscore.com&amp;utm_campaign=ws_tile&amp;utm_medium=map_link&amp;free=1" class="b-btn light bigger-btn" target="_blank">Bigger map<span class="popout"></span></a></div></div>      <div id="map-frame" class="make-room-above">
+        <div id="g-container">
+          <div id="g-overlay" class="visible" style="opacity: 1;">
+            <div id="map-module-selector"><div class="enticement">Street View...</div><div class="options"><div id="mod_google_map" class="selected">Google Map</div><div id="mod_street_view">Street View</div><div id="mod_satellite">Satellite</div><div id="mod_walkability">Walkability Map</div><div id="mod_walkshed">15 Minute Walk</div><div id="mod_panoramio">Nearby Photos</div></div></div>
+          </div>
+          <div id="map-element">&nbsp;</div><div id="google-map-element-0" style="position: absolute; z-index: 0; width: 344px; height: 396px; top: 0px; left: 0px; overflow: hidden; transform: translateZ(0px); background-color: rgb(229, 227, 223);"><div class="gm-style" style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0;"><div style="position: absolute; left: 0px; top: 0px; overflow: hidden; width: 100%; height: 100%; z-index: 0; cursor: url(&quot;https://maps.gstatic.com/mapfiles/openhand_8_8.cur&quot;) 8 8, default;"><div style="position: absolute; left: 0px; top: 0px; z-index: 1; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 100; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -121px; top: 101px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 135px; top: 101px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -121px; top: -155px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: -121px; top: 357px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 135px; top: -155px;"></div><div style="width: 256px; height: 256px; transform: translateZ(0px); position: absolute; left: 135px; top: 357px;"></div></div></div></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 101; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 102; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 103; width: 100%;"><div style="position: absolute; left: 0px; top: 0px; z-index: -1;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: -121px; top: 101px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 135px; top: 101px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: -121px; top: -155px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: -121px; top: 357px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 135px; top: -155px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div><div style="width: 256px; height: 256px; overflow: hidden; transform: translateZ(0px); position: absolute; left: 135px; top: 357px;"><canvas draggable="false" height="256" width="256" style="-webkit-user-select: none; position: absolute; left: 0px; top: 0px; height: 256px; width: 256px;"></canvas></div></div></div></div><div style="position: absolute; z-index: 0; transform: translateZ(0px); left: 0px; top: 0px;"><div style="overflow: hidden;"></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 0;"><div aria-hidden="true" style="position: absolute; left: 0px; top: 0px; z-index: 1; visibility: inherit;"><div style="transform: translateZ(0px); position: absolute; left: -121px; top: 101px; transition: opacity 200ms ease-out;"><img src="./vt" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="transform: translateZ(0px); position: absolute; left: 135px; top: 101px; transition: opacity 200ms ease-out;"><img src="./vt(1)" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="transform: translateZ(0px); position: absolute; left: -121px; top: -155px; transition: opacity 200ms ease-out;"><img src="./vt(2)" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="transform: translateZ(0px); position: absolute; left: -121px; top: 357px; transition: opacity 200ms ease-out;"><img src="./vt(3)" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="transform: translateZ(0px); position: absolute; left: 135px; top: -155px; transition: opacity 200ms ease-out;"><img src="./vt(4)" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div style="transform: translateZ(0px); position: absolute; left: 135px; top: 357px; transition: opacity 200ms ease-out;"><img src="./vt(5)" draggable="false" alt="" style="position: absolute; left: 0px; top: 0px; width: 256px; height: 256px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div><div style="position: absolute; left: 0px; top: 0px; z-index: 2; width: 100%; height: 100%; transition-duration: 0.3s; opacity: 0; display: none;" class="gm-style-pbc"><p class="gm-style-pbt">Use two fingers to move the map</p></div><div style="position: absolute; left: 0px; top: 0px; z-index: 3; width: 100%; height: 100%;"></div><div style="position: absolute; left: 0px; top: 0px; z-index: 4; width: 100%; transform-origin: 0px 0px 0px; transform: matrix(1, 0, 0, 1, 0, 0);"><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 104; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 105; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 106; width: 100%;"></div><div style="transform: translateZ(0px); position: absolute; left: 0px; top: 0px; z-index: 107; width: 100%;"></div></div></div><div style="margin-left: 5px; margin-right: 5px; z-index: 1000000; position: absolute; left: 0px; bottom: 0px;"><a target="_blank" href="https://maps.google.com/maps?ll=37.80216,-122.419081&amp;z=15&amp;t=m&amp;hl=en-US&amp;gl=US&amp;mapclient=apiv3" title="Click to see this area on Google Maps" style="position: static; overflow: visible; float: none; display: inline;"><div style="width: 66px; height: 26px; cursor: pointer;"><img src="./google_white5.png" draggable="false" style="position: absolute; left: 0px; top: 0px; width: 66px; height: 26px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px;"></div></a></div><div style="padding: 15px 21px; border: 1px solid rgb(171, 171, 171); font-family: Roboto, Arial, sans-serif; color: rgb(34, 34, 34); box-shadow: rgba(0, 0, 0, 0.2) 0px 4px 16px; z-index: 10000002; display: none; width: 256px; height: 148px; position: absolute; left: 22px; top: 108px; background-color: white;"><div style="padding: 0px 0px 10px; font-size: 16px;">Map Data</div><div style="font-size: 13px;">Map data ©2016 Google</div><div style="width: 13px; height: 13px; overflow: hidden; position: absolute; opacity: 0.7; right: 12px; top: 12px; z-index: 10000; cursor: pointer;"><img src="./mapcnt6.png" draggable="false" style="position: absolute; left: -2px; top: -336px; width: 59px; height: 492px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div><div class="gmnoprint" style="z-index: 1000001; position: absolute; right: 173px; bottom: 0px; width: 136px;"><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a style="color: rgb(68, 68, 68); text-decoration: none; cursor: pointer; display: none;">Map Data</a><span>Map data ©2016 Google</span></div></div></div><div class="gmnoscreen" style="position: absolute; right: 0px; bottom: 0px;"><div style="font-family: Roboto, Arial, sans-serif; font-size: 11px; color: rgb(68, 68, 68); direction: ltr; text-align: right; background-color: rgb(245, 245, 245);">Map data ©2016 Google</div></div><div class="gmnoprint gm-style-cc" draggable="false" style="z-index: 1000001; -webkit-user-select: none; height: 14px; line-height: 14px; position: absolute; right: 95px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a href="https://www.google.com/intl/en-US_US/help/terms_maps.html" target="_blank" style="text-decoration: none; cursor: pointer; color: rgb(68, 68, 68);">Terms of Use</a></div></div><div style="display: none; margin: 10px 14px; position: absolute; top: 0px; right: 0px;"></div><div draggable="false" class="gm-style-cc" style="-webkit-user-select: none; height: 14px; line-height: 14px; position: absolute; right: 0px; bottom: 0px;"><div style="opacity: 0.7; width: 100%; height: 100%; position: absolute;"><div style="width: 1px;"></div><div style="width: auto; height: 100%; margin-left: 1px; background-color: rgb(245, 245, 245);"></div></div><div style="position: relative; padding-right: 6px; padding-left: 6px; font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); white-space: nowrap; direction: ltr; text-align: right; vertical-align: middle; display: inline-block;"><a target="_new" title="Report errors in the road map or imagery to Google" href="https://www.google.com/maps/@37.8021604,-122.4190814,15z/data=!10m1!1e1!12b1?source=apiv3&amp;rapsrc=apiv3" style="font-family: Roboto, Arial, sans-serif; font-size: 10px; color: rgb(68, 68, 68); text-decoration: none; position: relative;">Report a map error</a></div></div><div class="gmnoprint gm-bundled-control gm-bundled-control-on-bottom" draggable="false" controlwidth="28" controlheight="55" style="margin: 10px; -webkit-user-select: none; position: absolute; bottom: 69px; right: 28px;"><div class="gmnoprint" controlwidth="28" controlheight="55" style="position: absolute; left: 0px; top: 0px;"><div draggable="false" style="-webkit-user-select: none; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; border-radius: 2px; cursor: pointer; width: 28px; height: 55px; background-color: rgb(255, 255, 255);"><div title="Zoom in" style="position: relative; width: 28px; height: 27px; left: 0px; top: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img src="./tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: 0px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div><div style="position: relative; overflow: hidden; width: 67%; height: 1px; left: 16%; top: 0px; background-color: rgb(230, 230, 230);"></div><div title="Zoom out" style="position: relative; width: 28px; height: 27px; left: 0px; top: 0px;"><div style="overflow: hidden; position: absolute; width: 15px; height: 15px; left: 7px; top: 6px;"><img src="./tmapctrl.png" draggable="false" style="position: absolute; left: 0px; top: -15px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none; width: 120px; height: 54px;"></div></div></div></div><div class="gmnoprint" controlwidth="28" controlheight="0" style="display: none; position: absolute;"><div title="Rotate map 90 degrees" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; cursor: pointer; display: none; background-color: rgb(255, 255, 255);"><img src="./tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: 6px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div><div class="gm-tilt" style="width: 28px; height: 28px; overflow: hidden; position: absolute; border-radius: 2px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 1px 4px -1px; top: 0px; cursor: pointer; background-color: rgb(255, 255, 255);"><img src="./tmapctrl4.png" draggable="false" style="position: absolute; left: -141px; top: -13px; width: 170px; height: 54px; -webkit-user-select: none; border: 0px; padding: 0px; margin: 0px; max-width: none;"></div></div></div></div><div class="context" style="visibility: hidden; width: 100px;"><a id="context-menu-score-link" target="_blank">Get Walk Score</a><img src="./crosshairs.gif"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="dialog">
+    <p><img id="error-title" alt="Error:"></p>
+    <p id="message"></p>
+  </div>
+</div>
+  <script type="text/javascript" src="./js(1)"></script>
+  <script src="./api"></script><script src="./default+en.I.js" type="text/javascript"></script>
+  <script type="text/javascript" src="./jsapi"></script>
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages: ["columnchart"]});
+  </script><script src="./saved_resource" type="text/javascript"></script><link href="./ui+en.css" type="text/css" rel="stylesheet"><script src="./format+en,default+en,ui+en,browserchart+en,columnchart+en_US.I.js" type="text/javascript"></script>
+<!-- custom js-->
+
+<!-- 3rd party extras -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-87185-2', 'walkscore.com');
+  ga('require', 'displayfeatures');
+  ga('send', 'pageview');
+</script>
+
+<script src="./_tile-end-bundle_vcnyvsr4.js" type="text/javascript"></script>
+
+
+</body></html>

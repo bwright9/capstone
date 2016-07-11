@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
+import CrimeRate from './CrimeRate'
 
 class Move extends React.Component {
 	constructor(props) {
@@ -92,6 +93,7 @@ class Move extends React.Component {
 		}
 	}
 
+
 	render() {
 		return(
 			<div>
@@ -160,6 +162,7 @@ class Move extends React.Component {
 				{ this.showNeighborhoods() }
 				{ this.showCoordinates() }
 				<Walkscore />
+				<CrimeRate />
 			  </div>
 			</div>
 		)

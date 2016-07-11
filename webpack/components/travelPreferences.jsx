@@ -15,8 +15,8 @@ class travelPreferences extends React.Component {
 				<div className='container'>
 					<h3>Visit Preferences</h3>
 						</div>
-								<Table>
-				   			 <TableBody>
+							<Table multiSelectable={true}>
+				   			<TableBody>
 				 				  <TableRow>
 				 						<TableRowColumn>Safety</TableRowColumn>
 				 				  </TableRow>
@@ -44,7 +44,6 @@ class travelPreferences extends React.Component {
 				 		 	<button className='btn grey'><Link to={'/preferenceSelect'}>Back</Link></button>
 				 		</div>
 				 	</div>
-
 
 		)
 	}

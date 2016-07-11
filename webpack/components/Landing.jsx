@@ -25,7 +25,7 @@ class Landing extends React.Component {
  				    <div className="dialog-box center">
  				    	<h5>Want to know how far your salary will go in another city? Or how much you can afford to spend on a house or rent? Use our discover tools to help determine your next move.</h5>
  				    </div>
- 				    <button className='btn-large' onClick={() => this.setState( {discoverDetail: !this.state.discoverDetail }) }>learn more</button>
+ 				    <button className='btn-large' onClick={() => this.setState( {discoverDetail: !this.state.discoverDetail }) }>close</button>
  				  </div>
  				</div>
 			)
@@ -52,7 +52,7 @@ class Landing extends React.Component {
  				    <div className="dialog-box center">
  				    	<h5>Visiting a new city and not sure which neighborhood has the best restaurants or is closest to the stadium? Help us help you find the perfect spot.</h5>
  				    </div>
- 				    <button className='btn-large' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>learn more</button>
+ 				    <button className='btn-large' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>close</button>
  				  </div>
  				</div>
 			)

@@ -92,6 +92,7 @@ class Move extends React.Component {
 		}
 	}
 
+
 	render() {
 		return(
 			<div>

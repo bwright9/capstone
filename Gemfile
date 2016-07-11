@@ -15,10 +15,6 @@ gem 'materialize-sass'
 gem 'devise', '~> 3.4.0'
 gem 'curb'
 gem 'nokogiri'
-<<<<<<< HEAD
-
-=======
->>>>>>> 8955806650ec51765e5a4a64a50925cd17233390
 
 group :development, :test do
   gem 'pry'

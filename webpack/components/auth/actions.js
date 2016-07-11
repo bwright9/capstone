@@ -26,7 +26,7 @@ export const handleLogin = (email, password, history) => {
 			// set localStorage apiKey
 			localStorage.setItem('apiKey', response.api_key);
 			// set localStorage userId
-			localStorage.setItem('userId', response.id);
+			localStorage.setItem('userID', response.id);
 			// dispatch the login action
 			dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
 			// redirect
@@ -61,6 +61,7 @@ export const handleSignup = (email, password, first_name, last_name, history) =>
 }
 
 
+
 export const handleLogout = (history) => {
 	return(dispatch) => {
 		$.ajax({
@@ -75,6 +76,25 @@ export const handleLogout = (history) => {
 		}).fail( response => {
 			// TODO: handle this better
 			console.log(response);
+		})
+	}
+}
+
+
+export const handleFacebookLogin = (auth, history) => {
+	return(dispatch) => {
+		$.ajax({
+			url: '/facebook_login',
+			type: 'POST',
+			data: { auth },
+			dataType: 'JSON'
+		}).done(response => {
+			localStorage.setItem('apiKey', response.api_key);
+			localStorage.setItem('userId', response.id);
+			dispatch(loggedIn(response.id, response.api_key));
+			history.push('/');
+		}).fail(response => {
+			dispatch(logout());
 		})
 	}
 }

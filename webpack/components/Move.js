@@ -2,17 +2,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
+import Walkscore from './Walkscore';
 
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-<<<<<<< HEAD
 		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null };
 		this.selectRegion = this.selectRegion.bind(this);
-=======
-		this.state = { city: null, geoState: '', neighborhoods: null, ws_lat: null, ws_lon: null };
-		this.handleSelect = this.handleSelect.bind(this);
->>>>>>> rachel
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
@@ -87,7 +83,6 @@ class Move extends React.Component {
 			let index = this.state.neighborhoods.names.indexOf(hood);
 			let hood_lat = this.state.neighborhoods.lat[index];
 			let hood_long = this.state.neighborhoods.long[index];
-			debugger
 			return(
 				<div>				
 					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
@@ -164,6 +159,7 @@ class Move extends React.Component {
 					</form>
 				{ this.showNeighborhoods() }
 				{ this.showCoordinates() }
+				<Walkscore />
 			  </div>
 			</div>
 		)

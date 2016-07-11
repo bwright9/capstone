@@ -47,6 +47,8 @@ header, main, footer {
 
 .brand-logo {
 	letter-spacing: 10px;
+	margin-left: 30px;
+
 }
 
 .logo-img {
@@ -62,6 +64,7 @@ header, main, footer {
 nav {
 	background-color: #4484CE;
 }
+
 
 /*
   ========================================
@@ -210,6 +213,11 @@ footer.page-footer .footer-copyright {
 	margin-top: 0px;
 }
 
+.state {
+	height: 90.02px;
+	width: 88.59px;
+}
+
 
 /*
   ========================================
@@ -225,21 +233,9 @@ footer.page-footer .footer-copyright {
 }
 
 
-/* Navbar */
 
-.brand-logo {
-	margin-left: 30px;
-	letter-spacing: 10px;
-}
 
-.login {
-  letter-spacing: 5px;
-}
 
-.state {
-	height: 90.02px;
-	width: 88.59px;
-}
 
 /*
   ========================================

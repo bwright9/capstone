@@ -26,15 +26,19 @@ const UserIsAuthenticated = UserAuthWrapper({
   wrapperDisplayName: 'UserIsAuthenticated'
 });
 
+const resetScriptCount = () => {
+  scriptCount = 0;
+}
+
 export default (
   <Route>
     <Route path="/" component={App}>
     	<IndexRoute component={LandingSwitch} />
       <Route path="signup" component={Signup} />
       <Route path="landing" component={LandingSwitch}></Route>
-    	<Route path="move" component={Move}></Route>
+    	<Route path="move" component={Move} onEnter={resetScriptCount}></Route>
       <Route path="login" component={Login} />
-    	<Route path="visit" component={Visit}></Route>
+    	<Route path="visit" component={Visit} onEnter={resetScriptCount}d></Route>
     	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>
       <Route path="profile" component={UserIsAuthenticated(Profile)}></Route>

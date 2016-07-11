@@ -82,7 +82,6 @@ class Move extends React.Component {
 			let index = this.state.neighborhoods.names.indexOf(hood);
 			let hood_lat = this.state.neighborhoods.lat[index];
 			let hood_long = this.state.neighborhoods.long[index];
-			debugger
 			return(
 				<div>				
 					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>

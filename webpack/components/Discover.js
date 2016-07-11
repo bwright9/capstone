@@ -8,7 +8,7 @@ import Slider from 'material-ui/Slider';
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: 'california', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
+		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
 		this.showGeoState = this.showGeoState.bind(this);
 		this.calculateTax = this.calculateTax.bind(this);
 	}
@@ -16,6 +16,7 @@ class Discover extends React.Component {
 	componentWillMount() {
 		let firstSalary = this.state.salary * 0.85;
   	this.setState({afterTaxCurrent: firstSalary, afterTaxNew: firstSalary});
+  	this.calculateTax();
 	}
 
 	componentDidMount() {
@@ -43,7 +44,6 @@ class Discover extends React.Component {
 				"alaska": 0,
 				"arizona": 0.0454,
 				"arkansas": 0.07,
-				"california": 0.09999, //fix this one
 				"colorado": 0.0463,
 				"connecticut": 0.06,
 				"delaware": 0.066,
@@ -91,12 +91,7 @@ class Discover extends React.Component {
 				"wisconsin": 0.07,
 				"wyoming": 0
     }
-    let graduatedTaxBrackets = {
-    	"california": {
-    	}
-    }
     let stateTax = 0;
-    graduatedTaxBrackets[this.state.stateSelect]
     let federalTax = 0;
     if (this.state.salary < 9225) {
     	federalTax = (this.state.salary*0.1)
@@ -109,9 +104,30 @@ class Discover extends React.Component {
     } else {
     	federalTax = (9225*0.1) + ((37450-9225)*0.15) + ((90750-37450)*0.25) + ((189300-90750)*0.28) + ((this.state.salary-189300)*0.33)
     }
-    oldSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets["california"]) );
+    if (this.state.stateSelect === "california") {
+    	if (this.state.salary < 7582) {
+	    	stateTax = (this.state.salary*0.01)
+	    } else if (this.state.salary >= 7582 && this.state.salary < 17976) {
+		   	stateTax = (7582*0.01) + ((this.state.salary-7582)*0.02)
+	    } else if (this.state.salary >= 17976 && this.state.salary < 28371) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((this.state.salary-17976)*0.04)
+	    } else if (this.state.salary >= 28371 && this.state.salary < 39384) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((this.state.salary-28371)*0.06)
+	    } else if (this.state.salary >= 39384 && this.state.salary < 49774) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((this.state.salary-39384)*0.08)
+	    } else if (this.state.salary >= 49774 && this.state.salary < 254250) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((49774-39384)*0.08) + ((this.state.salary-49774)*0.093)
+	    } else if (this.state.salary >= 254250 && this.state.salary < 305100) {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((49774-39384)*0.08) + ((254250-49774)*0.093) + ((this.state.salary-254250)*0.0103)
+	    } else {
+	    	stateTax = (7582*0.01) + ((17976-7582)*0.02) + ((28371-17976)*0.04) + ((39384-28371)*0.06) + ((49774-39384)*0.08) + ((254250-49774)*0.093) + ((305100-254250)*0.0103) + ((this.state.salary-305100)*0.0113)
+	    }
+    } else {
+    	stateTax = this.state.salary * (flatTaxBrackets[this.state.stateSelect])
+    }
+    oldSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets["utah"]) );
 		this.setState({afterTaxCurrent: oldSalary});
-    newSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets[this.state.stateSelect]) );
+    newSalary = this.state.salary - federalTax - stateTax;
 		this.setState({afterTaxNew: newSalary});
   }
 
@@ -213,7 +229,7 @@ class Discover extends React.Component {
 			        
 							<div className="row">
 								<div className="compare-states col s6 center">
-									<img className="home-state" src="assets/states/california.png" />
+									<img className="home-state" src="assets/states/utah.png" />
 									<p>After-Tax Income: ${Math.round(this.state.afterTaxCurrent).toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">

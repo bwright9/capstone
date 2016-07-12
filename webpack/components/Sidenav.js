@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
@@ -69,10 +70,11 @@ class Sidenav extends React.Component {
     let imageState = this.convertCurrentState();
     return(
       <div>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47oD2Sle3KuVFzOpPzDeQEnPRuR_qwOE?libraries=places"></script>
         <ul id="slide-out" className="side-nav fixed">
           <li className="search">
             <div className="search-wrapper focused">
-              <input id="search" placeholder="Search" />
+              <input type="search" placeholder="search" />
             </div>
           </li>
           <li><Link to="/move">Move</Link></li>

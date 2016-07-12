@@ -7,7 +7,7 @@ class Api::ProfilesController < ApplicationController
  	end
 
  	def show
-    render json: current_user.profile
+    render json: { profile: current_user.profile }
  	end
  	
  	def create
@@ -20,6 +20,7 @@ class Api::ProfilesController < ApplicationController
  	end
  	
  	def update
+ 		@profile = Profile.find_by(user_id: current_user.id)
  		if @profile.update(profile_params)
  			render json: @profile
  		else

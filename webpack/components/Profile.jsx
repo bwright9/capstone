@@ -6,14 +6,18 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = { profile: null, edit: false }
+		this.updateProfile = this.updateProfile.bind(this);
+		this.addProfile = this.addProfile.bind(this);
 	}
 
 	componentWillMount() {
+		let profile = null;
 		$.ajax({
 			url:`/api/profiles/${this.props.id}`,
 			type: 'GET',
 			dataType: 'JSON',
 		}).done( profile => {
+			profile = profile.profile 
 			this.setState({ profile })
 		}).fail( data => {
 			alert('Something went wrong')
@@ -27,20 +31,20 @@ class Profile extends React.Component {
 	handleSubmit(e) {
 		// TODO ensure variables are called corrently 
 	  e.preventDefault();
-	  let current_city = this.refs.current_city.value
-	  let current_state = this.refs.current_state.value
-	  let current_neigborhood = this.refs.current_neigborhood.value
-	  let current_zipcode = this.refs.current_zipcode.value
+	  let current_city = this.refs.currentCity.value
+	  let current_state = this.refs.currentState.value
+	  let current_neighborhood = this.refs.currentNeighborhood.value
+	  let current_zipcode = this.refs.currentZipcode.value
 	  let age = this.refs.age.value
 	  this.toggleEdit();
 	  $.ajax({
-	    url:`/api/profiles/${this.props.id}`,
+	    url: `/api/profiles/${this.props.id}`,
 	    type: 'PUT',
 	    dataType: 'JSON',
-	    data: { ProfileEdit: { current_city, current_state, current_neigborhood, current_zipcode, age } }
+	    data: { profile: { current_city, current_state, current_neighborhood, current_zipcode, age } }
 	  }).done( ProfileEdit => {
-	    this.props.updateProfileEdit(ProfileEdit)
-	  })
+	    this.setState({ profile: ProfileEdit });
+	  });
 	}
 
 	addProfile(e) {
@@ -61,24 +65,25 @@ class Profile extends React.Component {
 		this.refs.addProfileForm.reset()
 	}
 
-	updateProfile(profile) {
-		let profiles = this.state.profile
-		let index = profile.findIndex( p => p.id === profile.id)
-		this.setState({
-			profile: [
-				...profile.slice(0, index),
-				{...profile},
-				...profile.slice(index + 1, profile.length)
-			]
-		})
-	}
+	// DON'T NEED THIS
+	// updateProfile(profile) {
+	// 	let userProfile = this.state.profile;
+	// 	let index = userProfile.findIndex( p => p.id === profile.id)
+	// 	this.setState({
+	// 		profile: [
+	// 			...profile.slice(0, index),
+	// 			{...profile},
+	// 			...profile.slice(index + 1, profile.length)
+	// 		]
+	// 	})
+	// }
 
 	newProfile() {
 		return(
 			<div className='row'>
 				<h1 className="center">Profile</h1>
 				<div className="container">
-					<form ref='addProfileForm' onSubmit={this.addProfile.bind(this)}>
+					<form ref='addProfileForm' onSubmit={this.addProfile}>
 						<input ref='currentCity' type='text' placeholder='Current City' />
 						<input ref='currentState' type='text' step='any' placeholder='Current State' />
 						<input ref='currentNeighborhood' type='text' step='any' placeholder='Current Neighborhood' />
@@ -99,7 +104,7 @@ class Profile extends React.Component {
 			      <div className="card-content">
 			        <p>Current City: {this.state.profile.current_city}</p>
 			        <p>Current State: {this.state.profile.current_state}</p>
-			        <p>Current Neighborhood: {this.state.profile.current_neigborhood}</p>
+			        <p>Current Neighborhood: {this.state.profile.current_neighborhood}</p>
 			        <p>Current Zipcode: {this.state.profile.current_zipcode}</p>
 			        <p>Age: {this.state.profile.age}</p>
 			      </div>
@@ -126,11 +131,11 @@ class Profile extends React.Component {
 		    <div className="card grey lighten-3">
 		      <div className="card-content">
 		        <form onSubmit={this.handleSubmit.bind(this)}>
-		          <input ref="name" placeholder="Current City" defaultValue={this.state.profile.current_city} />
-		          <input ref="name" placeholder="Current State" defaultValue={this.state.profile.current_state} />
-		          <input ref="name" placeholder="Current Neighborhood" defaultValue={this.state.profile.current_neigborhood} />
-		          <input ref="number" placeholder="Current Zipcode" defaultValue={this.state.profile.current_zipcode} />
-		          <input ref="number" placeholder="Age" defaultValue={this.state.profile.age} />
+		          <input ref="currentCity" placeholder="Current City" defaultValue={this.state.profile.current_city} />
+		          <input ref="currentState" placeholder="Current State" defaultValue={this.state.profile.current_state} />
+		          <input ref="currentNeighborhood" placeholder="Current Neighborhood" defaultValue={this.state.profile.current_neighborhood} />
+		          <input ref="currentZipcode" placeholder="Current Zipcode" defaultValue={this.state.profile.current_zipcode} />
+		          <input ref="age" placeholder="Age" defaultValue={this.state.profile.age} />
 		          <button type="submit" className="btn">Update</button>
 		          <button type="button" className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Cancel</button>
 		        </form>
@@ -141,21 +146,22 @@ class Profile extends React.Component {
 	}
 
 	render() {
-		let profile = this.state.profile;
-		if (!profile) {
-			return this.newProfile()
-		} else {
+		if (this.state.profile) {
 			if (this.state.edit) {
 				return this.edit();
 			} else {
 				return this.show(); 
-			}
+			} 
+		} else {
+			return this.newProfile();	
 		}
 	}
-}
 
-const mapStateToProps = (state) => {
-	return { id: state.auth.id };
-}
+
+}	
+
+	const mapStateToProps = (state) => {
+		return { id: state.auth.id };
+	}
 
 export default connect(mapStateToProps)(Profile);

@@ -159,6 +159,10 @@ class Move extends React.Component {
 					</form>
 				{ this.showNeighborhoods() }
 				{ this.showCoordinates() }
+				
+				<br />
+				<br />
+				
 				<Walkscore />
 			  </div>
 			</div>

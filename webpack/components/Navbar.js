@@ -13,8 +13,6 @@ class Navbar extends React.Component {
 		this.props.dispatch(handleLogout(this.props.history));
 	}
 
-
-
 	authLink() {
 		if(this.props.auth)
 			return(
@@ -44,14 +42,16 @@ class Navbar extends React.Component {
 				  { this.authLink() }
 				  <li className="divider"></li>
 				</ul>
-				<nav>
-				  <div className="nav-wrapper">
-				    <Link to='/' className='brand-logo'>someThere</Link>
-				    <ul className="right hide-on-med-and-down">
-				      { this.dropDownButton() }
-				    </ul>
-				  </div>
-				</nav>
+				<div className='navbar-fixed'>
+					<nav>
+					  <div className="nav-wrapper">
+					    <Link to='/' className='brand-logo'>someThere</Link>
+					    <ul className="right hide-on-med-and-down">
+					      { this.dropDownButton() }
+					    </ul>
+					  </div>
+					</nav>
+				</div>
 			</div>
 		)
 	}

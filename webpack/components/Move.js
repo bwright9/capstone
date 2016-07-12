@@ -1,3 +1,7 @@
+// 1. add addtional data to profile - rails migration
+// 2. make sure the profile component shows that data and is able to update that data
+// 3. make the discover states a link - <Link to='/move?city=San%20Fan&state=CA'>San Francisco, CA</Link>
+
 import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
@@ -93,14 +97,16 @@ class Move extends React.Component {
 	}
 
 	render() {
+		let location = this.props.location;
+		let city = location.query.city;
+		let state = location.query.state;
 		return(
 			<div>
 				<h1 className="center">Move Component</h1>
 				<div className="container">
-			    
 			    <form onSubmit={this.selectRegion}>
-						<input ref='city' type='text' placeholder='Choose your city' />
-						<select ref='geoState'>
+						<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
+						<select ref='geoState' defaultValue={state}>
 				      <option value="" disabled selected>Choose your state</option>
 				      <option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>

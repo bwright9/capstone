@@ -1,4 +1,5 @@
 class Api::ProfilesController < ApplicationController
+	skip_before_action :verify_authenticity_token
 	# before_action :user_instance, except: [:index]
 	# before_action :profile_instance, except: [:index, :create, :show, :create]
  	

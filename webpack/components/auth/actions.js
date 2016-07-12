@@ -4,14 +4,20 @@ export const loggedIn = (id, apiKey, firstName, lastName) => {
 		id,
 		apiKey,
 		firstName,
-		lastName
-
+		lastName, 
 	}
 }
 
 export const logout = () => {
 	return {
 		type: 'LOGOUT',
+	}
+}
+
+export const profileUpdate = (profile) => {
+	return{
+		type: 'PROFILE_UPDATE',
+		profile
 	}
 }
 
@@ -27,8 +33,21 @@ export const handleLogin = (email, password, history) => {
 			localStorage.setItem('apiKey', response.api_key);
 			// set localStorage userId
 			localStorage.setItem('userId', response.id);
+			localStorage.setItem('firstName', response.first_name);
+			localStorage.setItem('lastName', response.last_name);
 			// dispatch the login action
-			dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
+			$.ajax({
+	      url: "/api/user_profile",
+	      type: 'GET',
+	      dataType: 'JSON'
+	    }).done( data => { 
+	      localStorage.setItem('currentCity', data.profile.current_city);
+	      localStorage.setItem('currentState', data.profile.current_state);
+	      dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
+	      dispatch(profileUpdate(data.profile));
+	    }).fail( data => {
+	      console.log(data);
+	    });
 			// redirect
 			history.push('/discover')
 		}).fail( response => {

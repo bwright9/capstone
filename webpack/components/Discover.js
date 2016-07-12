@@ -310,7 +310,7 @@ class Discover extends React.Component {
               <div className="row hamilton-cities">
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/california.png' />
-                    <p>San Francisco, CA</p>
+                    <p><Link to='/move?city=San%20Fan&state=CA'>San Francisco, CA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/california.png' />

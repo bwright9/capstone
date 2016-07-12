@@ -1,24 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
 class Sidenav extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { currentCity: '', abbrevState: '', currentState: '' };
     this.convertCurrentState = this.convertCurrentState.bind(this);
-  }
-
-  componentWillMount() {
-    $.ajax({
-      url: "/api/user_profile",
-      type: 'GET',
-      dataType: 'JSON'
-    }).done( data => { 
-      this.setState({ currentCity: data.profile.current_city, abbrevState: data.profile.current_state });
-      this.convertCurrentState();
-    }).fail( data => {
-      console.log(data);
-    })
   }
 
   convertCurrentState() {
@@ -75,10 +62,11 @@ class Sidenav extends React.Component {
       "WV": "westvirginia", 
       "WY": "wyoming"
     }
-    this.setState({ currentState: geoStates[this.state.abbrevState] });
+    return geoStates[this.props.currentState];
   }
 
   render() {
+    let imageState = this.convertCurrentState();
     return(
       <div>
         <ul id="slide-out" className="side-nav fixed">
@@ -93,11 +81,11 @@ class Sidenav extends React.Component {
           <li><Link to="/favorites">Favorites</Link></li>
           <li>
             <div className="center">
-              <img className="home-state" src={`assets/states/${this.state.currentState}.png`} />
+              <img className="home-state" src={`assets/states/${imageState}.png`} />
             </div>
           </li>
           <li>
-            <p className="center" id="city">Current City: {this.state.currentCity}, {this.state.abbrevState}</p>
+            <p className="center" id="city">Current City: {this.props.currentCity}, {this.props.currentState}</p>
           </li>
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="mdi-navigation-menu"></i></a>
@@ -106,4 +94,8 @@ class Sidenav extends React.Component {
   }
 }
 
-export default Sidenav;
+const mapStateToProps = (state) => {
+  return { currentCity: state.profile.current_city, currentState: state.profile.current_state }
+}
+
+export default connect(mapStateToProps)(Sidenav);

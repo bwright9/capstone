@@ -1,4 +1,5 @@
 class Api::ProfilesController < ApplicationController
+	skip_before_action :verify_authenticity_token
 	# before_action :user_instance, except: [:index]
 	# before_action :profile_instance, except: [:index, :create, :show, :create]
  	
@@ -7,7 +8,7 @@ class Api::ProfilesController < ApplicationController
  	end
 
  	def show
-    render json: current_user.profile
+    render json: { user: current_user, profile: current_user.profile }
  	end
  	
  	def create
@@ -20,6 +21,7 @@ class Api::ProfilesController < ApplicationController
  	end
  	
  	def update
+ 		@profile = Profile.find_by(user_id: current_user.id)
  		if @profile.update(profile_params)
  			render json: @profile
  		else

@@ -1,10 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router';
- 
-// when sidenav mounts
-// make ajax call to get user profile data 
-// on a component will mount
-
 
 class Sidenav extends React.Component {
   constructor(props) {
@@ -18,8 +13,8 @@ class Sidenav extends React.Component {
       url: "/api/user_profile",
       type: 'GET',
       dataType: 'JSON'
-    }).done( profile => { 
-      this.setState({ currentCity: profile.profile.current_city, abbrevState: profile.profile.current_state });
+    }).done( data => { 
+      this.setState({ currentCity: data.profile.current_city, abbrevState: data.profile.current_state });
       this.convertCurrentState();
     }).fail( data => {
       console.log(data);

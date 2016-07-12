@@ -7,7 +7,7 @@ class Api::ProfilesController < ApplicationController
  	end
 
  	def show
-    render json: { profile: current_user.profile }
+    render json: { user: current_user, profile: current_user.profile }
  	end
  	
  	def create

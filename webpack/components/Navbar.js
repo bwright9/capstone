@@ -6,7 +6,20 @@ import { connect } from 'react-redux';
 class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
+		this.state = { firstName: '', lastName: '' };
 	}
+
+	componentWillMount() {
+    $.ajax({
+      url: "/api/user_profile",
+      type: 'GET',
+      dataType: 'JSON'
+    }).done( data => { 
+      this.setState({ firstName: data.user.first_name, lastName: data.user.last_name });
+    }).fail( data => {
+      console.log(data);
+    })
+  }
 
 	logout(e) {
 		e.preventDefault();
@@ -29,7 +42,7 @@ class Navbar extends React.Component {
 
 	dropDownButton() {
 		if(this.props.auth) {
-			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right"></i></a></li>)
+			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{this.state.firstName} {this.state.lastName}<i className="material-icons right"></i></a></li>)
 		} else {
 			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">Menu<i className="material-icons right"></i></a></li>)
 		}
@@ -61,7 +74,6 @@ const mapStateToProps = (state) => {
 	return {
 		firstName: state.auth.firstName,
 		lastName: state.auth.lastName 
-
 	}
 }
 

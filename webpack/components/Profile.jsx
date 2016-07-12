@@ -6,7 +6,6 @@ class Profile extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = { profile: null, edit: false }
-		this.updateProfile = this.updateProfile.bind(this);
 		this.addProfile = this.addProfile.bind(this);
 	}
 
@@ -65,19 +64,6 @@ class Profile extends React.Component {
 		this.refs.addProfileForm.reset()
 	}
 
-	// DON'T NEED THIS
-	// updateProfile(profile) {
-	// 	let userProfile = this.state.profile;
-	// 	let index = userProfile.findIndex( p => p.id === profile.id)
-	// 	this.setState({
-	// 		profile: [
-	// 			...profile.slice(0, index),
-	// 			{...profile},
-	// 			...profile.slice(index + 1, profile.length)
-	// 		]
-	// 	})
-	// }
-
 	newProfile() {
 		return(
 			<div className='row'>
@@ -121,7 +107,6 @@ class Profile extends React.Component {
 			 	<button className='btn blue-grey'><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
 			</div>
 		</div>
-		
 		)
 	}
 
@@ -157,11 +142,10 @@ class Profile extends React.Component {
 		}
 	}
 
-
 }	
 
-	const mapStateToProps = (state) => {
-		return { id: state.auth.id };
-	}
+const mapStateToProps = (state) => {
+	return { id: state.auth.id };
+}
 
 export default connect(mapStateToProps)(Profile);

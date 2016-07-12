@@ -2,7 +2,7 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import {loggedIn, logout } from '../components/auth/actions';
+import { loggedIn, logout, profileUpdate } from '../components/auth/actions';
 import Sidenav from '../components/Sidenav';
 import Footer from '../components/Footer';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -16,10 +16,22 @@ class App extends React.Component {
   componentWillMount() {
     const userId = localStorage.getItem('userId');
     const apiKey = localStorage.getItem('apiKey');
-    if(!this.props.auth && userId)
-      this.props.dispatch(loggedIn(userId, apiKey))
-    else
-      this.props.dispatch(logout())        
+    const firstName = localStorage.getItem('firstName');
+    const lastName = localStorage.getItem('lastName');
+    if(!this.props.auth && userId) {
+      this.props.dispatch(loggedIn(userId, apiKey, firstName, lastName))
+      $.ajax({
+        url:`/api/profiles/${userId}`,
+        type: 'GET',
+        dataType: 'JSON',
+      }).done( profile => {
+        profile = profile.profile 
+        this.props.dispatch( profileUpdate(profile) )
+      }).fail( data => {
+        alert('Something went wrong')
+      });
+    } else
+        this.props.dispatch(logout())        
   }
 
   sideNav() {

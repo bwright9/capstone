@@ -8,12 +8,11 @@ class Navbar extends React.Component {
 		super(props);
 	}
 
+
 	logout(e) {
 		e.preventDefault();
 		this.props.dispatch(handleLogout(this.props.history));
 	}
-
-
 
 	authLink() {
 		if(this.props.auth)
@@ -31,7 +30,7 @@ class Navbar extends React.Component {
 
 	dropDownButton() {
 		if(this.props.auth) {
-			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right"></i></a></li>)
+			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{this.props.firstName} {this.props.lastName}<i className="material-icons right"></i></a></li>)
 		} else {
 			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">Menu<i className="material-icons right"></i></a></li>)
 		}
@@ -44,14 +43,16 @@ class Navbar extends React.Component {
 				  { this.authLink() }
 				  <li className="divider"></li>
 				</ul>
-				<nav>
-				  <div className="nav-wrapper">
-				    <Link to='/' className='brand-logo'>someThere</Link>
-				    <ul className="right hide-on-med-and-down">
-				      { this.dropDownButton() }
-				    </ul>
-				  </div>
-				</nav>
+				<div className='navbar-fixed'>
+					<nav>
+					  <div className="nav-wrapper">
+					    <Link to='/' className='brand-logo'>someThere</Link>
+					    <ul className="right hide-on-med-and-down">
+					      { this.dropDownButton() }
+					    </ul>
+					  </div>
+					</nav>
+				</div>
 			</div>
 		)
 	}
@@ -61,7 +62,6 @@ const mapStateToProps = (state) => {
 	return {
 		firstName: state.auth.firstName,
 		lastName: state.auth.lastName 
-
 	}
 }
 

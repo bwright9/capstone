@@ -66,8 +66,31 @@ class Sidenav extends React.Component {
     return geoStates[this.props.currentState];
   }
 
+  cityStateDisplay() {
+    if(this.props.currentCity && this.props.currentState) {
+      let imageState = this.convertCurrentState();
+      return(
+        <div>
+          <li>
+            <div className="center">
+              <img className="home-state" src={`assets/states/${imageState}.png`} />
+            </div>
+          </li>
+          <li>
+            <p className="center" id="city">Current City: {this.props.currentCity}, {this.props.currentState}</p>
+          </li>
+        </div>
+      )
+    } else {
+      return(
+        <div>
+          <Link to='/profile'>Create Profile</Link>
+        </div>
+      )
+    }
+  }
+
   render() {
-    let imageState = this.convertCurrentState();
     return(
       <div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47oD2Sle3KuVFzOpPzDeQEnPRuR_qwOE?libraries=places"></script>
@@ -81,14 +104,7 @@ class Sidenav extends React.Component {
           <li><Link to="/visit">Visit</Link></li>
           <li><Link to="/discover">Discover</Link></li>
           <li><Link to="/favorites">Favorites</Link></li>
-          <li>
-            <div className="center">
-              <img className="home-state" src={`assets/states/${imageState}.png`} />
-            </div>
-          </li>
-          <li>
-            <p className="center" id="city">Current City: {this.props.currentCity}, {this.props.currentState}</p>
-          </li>
+          { this.cityStateDisplay() }
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="mdi-navigation-menu"></i></a>
       </div>

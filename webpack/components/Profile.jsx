@@ -10,6 +10,14 @@ class Profile extends React.Component {
 		this.addProfile = this.addProfile.bind(this);
 	}
 
+	componentWillMount() {
+		let profile = this.props.profile;
+		if(!profile.current_city && !profile.current_state && 
+			 !profile.current_neighborhood && !profile.current_zipcode &&
+			 !profile.age)
+			this.setState({ edit: true })
+	}
+
 	toggleEdit() {
 	  this.setState({ edit: !this.state.edit })
 	}
@@ -83,16 +91,16 @@ class Profile extends React.Component {
 			        <p>Age: {this.props.profile.age}</p>
 			      </div>
 			      <div className="card-action">
-			        <button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
+			        <button className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Edit</button>
 			    </div>
 			  </div>
 			</div>
-			<div className='profile_desc col 2'>
-			 	<p>someThere helps you match your current neighborhood with other similar neighborhoods.
-			  		You can also customize your own preferences.</p> 
+			<div className='profile_desc'>
+			 	<p>someThere helps you match your current neighborhood profile with other similar neighborhoods.
+			  		You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
 				<p>Select from the options below:</p>
-			 	<button className="btn">Current Neighborhood</button>
-			 	<button className='btn blue-grey'><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
+			 	<button className="btn z-depth-3">Current Neighborhood</button>
+			 	<button className="btn blue-grey z-depth-3"><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
 			</div>
 		</div>
 		)
@@ -104,13 +112,13 @@ class Profile extends React.Component {
 		    <div className="card grey lighten-3">
 		      <div className="card-content">
 		        <form onSubmit={this.handleSubmit.bind(this)}>
-		          <input ref="currentCity" placeholder="Current City" defaultValue={this.props.profile.current_city} />
-		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />
+		          <input ref="currentCity" placeholder="Current City" required defaultValue={this.props.profile.current_city} />
+		          <input ref="currentState" placeholder="Current State" required defaultValue={this.props.profile.current_state} />
 		          <input ref="currentNeighborhood" placeholder="Current Neighborhood" defaultValue={this.props.profile.current_neighborhood} />
 		          <input ref="currentZipcode" placeholder="Current Zipcode" defaultValue={this.props.profile.current_zipcode} />
 		          <input ref="age" placeholder="Age" defaultValue={this.props.profile.age} />
-		          <button type="submit" className="btn">Update</button>
-		          <button type="button" className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Cancel</button>
+		          <button type="submit" className="btn z-depth-2">Update</button>
+		          <button type="button" className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Cancel</button>
 		        </form>
 		      </div>
 		    </div>

@@ -8,10 +8,13 @@ class Navbar extends React.Component {
 		super(props);
 	}
 
-
 	logout(e) {
 		e.preventDefault();
 		this.props.dispatch(handleLogout(this.props.history));
+	}
+
+	componentDidUpdate() {
+		$('.dropdown-button').dropdown();
 	}
 
 	authLink() {
@@ -30,9 +33,10 @@ class Navbar extends React.Component {
 
 	dropDownButton() {
 		if(this.props.auth) {
-			return(<div><li><a className="dropdown-button" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right"></i></a></li></div>)
+			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right">arrow_drop_down</i></a></li>)
 		} else {
-			return(<div><li><Link to='signup'>Sign Up</Link></li><li><Link to='login' className='login'>Login</Link></li></div>)
+			return([<li><Link to='signup'>Sign Up</Link></li>,
+				      <li><Link to='login' className='login'>Login</Link></li>])
 		}
 	}
 
@@ -43,7 +47,7 @@ class Navbar extends React.Component {
 				  { this.authLink() }
 				  <li className="divider"></li>
 				</ul>
-				<div className='navbar-fixed'>
+				<div className='navbar-fixed z-depth-1'>
 					<nav>
 					  <div className="nav-wrapper">
 					    <Link to='/' className='brand-logo'>someThere</Link>

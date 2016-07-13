@@ -6,7 +6,7 @@ import FacebookLogin from 'react-facebook-login';
 class Login extends React.Component {
 	constructor(props) {
 		super(props);
-		const redirectLocation = '/'
+		const redirectLocation = '/discover'
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.state = { error: false, redirectRoute: redirectLocation }
 	}

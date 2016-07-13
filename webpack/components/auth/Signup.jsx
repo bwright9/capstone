@@ -19,14 +19,16 @@ class Signup extends React.Component {
 	render() {
 		return(
 			<div>
-				<h3>Sign Up</h3>
-				<form onSubmit={ this.handleSubmit.bind(this) } >
-					<input type='text' placeholder='First Name' ref='firstName' required />
-					<input type='text' placeholder='Last Name' ref='lastName' required />
-					<input type='email' placeholder='Email' ref='email' required />
-					<input type='password' placeholder='Password' ref='password' required />
-					<input type='submit' className='btn' value='Sign Up' />
- 				</form>
+				<div className='container'>
+					<h3>Sign Up</h3>
+						<form onSubmit={ this.handleSubmit.bind(this) } >
+							<input type='text' placeholder='First Name' ref='firstName' required />
+							<input type='text' placeholder='Last Name' ref='lastName' required />
+							<input type='email' placeholder='Email' ref='email' required />
+							<input type='password' placeholder='Password' ref='password' required />
+							<input type='submit' className='btn' value='Sign Up' />
+ 						</form>
+ 					</div>
 			</div>
 		);
 	}

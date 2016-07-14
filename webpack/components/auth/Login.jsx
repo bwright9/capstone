@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { handleLogin, handleFacebookLogin } from './actions';
-import FacebookLogin from 'react-facebook-login';
+import { handleLogin } from './actions';
 
 class Login extends React.Component {
 	constructor(props) {
@@ -9,10 +8,6 @@ class Login extends React.Component {
 		const redirectLocation = '/discover'
 		this.handleSubmit = this.handleSubmit.bind(this);
 		this.state = { error: false, redirectRoute: redirectLocation }
-	}
-
-	responseFacebook = (auth) => {
-		this.props.dispatch(handleFacebookLogin(auth, this.props.history))
 	}
 
 	handleSubmit(e) {

@@ -18,7 +18,7 @@ class MoveMap extends React.Component {
 		});  
 	}
 
-	componentWillUpdate() {
+	componentWillReceiveProps() {
     $.ajax({
 			type: 'GET',
 			url: '/api/maps_key',

@@ -15,6 +15,7 @@ gem 'materialize-sass'
 gem 'devise', '~> 3.4.0'
 gem 'curb'
 gem 'nokogiri'
+gem 'geocoder'
 
 group :development, :test do
   gem 'pry'

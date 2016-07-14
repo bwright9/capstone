@@ -13,7 +13,7 @@ class WalkScore extends React.Component {
     
     componentWillMount(city, geostate) {
       // address will come from this.props
-      ws_address = 'Seattle, WA'     
+      ws_address = 'parkside, San Francisco, CA'     
     }
 
     addScript() {

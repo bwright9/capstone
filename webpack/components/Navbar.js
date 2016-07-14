@@ -20,8 +20,8 @@ class Navbar extends React.Component {
 	authLink() {
 		if(this.props.auth)
 			return(
-					[<li><Link to="/profile">Profile</Link></li>,
-					<li><a className='logo-header'href='#' onClick={this.logout.bind(this)}>Logout</a></li>]
+				[<li><Link className='profile' to="/profile">Profile</Link></li>,
+				<li><a className='logo-header'href='#' onClick={this.logout.bind(this)}>logout</a></li>]
 			)
 		else {
 			return( 

@@ -66,6 +66,10 @@ nav {
 	background-color: #4484CE;
 }
 
+.profile {
+  letter-spacing: 5px;
+}
+
 
 /*
   ========================================
@@ -104,25 +108,30 @@ nav {
   Landing Page
   ========================================
 */
+
+.card {
+  margin: 50px 10px 50px 10px;
+}
+
 .card img {
-	height: 900px;
+  max-width: 100%;
+	height: 554px;
 	border-width: 0px;
 	opacity: 0.85;
 }
 
 .image {
-	background-image: url(balcony.jpg);
-	height: 700px;
-	width: 350px;
+	height: auto;
+	max-width: 100%;
 }
 
 .card .card-image .card-title {
 	color: #fff;
 	position: absolute;
 	top: 50px;
-	right: 30px;
-	padding: 20px;
-	font-size: 40px;
+	right: 5px;
+	padding: 10px;
+	font-size: 30px;
 	letter-spacing: 15px;
 	text-shadow: 0px 2px 8px #4A4A4A;
 	text-align: right;
@@ -131,8 +140,8 @@ nav {
 .card .card-image .btn {
 	position: absolute;
 	bottom: 20px;
-	left: 181px;
 	letter-spacing: 10px;
+  margin-left: 70px;
 }
 
 .dialog-box {
@@ -148,6 +157,7 @@ nav {
 	margin: 100px 10px 0px 10px;
 	text-shadow: 0px 2px 8px #4A4A4A;
 }
+
 
 /*
   ========================================

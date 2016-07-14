@@ -21,7 +21,7 @@ class Landing extends React.Component {
 				<div className="card">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/discover.jpg" />
- 				    <h2 className="card-title">DISCOVER</h2>
+ 				    <h4 className="card-title">DISCOVER</h4>
  				    <div className="dialog-box center">
  				    	<h5>Want to know how far your salary will go in another city? Or how much you can afford to spend on a house or rent? Use our discover tools to help determine your next move.</h5>
  				    </div>
@@ -34,7 +34,7 @@ class Landing extends React.Component {
 				<div className="card">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/discover.jpg" />
- 				    <h2 className="card-title">DISCOVER</h2>
+ 				    <h4 className="card-title">DISCOVER</h4>
  				    <button className='btn-large' onClick={() => this.setState( {discoverDetail: !this.state.discoverDetail }) }>learn more</button>
  				  </div>
  				</div>

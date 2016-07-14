@@ -93,8 +93,8 @@ class Move extends React.Component {
 			return(
 				<div>				
 					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
-					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
 					{ this.showWalkscore() }
+					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
 				</div>
 			)
 		}

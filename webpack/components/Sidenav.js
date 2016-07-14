@@ -97,7 +97,7 @@ class Sidenav extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { currentCity: state.profile.current_city, currentState: state.profile.current_state }
+  return { currentCity: state.profile.current_city, currentState: state.profile.current_state, walkscore: state.profile.walkscore }
 }
 
 export default connect(mapStateToProps)(Sidenav);

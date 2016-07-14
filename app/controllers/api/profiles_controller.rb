@@ -38,7 +38,7 @@ class Api::ProfilesController < ApplicationController
  	
  	def profile_params
  		params.require(:profile).permit(:address, :current_city, :current_state, :current_neighborhood,
- 																		:current_zipcode, :age, :user_id)
+ 																		:current_zipcode, :age, :latitude, :longitude, :walkscore, :user_id)
  	end
 
  	def profile

@@ -8,6 +8,7 @@ class Profile extends React.Component {
 		super(props)
 		this.state = { edit: false }
 		this.addProfile = this.addProfile.bind(this);
+		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 	}
 
 	toggleEdit() {
@@ -31,9 +32,32 @@ class Profile extends React.Component {
 	    data: { profile: { address, current_city, current_state, current_neighborhood, current_zipcode, age } }
 	  }).done( profile => {
 	  	this.props.dispatch(profileUpdate(profile));
+			this.fetchWalkscore();
 	    // this.setState({ profile });
 	  });
 	}
+
+	fetchWalkscore() {
+		$.ajax({
+			url: "/api/walkscore",
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( score => {
+			console.log(score);
+			$.ajax({
+		    url: `/api/profiles/${this.props.id}`,
+		    type: 'PUT',
+		    dataType: 'JSON',
+		    data: { profile: { walkscore: score } }
+		  }).done( profile => {
+		  	this.props.dispatch(profileUpdate(profile));
+		  });
+		}).fail( data => {
+			console.log('did not work');
+		})
+	}
+
+
 
 	addProfile(e) {
 		e.preventDefault();

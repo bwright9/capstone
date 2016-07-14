@@ -79,8 +79,6 @@ export const handleSignup = (email, password, first_name, last_name, history) =>
 	}
 }
 
-
-
 export const handleLogout = (history) => {
 	return(dispatch) => {
 		$.ajax({
@@ -98,7 +96,4 @@ export const handleLogout = (history) => {
 		})
 	}
 }
-
-
-
 

@@ -3,4 +3,11 @@ class Profile < ActiveRecord::Base
   has_one :move_preference
   has_one :visit_preference
   validates_presence_of :address
+
+  def full_street_address
+		[address, current_city, current_state].compact.join(', ')
+	end
+
+  geocoded_by :full_street_address
+	after_validation :geocode  
 end

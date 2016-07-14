@@ -4,11 +4,14 @@ import ReactDOM from 'react-dom';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Slider from 'material-ui/Slider';
- 
+import { connect } from 'react-redux';
+
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
+    this.convertCurrentState = this.convertCurrentState.bind(this);
+		this.showCurrentState = this.showCurrentState.bind(this);
 		this.showGeoState = this.showGeoState.bind(this);
 		this.calculateTax = this.calculateTax.bind(this);
 	}
@@ -125,16 +128,89 @@ class Discover extends React.Component {
     } else {
     	stateTax = this.state.salary * (flatTaxBrackets[this.state.stateSelect])
     }
-    oldSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets["utah"]) );
+    let oldSalaryState = this.convertCurrentState();
+    oldSalary = this.state.salary - federalTax - (this.state.salary * (flatTaxBrackets[oldSalaryState]) );
 		this.setState({afterTaxCurrent: oldSalary});
     newSalary = this.state.salary - federalTax - stateTax;
 		this.setState({afterTaxNew: newSalary});
   }
-  
-   showGeoState() {
+
+  convertCurrentState() {
+    let geoStates = {
+      "AK": "alaska", 
+      "AL": "alabama", 
+      "AR": "arkansas", 
+      "AZ": "arizona", 
+      "CA": "california", 
+      "CO": "colorado", 
+      "CT": "connecticut", 
+      "DC": "dc", 
+      "DE": "delaware", 
+      "FL": "florida", 
+      "GA": "georgia", 
+      "HI": "hawaii", 
+      "IA": "iowa", 
+      "ID": "idaho", 
+      "IL": "illinois", 
+      "IN": "indiana", 
+      "KS": "kansas", 
+      "KY": "kentucky", 
+      "LA": "louisiana", 
+      "MA": "massachusetts", 
+      "MD": "maryland", 
+      "ME": "maine", 
+      "MI": "michigan", 
+      "MN": "minnesota", 
+      "MO": "missouri", 
+      "MS": "mississippi", 
+      "MT": "montana", 
+      "NC": "northcarolina", 
+      "ND": "northdakota", 
+      "NE": "nebraska", 
+      "NH": "newhampshire", 
+      "NJ": "newjersey", 
+      "NM": "newmexico", 
+      "NV": "nevada", 
+      "NY": "newyork", 
+      "OH": "ohio", 
+      "OK": "oklahoma", 
+      "OR": "oregon", 
+      "PA": "pennsylvania", 
+      "RI": "rhodeisland", 
+      "SC": "southcarolina", 
+      "SD": "southdakota", 
+      "TN": "tennessee", 
+      "TX": "texas", 
+      "UT": "utah", 
+      "VA": "virginia", 
+      "VT": "vermont", 
+      "WA": "washington", 
+      "WI": "wisconsin", 
+      "WV": "westvirginia", 
+      "WY": "wyoming"
+    }
+    return geoStates[this.props.currentState];
+  }
+
+  showCurrentState() {
+    if(this.state.stateSelect) {
+      let imageState = this.convertCurrentState();
+      return(
+        <img className="tax-state" src={`assets/states/${imageState}.png`} />
+      )
+    } else {
+      return(
+        <div>             
+          <i className="large material-icons">terrain</i>
+        </div>
+      )
+    }
+  }
+
+  showGeoState() {
     if(this.state.stateSelect) {
       return(
-        <img className="home-state" src={`assets/states/${this.state.stateSelect}.png`} />
+        <img className="tax-state" src={`assets/states/${this.state.stateSelect}.png`} />
       )
     } else {
       return(
@@ -229,7 +305,7 @@ class Discover extends React.Component {
 			        
 							<div className="row">
 								<div className="compare-states col s6 center">
-									<img className="home-state" src="assets/states/utah.png" />
+									{ this.showCurrentState() }
 									<p>After-Tax Income: ${Math.round(this.state.afterTaxCurrent).toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">
@@ -389,4 +465,8 @@ class Discover extends React.Component {
 	}
 }
  
-export default Discover;
+const mapStateToProps = (state) => {
+  return { currentCity: state.profile.current_city, currentState: state.profile.current_state }
+}
+
+export default connect(mapStateToProps)(Discover);

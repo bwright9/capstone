@@ -77,7 +77,6 @@ const mapStateToProps = (state) => {
 		//if login with auth
 		firstName: state.auth.firstName,
 		lastName: state.auth.lastName 
-
 	}
 }
 

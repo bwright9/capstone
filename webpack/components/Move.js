@@ -59,6 +59,13 @@ class Move extends React.Component {
 	  	    <li><a href="#" key={`hood-${index}`} onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
 				)
 			})
+			let coordinatesArr = [];
+			for(var i = 0; i < this.state.neighborhoods.lat.length; i++){
+		    coordinatesArr.push({lat: this.state.neighborhoods.lat[i], long: this.state.neighborhoods.long[i]})
+			}
+			console.log(coordinatesArr[3]["lat"]); 
+			// this is printing out twice for some reason, one old and one new
+			// now just need to loop through the coordinatesArr and make ajax call to return array of walkscores
 			return(
 				<div>				
 					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
@@ -106,14 +113,13 @@ class Move extends React.Component {
 				type: 'GET',
 				data: { lat , long },
 				dataType: 'JSON'
-				}).done( score => {
-					this.setState({ geoWalkscore: score });
-				}).fail( data => {
-					console.log(data);
-				});
-			console.log(this.state.geoWalkscore);
+			}).done( score => {
+				this.setState({ geoWalkscore: score });
+			}).fail( data => {
+				console.log(data);
+			});
 		} else {
-			console.log(this.state.geoWalkscore);
+			console.log('could not find score');
 		}
 	}
 

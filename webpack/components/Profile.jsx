@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { profileUpdate } from './auth/actions';
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -11,13 +13,13 @@ class Profile extends React.Component {
 		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 	}
 
-	componentWillMount() {
-		let profile = this.props.profile;
-		if(!profile.current_city && !profile.current_state && 
-			 !profile.current_neighborhood && !profile.current_zipcode &&
-			 !profile.age)
-			this.setState({ edit: true })
-	}
+	// componentWillMount() {
+	// 	let profile = this.props.profile;
+	// 	if(!profile.current_city && !profile.current_state && 
+	// 		 !profile.current_neighborhood && !profile.current_zipcode &&
+	// 		 !profile.age)
+	// 		this.setState({ edit: true })
+	// }
 
 	toggleEdit() {
 	  this.setState({ edit: !this.state.edit })
@@ -29,7 +31,6 @@ class Profile extends React.Component {
  		let address = this.refs.currentAddress.value
 	  let current_city = this.refs.currentCity.value
 	  let current_state = this.refs.currentState.value
-	  let current_neighborhood = this.refs.currentNeighborhood.value
 	  let current_zipcode = this.refs.currentZipcode.value
 	  let age = this.refs.age.value
 	  this.toggleEdit();
@@ -37,7 +38,7 @@ class Profile extends React.Component {
 	    url: `/api/profiles/${this.props.id}`,
 	    type: 'PUT',
 	    dataType: 'JSON',
-	    data: { profile: { address, current_city, current_state, current_neighborhood, current_zipcode, age } }
+	    data: { profile: { address, current_city, current_state, current_zipcode, age } }
 	  }).done( profile => {
 	  	this.props.dispatch(profileUpdate(profile));
 			this.fetchWalkscore();
@@ -65,21 +66,18 @@ class Profile extends React.Component {
 		})
 	}
 
-
-
 	addProfile(e) {
 		e.preventDefault();
 		let address = this.refs.currentAddress.value
 		let current_city = this.refs.currentCity.value
 		let current_state = this.refs.currentState.value
-		let current_neighborhood = this.refs.currentNeighborhood.value
 		let current_zipcode = this.refs.currentZipcode.value
 		let age = this.refs.age.value
 		$.ajax({
 			url: `/api/profiles`,
 			type: 'POST',
 			dataType: 'JSON',
-			data: { profile: { address, current_city, current_state, current_neighborhood, current_zipcode, age, user_id: this.props.id } }
+			data: { profile: { address, current_city, current_state, current_zipcode, age, user_id: this.props.id } }
 		}).done( profile => {
 	  	this.props.dispatch(profileUpdate(profile));
 		})
@@ -95,7 +93,6 @@ class Profile extends React.Component {
 	          <input ref="currentAddress" placeholder="Current Address" />
 						<input ref='currentCity' type='text' placeholder='Current City' />
 						<input ref='currentState' type='text' step='any' placeholder='Current State' />
-						<input ref='currentNeighborhood' type='text' step='any' placeholder='Current Neighborhood' />
 						<input ref='currentZipcode' type='number' step='any' placeholder='Current Zip Code' />
 						<input ref='age' type='number' step='any' placeholder='Age' />
 						<button type='submit' className='btn'>Create Profile</button>
@@ -114,7 +111,6 @@ class Profile extends React.Component {
 			        <p>Current Address: {this.props.profile.address}</p>
 			        <p>Current City: {this.props.profile.current_city}</p>
 			        <p>Current State: {this.props.profile.current_state}</p>
-			        <p>Current Neighborhood: {this.props.profile.current_neighborhood}</p>
 			        <p>Current Zipcode: {this.props.profile.current_zipcode}</p>
 			        <p>Age: {this.props.profile.age}</p>
 			      </div>
@@ -142,8 +138,7 @@ class Profile extends React.Component {
 		        <form onSubmit={this.handleSubmit.bind(this)}>
  		          <input ref="currentAddress" placeholder="Current Address" defaultValue={this.props.profile.address} />
 		          <input ref="currentCity" placeholder="Current City" defaultValue={this.props.profile.current_city} />
-		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />
-		          <input ref="currentNeighborhood" placeholder="Current Neighborhood" defaultValue={this.props.profile.current_neighborhood} />
+		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />	          
 		          <input ref="currentZipcode" placeholder="Current Zipcode" defaultValue={this.props.profile.current_zipcode} />
 		          <input ref="age" placeholder="Age" defaultValue={this.props.profile.age} />
 		          <button type="submit" className="btn z-depth-2">Update</button>

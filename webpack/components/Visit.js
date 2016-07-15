@@ -3,7 +3,6 @@ import { Link } from 'react-router';
 import Walkscore from './Walkscore';
 import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
-import CrimeRate from './CrimeRate'
 
 class Visit extends React.Component {
 	constructor(props) {
@@ -163,7 +162,6 @@ class Visit extends React.Component {
 						</form>
 						{ this.showNeighborhoods() }
 						{ this.showCoordinates() }
-						<CrimeRate />
 					</div>
 			  </div>
 			</div>

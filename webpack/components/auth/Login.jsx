@@ -20,7 +20,7 @@ class Login extends React.Component {
 		const email = this.refs.email.value;
 		const password = this.refs.password.value;
 		// TODO: dispatch login action
-		this.props.dispatch(handleLogin(email, password, this.state.redirectRoute, this.props.history));
+		this.props.dispatch(handleLogin(email, password, this.props.history));
 	}
 
 	render() {

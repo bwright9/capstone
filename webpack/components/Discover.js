@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Slider from 'material-ui/Slider';
+import CompareCities from './CompareCities';
+import CompareSalary from './CompareSalary';
  
 class Discover extends React.Component {
 	constructor(props) {
@@ -383,6 +385,14 @@ class Discover extends React.Component {
               </div>                
             </div>
           </li>
+
+          <li>
+            <div className="collapsible-header"><i className="material-icons">&#xE915;</i>Compare</div>
+            <div className="collapsible-body">
+              <CompareCities />
+            </div>
+          </li>
+
 			  </ul>
 			</div>
 		)

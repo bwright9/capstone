@@ -3,17 +3,20 @@ import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
-import CrimeRate from './CrimeRate'
+
 
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, ws_lat: null, ws_lon: null };
+		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, ws_lat: null, ws_lon: null, average: null, crimerate: null };
 		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
 		this.showCoordinates = this.showCoordinates.bind(this);
+		this.fetchSchRate = this.fetchSchRate.bind(this);
+		this.fetchCrimeRate = this.fetchCrimeRate.bind(this);
+
 	}
 
 	componentDidMount() {
@@ -24,7 +27,9 @@ class Move extends React.Component {
 		e.preventDefault();
 		let city = this.refs.city.value.replace(/[ ]+/g, "").trim();
 		this.setState( { city: city, geoState: this.refs.geoState.value }, function stateUpdated () {
-			this.fetchNeighborhoods() 
+		  this.fetchNeighborhoods()
+			this.fetchSchRate()
+		  this.fetchCrimeRate()
 		})
 	}
 
@@ -41,6 +46,77 @@ class Move extends React.Component {
 			console.log(data);
 		})
 	}
+
+	fetchSchRate() {
+		$.ajax({
+			url: "/api/city_schrate",
+			type: 'GET',
+			data: { city: this.state.city, state: this.state.geoState },
+			dataType: 'JSON'
+		}).done( average => {
+			console.log("Average:", average)
+			this.setState({ average });
+		}).fail( data => {
+			console.log(data);
+		})
+	}
+
+	ShowSchoolRate() {
+		if(this.state.average === null) {
+			return(
+				<div></div>
+			)
+		}else if (this.state.average.length === 0) {
+		return(
+			<div>No School Ratings Found</div>
+		) 
+		} else {
+			return(
+				<div>
+					<h4>
+					<span> Average School Rate:</span>
+					{ this.state.average }
+					</h4>
+				</div>
+			)
+		}
+	}
+
+	fetchCrimeRate() {
+		$.ajax({
+			url: "/api/city_crimerate",
+			type: 'GET',
+			data: { city: this.state.city, state: this.state.geoState },
+			dataType: 'JSON'
+		}).done( crimerate => {
+			console.log(crimerate)
+			this.setState({ crimerate });
+		}).fail( data => {
+			console.log(data);
+		})
+	}
+
+	ShowCrimeRate() {
+		if(this.state.crimerate === null) {
+			return(
+				<div></div>
+			)
+		}else if (this.state.crimerate.length === 0) {
+		return(
+			<div>No Crime Ratings Found</div>
+		) 
+		} else {
+			return(
+				<div>
+					<h4>
+					<span> Voilent Crime Rate:</span>
+					{ this.state.crimerate }
+					</h4>
+				</div>
+			)
+		}
+	}
+
 
 
 	showNeighborhoods() {
@@ -92,7 +168,6 @@ class Move extends React.Component {
 			)
 		}
 	}
-
 
 	render() {
 		return(
@@ -161,8 +236,9 @@ class Move extends React.Component {
 					</form>
 				{ this.showNeighborhoods() }
 				{ this.showCoordinates() }
+				{ this.ShowSchoolRate() }
+				{ this.ShowCrimeRate() }
 				<Walkscore />
-				<CrimeRate />
 			  </div>
 			</div>
 		)

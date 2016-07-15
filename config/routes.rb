@@ -7,6 +7,10 @@ Rails.application.routes.draw do
     get 'walkscore_map', to: 'move#walkscore_map'
 		resources :profiles
   	resources :move
+    get 'city_schrate', to: 'move#city_schrate'
+    get 'city_crimerate', to: 'move#city_crimerate'
+    get 'compare_cities', to: 'move#compare_cities'
+    get 'compare_salary', to: 'move#compare_salary'
 	end  
 
   devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }

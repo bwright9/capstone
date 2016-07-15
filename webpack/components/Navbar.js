@@ -1,11 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { handleLogout } from './auth/actions';
+import { handleLogout, loggedIn } from './auth/actions';
 import { connect } from 'react-redux';
 
 class Navbar extends React.Component {
 	constructor(props) {
 		super(props);
+	}
+
+	componentWillMount() {
+		//if user id and api key
+		//check for empty firstname lastame and set as props
+		if (localStorage.apiKey && localStorage.userId) {
+			if (this.props.firstName === undefined && this.props.lastName === undefined) {
+				this.props.dispatch(loggedIn(localStorage.userId, localStorage.apiKey, localStorage.firstName, localStorage.lastName))
+			}
+		}
 	}
 
 	logout(e) {
@@ -59,9 +69,10 @@ class Navbar extends React.Component {
 
 const mapStateToProps = (state) => {
 	return {
+		//if login with auth
 		firstName: state.auth.firstName,
 		lastName: state.auth.lastName 
-
+		// if login with facebook
 	}
 }
 

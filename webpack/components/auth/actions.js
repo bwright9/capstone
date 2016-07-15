@@ -26,7 +26,9 @@ export const handleLogin = (email, password, history) => {
 			// set localStorage apiKey
 			localStorage.setItem('apiKey', response.api_key);
 			// set localStorage userId
-			localStorage.setItem('userID', response.id);
+			localStorage.setItem('userId', response.id);
+			localStorage.setItem('firstName', response.first_name);
+			localStorage.setItem('lastName', response.last_name);
 			// dispatch the login action
 			dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
 			// redirect
@@ -91,7 +93,9 @@ export const handleFacebookLogin = (auth, history) => {
 		}).done(response => {
 			localStorage.setItem('apiKey', response.api_key);
 			localStorage.setItem('userId', response.id);
-			dispatch(loggedIn(response.id, response.api_key));
+			localStorage.setItem('firstName', response.first_name);
+			localStorage.setItem('lastName', response.last_name);
+			dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
 			history.push('/');
 		}).fail(response => {
 			dispatch(logout());

@@ -7,7 +7,7 @@ import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
-import CrimeRate from './CrimeRate'
+import CrimeRate from './CrimeRate'; 
 
 class Move extends React.Component {
 	constructor(props) {

@@ -81,9 +81,11 @@ class Profile extends React.Component {
 	show() {
 		return (
 			<div>
+			<div className="card-panel grey lighten-2">
 		  	<div key={this.props.id} className="col s12 m6">
-			    <div className="card grey lighten-5">
-			      <div className="card-content">
+			    <div className="card white">
+			      <div className="card-content z-depth-1">
+							<i className="medium material-icons profile_icon">perm_identity</i>
 			        <p>Current City: {this.props.profile.current_city}</p>
 			        <p>Current State: {this.props.profile.current_state}</p>
 			        <p>Current Neighborhood: {this.props.profile.current_neighborhood}</p>
@@ -92,16 +94,31 @@ class Profile extends React.Component {
 			      </div>
 			      <div className="card-action">
 			        <button className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Edit</button>
+			    	</div>
 			    </div>
 			  </div>
 			</div>
-			<div className='profile_desc'>
-			 	<p>someThere helps you match your current neighborhood profile with other similar neighborhoods.
-			  		You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
-				<p>Select from the options below:</p>
-			 	<button className="btn z-depth-3">Current Neighborhood</button>
-			 	<button className="btn blue-grey z-depth-3"><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
-			</div>
+				<div className="row">
+					<div className='center'>
+				     <div class="col s12 m6">
+				       <div class="card blue-grey darken-1">
+				         <div class="card-content white-text">
+				         	<div className='profile_desc'>
+				            	<p>someThere helps you match your current neighborhood profile with other similar neighborhoods.
+				             	You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
+				         	</div>
+				         	<div class="card-action">
+				         	<div className="button_format">
+				         	<div className='profile_buttons'>
+				           <button className="btn z-depth-2">Current Neighborhood</button>  |  <button className="btn blue-grey white-text z-depth-2"><Link to={'/preferenceSelect'}><div className="white-text">Set Preferences</div></Link></button>
+				           </div>
+				           </div>
+				           </div>
+				         </div>
+				       </div>
+				     </div>
+				   </div>
+				  </div>
 		</div>
 		)
 	}

@@ -50,7 +50,7 @@ class Navbar extends React.Component {
 				<div className='navbar-fixed z-depth-1'>
 					<nav>
 					  <div className="nav-wrapper">
-					    <Link to='/' className='brand-logo'>someThere</Link>
+					   <Link to='/'><img className='logo3' src="assets/Logo3.png" /></Link>
 					    <ul className="right hide-on-med-and-down">
 					      { this.dropDownButton() }
 					    </ul>

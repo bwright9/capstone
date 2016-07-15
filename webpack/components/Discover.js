@@ -4,6 +4,8 @@ import ReactDOM from 'react-dom';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
 import Slider from 'material-ui/Slider';
+import ExploreNeighborhoods from './exploreNeighborhoods';
+
  
 class Discover extends React.Component {
 	constructor(props) {
@@ -382,6 +384,10 @@ class Discover extends React.Component {
                 </div>
               </div>                
             </div>
+          </li>
+          <li>
+            <div className="collapsible-header"><i className="material-icons">home</i>Featured Neighborhoods</div>
+            <div className="collapsible-body"><p><ExploreNeighborhoods /></p></div>
           </li>
 			  </ul>
 			</div>

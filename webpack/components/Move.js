@@ -17,6 +17,7 @@ class Move extends React.Component {
 		this.showCoordinates = this.showCoordinates.bind(this);
 		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 		this.showWalkscore = this.showWalkscore.bind(this);
+		this.runUpdate = true;
 	}
 
 	componentDidMount() {
@@ -26,6 +27,7 @@ class Move extends React.Component {
 	selectRegion(e) {
 		e.preventDefault();
 		let city = this.refs.city.value.replace(/[ ]+/g, "").trim();
+		this.runUpdate = false;
 		this.setState( { city: city, geoState: this.refs.geoState.value }, function stateUpdated () {
 			this.fetchNeighborhoods() 
 		})
@@ -38,8 +40,10 @@ class Move extends React.Component {
 			data: { city: this.state.city, geoState: this.state.geoState },
 			dataType: 'JSON'
 		}).done( neighborhoods => {
+			this.runUpdate = true;
 			this.setState({ neighborhoods });
 		}).fail( data => {
+			this.runUpdate = true;
 			console.log(data);
 		})
 	}
@@ -56,16 +60,23 @@ class Move extends React.Component {
 		} else {
 			let names = this.state.neighborhoods.names.map( (neighborhood, index) => {
 				return(
-	  	    <li><a href="#" key={`hood-${index}`} onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
+	  	    <li key={`hood-${index}`}><a href="#" onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
 				)
 			})
 			let coordinatesArr = [];
 			for(var i = 0; i < this.state.neighborhoods.lat.length; i++){
 		    coordinatesArr.push({lat: this.state.neighborhoods.lat[i], long: this.state.neighborhoods.long[i]})
 			}
-			console.log(coordinatesArr[3]["lat"]); 
-			// this is printing out twice for some reason, one old and one new
-			// now just need to loop through the coordinatesArr and make ajax call to return array of walkscores
+			$.ajax({
+				url: "/api/set_walkscore_arr",
+				type: 'GET',
+				data: { coordinates: coordinatesArr },
+				dataType: 'JSON'
+			}).done( scores => {
+				console.log(scores);
+			}).fail( data => {
+				console.log('did not work');
+			});
 			return(
 				<div>				
 					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
@@ -75,6 +86,10 @@ class Move extends React.Component {
 				</div>
 			)
 		}
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.runUpdate;
 	}
 
 	selectNeighborhood(e, neighborhood) {
@@ -140,7 +155,7 @@ class Move extends React.Component {
 	render() {
 		let location = this.props.location;
 		let city = location.query.city;
-		let state = location.query.state;
+		let state = location.query.state || "";
 		return(
 			<div>
 				<h1 className="center">Move Component</h1>
@@ -149,7 +164,7 @@ class Move extends React.Component {
 			    <form onSubmit={this.selectRegion}>
 						<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
 						<select ref='geoState' defaultValue={state}>
-				      <option value="" disabled selected>Choose your state</option>
+				      <option value="" disabled>Choose your state</option>
 				      <option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>

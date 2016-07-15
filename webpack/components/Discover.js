@@ -6,6 +6,8 @@ import MenuItem from 'material-ui/MenuItem';
 import Slider from 'material-ui/Slider';
 import CompareCities from './CompareCities';
 import CompareSalary from './CompareSalary';
+import ExploreNeighborhoods from './exploreNeighborhoods';
+
  
 class Discover extends React.Component {
 	constructor(props) {
@@ -385,6 +387,7 @@ class Discover extends React.Component {
               </div>                
             </div>
           </li>
+<<<<<<< HEAD
 
           <li>
             <div className="collapsible-header"><i className="material-icons">&#xE915;</i>Compare</div>
@@ -393,6 +396,12 @@ class Discover extends React.Component {
             </div>
           </li>
 
+=======
+          <li>
+            <div className="collapsible-header"><i className="material-icons">home</i>Featured Neighborhoods</div>
+            <div className="collapsible-body"><p><ExploreNeighborhoods /></p></div>
+          </li>
+>>>>>>> new
 			  </ul>
 			</div>
 		)

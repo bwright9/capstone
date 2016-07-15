@@ -31,7 +31,7 @@ class Landing extends React.Component {
 			)
 		} else {
 			return(
-				<div className="card">
+				<div className="card hoverable">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/discover.jpg" />
  				    <h4 className="card-title">DISCOVER</h4>
@@ -58,7 +58,7 @@ class Landing extends React.Component {
 			)
 		} else {
 			return(
-				<div className="card">
+				<div className="card hoverable">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/balcony.jpg" />
  				    <h2 className="card-title">TRAVEL</h2>
@@ -85,7 +85,7 @@ class Landing extends React.Component {
 			)
 		} else {
 			return (
-				<div className="card">
+				<div className="card hoverable">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/home.jpg" />
  				    <h2 className="card-title">MOVE</h2>

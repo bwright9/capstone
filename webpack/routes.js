@@ -20,6 +20,8 @@ import travelPreferences from './components/travelPreferences';
 import preferenceSelect from './components/preferenceSelect';
 import CompareCities from './components/CompareCities';
 import CompareSalary from './components/CompareSalary';
+import exploreNeighborhoods from './components/exploreNeighborhoods';
+import Austin from './components/Austin';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -49,8 +51,10 @@ export default (
       <Route path="movePreferences" component={UserIsAuthenticated(movePreferences)}></Route>
       <Route path="travelPreferences" component={UserIsAuthenticated(travelPreferences)}></Route>
       <Route path="preferenceSelect" component={UserIsAuthenticated(preferenceSelect)}></Route>
+      <Route path="exploreNeighborhoods" component={exploreNeighborhoods}></Route>
       <Route path="about" component={About}></Route>
       <Route path="contact" component={Contact}></Route>
+      <Route path="austin" component={Austin}></Route>
     </Route>
     <Route path="*" status={404} component={NoMatch} />
   </Route>

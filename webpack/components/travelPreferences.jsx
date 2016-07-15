@@ -10,11 +10,14 @@ class travelPreferences extends React.Component {
 
 	render() {
 		return(
-			<div>
+			<div className="row">
 				<div>
-				<div className='container'>
-					<h3>Visit Preferences</h3>
+					<div>
+					<div className='travel_title'>
+						<h4>Visit Preferences</h4>
 						</div>
+							</div>
+							<div className='container'>
 							<Table multiSelectable={true}>
 				   			<TableBody>
 				 				  <TableRow>
@@ -40,11 +43,12 @@ class travelPreferences extends React.Component {
 				 				  </TableRow>
 				 		  	</TableBody>
 				 		 	</Table>
-				 		 	<button className='btn col s6 offset-s6'>Submit</button>
-				 		 	<button className='btn grey col s6 offset-s6'><Link to={'/preferenceSelect'}>Back</Link></button>
+				 		 	<div className='button_spacing'>
+				 		 		<button className='btn offset-s2'>Match Neighborhood!</button>  |   <button className='btn grey'><Link to={'/preferenceSelect'}><div className="white-text">Back</div></Link></button>
+				 			</div>
 				 		</div>
-				 	</div>
-
+				 		</div>
+				 </div>
 		)
 	}
 }

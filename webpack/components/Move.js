@@ -8,6 +8,8 @@ import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
 import { connect } from 'react-redux';
+import CrimeRate from './CrimeRate'; 
+
 
 class Move extends React.Component {
 	constructor(props) {

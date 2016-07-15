@@ -66,8 +66,16 @@ nav {
 	background-color: #4484CE;
 }
 
+
 .profile {
   letter-spacing: 5px;
+}
+
+.logo3 {
+	width: 230px;
+  height: 40px;
+  margin-left: 15px;
+  margin-top: 10px;
 }
 
 
@@ -263,14 +271,58 @@ footer.page-footer .footer-copyright {
 
 
 .profile {
-	padding-top: 30px;
-	margin-left: 30px;
+
 }
 
 .profile_desc {
-	padding-top: 20px;
+	padding-top: 40px;
 	margin-left: 20px;
+	padding-bottom: 20px;
 }
 
+.button_format {
+	padding-left: 20px;
+}
 
+.profile_icon {
+	float: right; 
+}
+
+/*
+  ========================================
+  Preference Select  
+  ========================================
+*/
+
+.preference_select {
+	padding-top: 70px;
+	height: 300px;
+
+
+}
+
+.travel_title {
+	padding-left: 200px;
+	padding-bottom: 20px;
+	padding-top: 20px;
+}
+
+.move_title {
+	padding-left: 200px;
+	padding-top: 20px;
+}
+
+.button_spacing {
+	padding-top: 40px;
+	padding-bottom: 60px;
+}
+
+.move_button {
+	padding-bottom: 40px;
+	padding-top: 20px;
+}
+
+.profile_buttons {
+	padding-bottom: 140px;
+}
 

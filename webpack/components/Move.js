@@ -18,6 +18,7 @@ class Move extends React.Component {
 		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 		this.showWalkscore = this.showWalkscore.bind(this);
 		this.fetchAllWalkscores = this.fetchAllWalkscores.bind(this);
+		this.recommendNeighborhood = this.recommendNeighborhood.bind(this);
 		this.runUpdate = true;
 	}
 
@@ -64,11 +65,29 @@ class Move extends React.Component {
 		}).done( scores => {
 			console.log(scores);
 			this.setState({ scores }, function stateUpdated () {
-				// this.recommendNeighborborhood() 
+				this.recommendNeighborhood() 
 			})
 		}).fail( data => {
 			console.log('did not work');
 		});
+	}
+	
+	recommendNeighborhood() {
+		let point = this.props.walkscore;
+		let matchPoint = null;
+		let scores = [...this.state.scores]
+		let sortedScores = scores.sort(function(a, b){return a-b});
+		for(var i = 0; i < this.state.scores.length; i++){
+	    if (point === i) {
+	    	matchPoint = i
+	    } else if (matchPoint == null && i > point ) {
+	    	matchPoint = i 
+	    } else {
+	    
+	    }
+		}
+		if (matchPoint == null) matchPoint = sortedScores[sortedScores.length - 1]
+		this.state.scores.indexOf(matchPoint)
 	}
 
 	showNeighborhoods() {

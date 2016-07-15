@@ -5,6 +5,9 @@ Rails.application.routes.draw do
 		get "neighborhoods", to: "zillow#neighborhoods"
 		get 'maps_key', to: 'move#maps_key'
     get 'walkscore_map', to: 'move#walkscore_map'
+    get 'user_profile', to: 'profiles#show'
+    get "walkscore", to: "walkscore#score"
+    get "new_walkscore", to: "walkscore#new_score"
 		resources :profiles
   	resources :move
     get 'city_schrate', to: 'move#city_schrate'

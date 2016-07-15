@@ -1,14 +1,18 @@
+// 1. add addtional data to profile - rails migration
+// 2. make sure the profile component shows that data and is able to update that data
+// 3. make the discover states a link - <Link to='/move?city=San%20Fan&state=CA'>San Francisco, CA</Link>
+
 import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
-
+import { connect } from 'react-redux';
 
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, ws_lat: null, ws_lon: null, average: null, crimerate: null };
+		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, ws_lat: null, ws_lon: null, geoWalkscore: null, average: null, crimerate: null };
 		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
@@ -16,7 +20,7 @@ class Move extends React.Component {
 		this.showCoordinates = this.showCoordinates.bind(this);
 		this.fetchSchRate = this.fetchSchRate.bind(this);
 		this.fetchCrimeRate = this.fetchCrimeRate.bind(this);
-
+		this.showWalkscore = this.showWalkscore.bind(this);
 	}
 
 	componentDidMount() {
@@ -117,8 +121,6 @@ class Move extends React.Component {
 		}
 	}
 
-
-
 	showNeighborhoods() {
 		if(this.state.neighborhoods === null) {
 			return(
@@ -163,21 +165,43 @@ class Move extends React.Component {
 			return(
 				<div>				
 					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
+					{ this.showWalkscore() }
 					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
 				</div>
 			)
 		}
 	}
 
+	showWalkscore() {
+		$.ajax({
+			url: "/api/new_walkscore",
+			type: 'GET',
+			data: { lat: this.state.neighborhoods.lat[this.state.neighborhoods.names.indexOf(this.state.geoHood)], long: this.state.neighborhoods.long[this.state.neighborhoods.names.indexOf(this.state.geoHood)] },
+			dataType: 'JSON'
+		}).done( score => {
+			this.setState({ geoWalkscore: score });
+		}).fail( data => {
+			console.log(data);
+		});
+		return(
+			<div>				
+				<p>The walkscore of {this.state.geoHood} is {this.state.geoWalkscore}.</p>
+			</div>
+		)
+	}
+
 	render() {
+		let location = this.props.location;
+		let city = location.query.city;
+		let state = location.query.state;
 		return(
 			<div>
 				<h1 className="center">Move Component</h1>
 				<div className="container">
-			    
+					<p className="center">Current Walkscore: {this.props.walkscore}</p>
 			    <form onSubmit={this.selectRegion}>
-						<input ref='city' type='text' placeholder='Choose your city' />
-						<select ref='geoState'>
+						<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
+						<select ref='geoState' defaultValue={state}>
 				      <option value="" disabled selected>Choose your state</option>
 				      <option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
@@ -238,6 +262,8 @@ class Move extends React.Component {
 				{ this.showCoordinates() }
 				{ this.ShowSchoolRate() }
 				{ this.ShowCrimeRate() }
+				<br />
+				<br />
 				<Walkscore />
 			  </div>
 			</div>
@@ -245,4 +271,9 @@ class Move extends React.Component {
 	}
 }
 
-export default Move;
+
+const mapStateToProps = (state) => {
+  return { walkscore: state.profile.walkscore }
+}
+
+export default connect(mapStateToProps)(Move);

@@ -14,7 +14,7 @@ import LandingSwitch from './components/LandingSwitch';
 import { UserAuthWrapper } from 'redux-auth-wrapper';
 import { handleLogout } from './components/auth/actions';
 import Signup from './components/auth/Signup'; 
-import  NoMatch from './components/NoMatch';
+import NoMatch from './components/NoMatch';
 import movePreferences from './components/movePreferences';
 import travelPreferences from './components/travelPreferences';
 import preferenceSelect from './components/preferenceSelect';

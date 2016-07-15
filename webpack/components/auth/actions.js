@@ -4,8 +4,7 @@ export const loggedIn = (id, apiKey, firstName, lastName) => {
 		id,
 		apiKey,
 		firstName,
-		lastName
-
+		lastName, 
 	}
 }
 
@@ -15,7 +14,31 @@ export const logout = () => {
 	}
 }
 
-export const handleLogin = (email, password, history) => {
+export const profileUpdate = (profile) => {
+	return{
+		type: 'PROFILE_UPDATE',
+		profile
+	}
+}
+
+const getProfile = (response, dispatch) => {
+ 	$.ajax({
+    url: "/api/user_profile",
+    type: 'GET',
+    dataType: 'JSON'
+  }).done( data => { 
+  	if(data.profile) {
+    	localStorage.setItem('currentCity', data.profile.current_city);
+    	localStorage.setItem('currentState', data.profile.current_state);
+    	dispatch(profileUpdate(data.profile));
+    }
+    dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
+  }).fail( data => {
+    console.log(data);
+  });
+}
+
+export const handleLogin = (email, password, redirect, history) => {
 	return(dispatch) => {
 		$.ajax({
 			url: '/users/sign_in',
@@ -30,9 +53,9 @@ export const handleLogin = (email, password, history) => {
 			localStorage.setItem('firstName', response.first_name);
 			localStorage.setItem('lastName', response.last_name);
 			// dispatch the login action
-			dispatch(loggedIn(response.id, response.api_key, response.first_name, response.last_name));
-			// redirect
-			history.push('/discover')
+			getProfile(response, dispatch)
+		  // redirect
+		  history.push(redirect)
 		}).fail( response => {
 			// TODO: hand this better
 			console.log(response);
@@ -53,7 +76,9 @@ export const handleSignup = (email, password, first_name, last_name, history) =>
 			// set localStorage userId
 			localStorage.setItem('userId', response.id);
 			// dispatch the login action
-			dispatch(loggedIn(response.id, response.api_key));
+			localStorage.setItem('firstName', response.first_name);
+			localStorage.setItem('lastName', response.last_name);
+			getProfile(response, dispatch);
 			// redirect
 			history.push('/')
 		}).fail( response => {
@@ -61,8 +86,6 @@ export const handleSignup = (email, password, first_name, last_name, history) =>
 		});
 	}
 }
-
-
 
 export const handleLogout = (history) => {
 	return(dispatch) => {
@@ -81,6 +104,7 @@ export const handleLogout = (history) => {
 		})
 	}
 }
+
 
 
 export const handleFacebookLogin = (auth, history) => {

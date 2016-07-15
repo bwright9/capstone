@@ -16,3 +16,4 @@
 /public/webpack
 /config/zillow.yml
 /config/googlemaps.yml
+/config/walkscore.yml

@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 
 const Footer = () => (
-	<footer className='page-footer'>
+	<footer className='page-footer z-depth-1'>
 	<div className="footer-copyright center">
 	    <div className="container footer">
       		<Link to="/about" className='white-links'> about </Link>|

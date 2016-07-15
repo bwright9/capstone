@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_one :profile
+  after_create :create_profile
 
   before_create do |user|
     user.api_key = user.generate_api_key
@@ -22,5 +23,9 @@ class User < ActiveRecord::Base
   		token = SecureRandom.base64
   		break token unless User.exists?(api_key: token)
   	end
+  end
+
+  def create_profile
+    self.profile = Profile.create
   end
 end

@@ -21,7 +21,7 @@ class Landing extends React.Component {
 				<div className="card">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/discover.jpg" />
- 				    <h2 className="card-title">DISCOVER</h2>
+ 				    <h4 className="card-title">DISCOVER</h4>
  				    <div className="dialog-box center">
  				    	<h5>Want to know how far your salary will go in another city? Or how much you can afford to spend on a house or rent? Use our discover tools to help determine your next move.</h5>
  				    </div>
@@ -34,7 +34,7 @@ class Landing extends React.Component {
 				<div className="card">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/discover.jpg" />
- 				    <h2 className="card-title">DISCOVER</h2>
+ 				    <h4 className="card-title">DISCOVER</h4>
  				    <button className='btn-large' onClick={() => this.setState( {discoverDetail: !this.state.discoverDetail }) }>learn more</button>
  				  </div>
  				</div>
@@ -62,7 +62,7 @@ class Landing extends React.Component {
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/balcony.jpg" />
  				    <h2 className="card-title">TRAVEL</h2>
- 				    <button className='btn-large' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>learn more</button>
+ 				    <button className='btn-large z-depth-5' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>learn more</button>
  				  </div>
  				</div>
  			)
@@ -79,7 +79,7 @@ class Landing extends React.Component {
  				    <div className="dialog-box center">
  				    	<h5>Relocating and want to find somewhere that feels like home? Help us help you find the perfect spot.</h5>
  				    </div>
- 				    <button className='btn-large' onClick={() => this.setState( {moveDetail: !this.state.moveDetail }) }>close</button>
+ 				    <button className='btn-large z-depth-5' onClick={() => this.setState( {moveDetail: !this.state.moveDetail }) }>close</button>
  				  </div>
  				</div>
 			)
@@ -89,7 +89,7 @@ class Landing extends React.Component {
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/home.jpg" />
  				    <h2 className="card-title">MOVE</h2>
- 				    <button className='btn-large' onClick={() => this.setState( {moveDetail: !this.state.moveDetail }) }>learn more</button>
+ 				    <button className='btn-large z-depth-5' onClick={() => this.setState( {moveDetail: !this.state.moveDetail }) }>learn more</button>
  				  </div>
  				</div>
 			)	

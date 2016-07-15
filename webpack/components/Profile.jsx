@@ -1,23 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
+import { profileUpdate } from './auth/actions';
 
 class Profile extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { profile: null, edit: false }
+		this.state = { edit: false }
+		this.addProfile = this.addProfile.bind(this);
+		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 	}
 
 	componentWillMount() {
-		$.ajax({
-			url:`/api/profiles/${this.props.id}`,
-			type: 'GET',
-			dataType: 'JSON',
-		}).done( profile => {
-			this.setState({ profile })
-		}).fail( data => {
-			alert('Something went wrong')
-		})
+		let profile = this.props.profile;
+		if(!profile.current_city && !profile.current_state && 
+			 !profile.current_neighborhood && !profile.current_zipcode &&
+			 !profile.age)
+			this.setState({ edit: true })
 	}
 
 	toggleEdit() {
@@ -27,24 +26,50 @@ class Profile extends React.Component {
 	handleSubmit(e) {
 		// TODO ensure variables are called corrently 
 	  e.preventDefault();
-	  let current_city = this.refs.current_city.value
-	  let current_state = this.refs.current_state.value
-	  let current_neigborhood = this.refs.current_neigborhood.value
-	  let current_zipcode = this.refs.current_zipcode.value
+ 		let address = this.refs.currentAddress.value
+	  let current_city = this.refs.currentCity.value
+	  let current_state = this.refs.currentState.value
+	  let current_neighborhood = this.refs.currentNeighborhood.value
+	  let current_zipcode = this.refs.currentZipcode.value
 	  let age = this.refs.age.value
 	  this.toggleEdit();
 	  $.ajax({
-	    url:`/api/profiles/${this.props.id}`,
+	    url: `/api/profiles/${this.props.id}`,
 	    type: 'PUT',
 	    dataType: 'JSON',
-	    data: { ProfileEdit: { current_city, current_state, current_neigborhood, current_zipcode, age } }
-	  }).done( ProfileEdit => {
-	    this.props.updateProfileEdit(ProfileEdit)
-	  })
+	    data: { profile: { address, current_city, current_state, current_neighborhood, current_zipcode, age } }
+	  }).done( profile => {
+	  	this.props.dispatch(profileUpdate(profile));
+			this.fetchWalkscore();
+	    // this.setState({ profile });
+	  });
 	}
+
+	fetchWalkscore() {
+		$.ajax({
+			url: "/api/walkscore",
+			type: 'GET',
+			dataType: 'JSON'
+		}).done( score => {
+			console.log(score);
+			$.ajax({
+		    url: `/api/profiles/${this.props.id}`,
+		    type: 'PUT',
+		    dataType: 'JSON',
+		    data: { profile: { walkscore: score } }
+		  }).done( profile => {
+		  	this.props.dispatch(profileUpdate(profile));
+		  });
+		}).fail( data => {
+			console.log('did not work');
+		})
+	}
+
+
 
 	addProfile(e) {
 		e.preventDefault();
+		let address = this.refs.currentAddress.value
 		let current_city = this.refs.currentCity.value
 		let current_state = this.refs.currentState.value
 		let current_neighborhood = this.refs.currentNeighborhood.value
@@ -54,23 +79,11 @@ class Profile extends React.Component {
 			url: `/api/profiles`,
 			type: 'POST',
 			dataType: 'JSON',
-			data: { profile: { current_city, current_state, current_neighborhood, current_zipcode, age, user_id: this.props.id } }
+			data: { profile: { address, current_city, current_state, current_neighborhood, current_zipcode, age, user_id: this.props.id } }
 		}).done( profile => {
-			this.setState({ profile })
+	  	this.props.dispatch(profileUpdate(profile));
 		})
 		this.refs.addProfileForm.reset()
-	}
-
-	updateProfile(profile) {
-		let profiles = this.state.profile
-		let index = profile.findIndex( p => p.id === profile.id)
-		this.setState({
-			profile: [
-				...profile.slice(0, index),
-				{...profile},
-				...profile.slice(index + 1, profile.length)
-			]
-		})
 	}
 
 	newProfile() {
@@ -78,7 +91,8 @@ class Profile extends React.Component {
 			<div className='row'>
 				<h1 className="center">Profile</h1>
 				<div className="container">
-					<form ref='addProfileForm' onSubmit={this.addProfile.bind(this)}>
+					<form ref='addProfileForm' onSubmit={this.addProfile}>
+	          <input ref="currentAddress" placeholder="Current Address" />
 						<input ref='currentCity' type='text' placeholder='Current City' />
 						<input ref='currentState' type='text' step='any' placeholder='Current State' />
 						<input ref='currentNeighborhood' type='text' step='any' placeholder='Current Neighborhood' />
@@ -97,42 +111,43 @@ class Profile extends React.Component {
 		  	<div key={this.props.id} className="col s12 m6">
 			    <div className="card grey lighten-5">
 			      <div className="card-content">
-			        <p>Current City: {this.state.profile.current_city}</p>
-			        <p>Current State: {this.state.profile.current_state}</p>
-			        <p>Current Neighborhood: {this.state.profile.current_neigborhood}</p>
-			        <p>Current Zipcode: {this.state.profile.current_zipcode}</p>
-			        <p>Age: {this.state.profile.age}</p>
+			        <p>Current Address: {this.props.profile.address}</p>
+			        <p>Current City: {this.props.profile.current_city}</p>
+			        <p>Current State: {this.props.profile.current_state}</p>
+			        <p>Current Neighborhood: {this.props.profile.current_neighborhood}</p>
+			        <p>Current Zipcode: {this.props.profile.current_zipcode}</p>
+			        <p>Age: {this.props.profile.age}</p>
 			      </div>
 			      <div className="card-action">
-			        <button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
+			        <button className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Edit</button>
 			    </div>
 			  </div>
 			</div>
-			<div className='profile_desc col 2'>
-			 	<p>someThere helps you match your current neighborhood with other similar neighborhoods.
-			  		You can also customize your own preferences.</p> 
+			<div className='profile_desc'>
+			 	<p>someThere helps you match your current neighborhood profile with other similar neighborhoods.
+			  		You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
 				<p>Select from the options below:</p>
-			 	<button className="btn">Current Neighborhood</button>
-			 	<button className='btn blue-grey'><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
+			 	<button className="btn z-depth-3">Current Neighborhood</button>
+			 	<button className="btn blue-grey z-depth-3"><Link to={'/preferenceSelect'}>Set Preferences</Link></button>
 			</div>
 		</div>
-		
 		)
 	}
 
 	edit() {
 		return (
-		  <div key={this.state.profile.id} className="col s12 m6">
+		  <div key={this.props.profile.id} className="col s12 m6">
 		    <div className="card grey lighten-3">
 		      <div className="card-content">
 		        <form onSubmit={this.handleSubmit.bind(this)}>
-		          <input ref="name" placeholder="Current City" defaultValue={this.state.profile.current_city} />
-		          <input ref="name" placeholder="Current State" defaultValue={this.state.profile.current_state} />
-		          <input ref="name" placeholder="Current Neighborhood" defaultValue={this.state.profile.current_neigborhood} />
-		          <input ref="number" placeholder="Current Zipcode" defaultValue={this.state.profile.current_zipcode} />
-		          <input ref="number" placeholder="Age" defaultValue={this.state.profile.age} />
-		          <button type="submit" className="btn">Update</button>
-		          <button type="button" className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Cancel</button>
+ 		          <input ref="currentAddress" placeholder="Current Address" defaultValue={this.props.profile.address} />
+		          <input ref="currentCity" placeholder="Current City" defaultValue={this.props.profile.current_city} />
+		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />
+		          <input ref="currentNeighborhood" placeholder="Current Neighborhood" defaultValue={this.props.profile.current_neighborhood} />
+		          <input ref="currentZipcode" placeholder="Current Zipcode" defaultValue={this.props.profile.current_zipcode} />
+		          <input ref="age" placeholder="Age" defaultValue={this.props.profile.age} />
+		          <button type="submit" className="btn z-depth-2">Update</button>
+		          <button type="button" className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Cancel</button>
 		        </form>
 		      </div>
 		    </div>
@@ -141,21 +156,23 @@ class Profile extends React.Component {
 	}
 
 	render() {
-		let profile = this.state.profile;
-		if (!profile) {
-			return this.newProfile()
-		} else {
+		if (this.props.profile) {
 			if (this.state.edit) {
 				return this.edit();
 			} else {
 				return this.show(); 
-			}
+			} 
+		} else {
+			return this.newProfile();	
 		}
 	}
-}
+
+}	
 
 const mapStateToProps = (state) => {
-	return { id: state.auth.id };
+	return { id: state.auth.id, 
+					 profile: state.profile
+				 };
 }
 
 export default connect(mapStateToProps)(Profile);

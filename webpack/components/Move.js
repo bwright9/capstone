@@ -9,7 +9,7 @@ import { connect } from 'react-redux';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, ws_lat: null, ws_lon: null, geoWalkscore: null };
+		this.state = { city: null, geoState: '', neighborhoods: null, scores: null, geoHood: null, geoWalkscore: null, ws_lat: null, ws_lon: null };
 		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
@@ -17,6 +17,7 @@ class Move extends React.Component {
 		this.showCoordinates = this.showCoordinates.bind(this);
 		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 		this.showWalkscore = this.showWalkscore.bind(this);
+		this.fetchAllWalkscores = this.fetchAllWalkscores.bind(this);
 		this.runUpdate = true;
 	}
 
@@ -41,11 +42,33 @@ class Move extends React.Component {
 			dataType: 'JSON'
 		}).done( neighborhoods => {
 			this.runUpdate = true;
-			this.setState({ neighborhoods });
+			this.setState({ neighborhoods }, function stateUpdated () {
+				this.fetchAllWalkscores() 
+			})
 		}).fail( data => {
 			this.runUpdate = true;
 			console.log(data);
 		})
+	}
+
+	fetchAllWalkscores() {
+		let coordinatesArr = [];
+		for(var i = 0; i < this.state.neighborhoods.lat.length; i++){
+	    coordinatesArr.push({lat: this.state.neighborhoods.lat[i], long: this.state.neighborhoods.long[i]})
+		}
+		$.ajax({
+			url: "/api/set_walkscore_arr",
+			type: 'GET',
+			data: { coordinates: coordinatesArr },
+			dataType: 'JSON'
+		}).done( scores => {
+			console.log(scores);
+			this.setState({ scores }, function stateUpdated () {
+				// this.recommendNeighborborhood() 
+			})
+		}).fail( data => {
+			console.log('did not work');
+		});
 	}
 
 	showNeighborhoods() {
@@ -63,20 +86,6 @@ class Move extends React.Component {
 	  	    <li key={`hood-${index}`}><a href="#" onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
 				)
 			})
-			let coordinatesArr = [];
-			for(var i = 0; i < this.state.neighborhoods.lat.length; i++){
-		    coordinatesArr.push({lat: this.state.neighborhoods.lat[i], long: this.state.neighborhoods.long[i]})
-			}
-			$.ajax({
-				url: "/api/set_walkscore_arr",
-				type: 'GET',
-				data: { coordinates: coordinatesArr },
-				dataType: 'JSON'
-			}).done( scores => {
-				console.log(scores);
-			}).fail( data => {
-				console.log('did not work');
-			});
 			return(
 				<div>				
 					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
@@ -161,6 +170,7 @@ class Move extends React.Component {
 				<h1 className="center">Move Component</h1>
 				<div className="container">
 					<p className="center">Current Walkscore: {this.props.walkscore}</p>
+					<p className="center">New City Walkscores: {this.state.scores}</p>
 			    <form onSubmit={this.selectRegion}>
 						<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
 						<select ref='geoState' defaultValue={state}>

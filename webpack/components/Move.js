@@ -4,8 +4,6 @@ import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
 import { connect } from 'react-redux';
-import CrimeRate from './CrimeRate'; 
-
 
 class Move extends React.Component {
 	constructor(props) {
@@ -114,10 +112,10 @@ class Move extends React.Component {
 			return(
 				<div></div>
 			)
-		}else if (this.state.crimerate.length === 0) {
-		return(
-			<div>No Crime Ratings Found</div>
-		) 
+		} else if (this.state.crimerate.length === 0) {
+			return(
+				<div>No Crime Ratings Found</div>
+			) 
 		} else {
 			return(
 				<div>
@@ -128,6 +126,7 @@ class Move extends React.Component {
 				</div>
 			)
 		}
+	}
 
 	// fetchAllWalkscores() {
 	// 	let coordinatesArr = [];
@@ -162,7 +161,7 @@ class Move extends React.Component {
 	    } else if (matchPoint == null && neighborhoods[names[i]].score > point ) {
 	    	matchPoint = i 
 	    	matchName = names[i]
-	    } 
+	    }
 		}
 		if (matchPoint === null) {
 			matchPoint = neighborhoods[names[names.length - 1]].score;
@@ -288,7 +287,6 @@ class Move extends React.Component {
 		if (this.state.geoWalkscore === null) {
 			return(
 				<div>
-					<h1 className="center">Move Component</h1>
 					<div className="container">
 						<form onSubmit={this.selectRegion}>
 							<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />

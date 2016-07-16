@@ -10,15 +10,18 @@ class Move extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { city: null, geoState: '', neighborhoods: null, scores: null, geoHood: null, geoWalkscore: null, ws_lat: null, ws_lon: null };
+		this.showForm = this.showForm.bind(this);
 		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
-		this.showNeighborhoods = this.showNeighborhoods.bind(this);
+		// this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
 		this.showCoordinates = this.showCoordinates.bind(this);
 		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 		this.showWalkscore = this.showWalkscore.bind(this);
-		this.fetchAllWalkscores = this.fetchAllWalkscores.bind(this);
+		// this.fetchAllWalkscores = this.fetchAllWalkscores.bind(this);
 		this.recommendNeighborhood = this.recommendNeighborhood.bind(this);
+		this.showRecommendation = this.showRecommendation.bind(this);
+
 		this.runUpdate = true;
 	}
 
@@ -44,7 +47,7 @@ class Move extends React.Component {
 		}).done( neighborhoods => {
 			this.runUpdate = true;
 			this.setState({ neighborhoods }, function stateUpdated () {
-				this.fetchAllWalkscores() 
+				this.recommendNeighborhood(); 
 			})
 		}).fail( data => {
 			this.runUpdate = true;
@@ -52,69 +55,88 @@ class Move extends React.Component {
 		})
 	}
 
-	fetchAllWalkscores() {
-		let coordinatesArr = [];
-		for(var i = 0; i < this.state.neighborhoods.lat.length; i++){
-	    coordinatesArr.push({lat: this.state.neighborhoods.lat[i], long: this.state.neighborhoods.long[i]})
-		}
-		$.ajax({
-			url: "/api/set_walkscore_arr",
-			type: 'GET',
-			data: { coordinates: coordinatesArr },
-			dataType: 'JSON'
-		}).done( scores => {
-			console.log(scores);
-			this.setState({ scores }, function stateUpdated () {
-				this.recommendNeighborhood() 
-			})
-		}).fail( data => {
-			console.log('did not work');
-		});
-	}
+	// fetchAllWalkscores() {
+	// 	let coordinatesArr = [];
+	// 	for(var i = 0; i < this.state.neighborhoods.lat.length; i++){
+	//     coordinatesArr.push({lat: this.state.neighborhoods.lat[i], long: this.state.neighborhoods.long[i]})
+	// 	}
+	// 	$.ajax({
+	// 		url: "/api/set_walkscore_arr",
+	// 		type: 'GET',
+	// 		data: { coordinates: coordinatesArr },
+	// 		dataType: 'JSON'
+	// 	}).done( scores => {
+	// 		console.log(scores);
+	// 		this.setState({ scores }, function stateUpdated () {
+	// 			this.recommendNeighborhood() 
+	// 		})
+	// 	}).fail( data => {
+	// 		console.log('did not work');
+	// 	});
+	// }
 	
 	recommendNeighborhood() {
 		let point = this.props.walkscore;
 		let matchPoint = null;
-		let scores = [...this.state.scores]
-		let sortedScores = scores.sort(function(a, b){return a-b});
-		for(var i = 0; i < this.state.scores.length; i++){
-	    if (point === i) {
-	    	matchPoint = i
-	    } else if (matchPoint == null && i > point ) {
+		let matchName = null;
+		let neighborhoods = this.state.neighborhoods;
+		let names = Object.keys(neighborhoods);
+		for(var i = 0; i < names.length; i++){
+	    if (point === neighborhoods[names[i]].score) {
+	    	matchPoint = i;
+	    	matchName = names[i]
+	    } else if (matchPoint == null && neighborhoods[names[i]].score > point ) {
 	    	matchPoint = i 
-	    } else {
-	    
-	    }
+	    	matchName = names[i]
+	    } 
 		}
-		if (matchPoint == null) matchPoint = sortedScores[sortedScores.length - 1]
-		this.state.scores.indexOf(matchPoint)
+		if (matchPoint === null) {
+			matchPoint = neighborhoods[names[names.length - 1]].score;
+			matchName = names[names.length-1]
+		}
+		this.setState({ geoHood: matchName, geoWalkscore: matchPoint });
 	}
 
-	showNeighborhoods() {
-		if(this.state.neighborhoods === null) {
+	showRecommendation() {
+		if(this.state.geoHood === null) {
 			return(
 				<div></div>
 			)
-		} else if (this.state.neighborhoods.names.length === 0 ) {
-			return(
-				<div>No neighborhoods, sorry</div>
-			)
 		} else {
-			let names = this.state.neighborhoods.names.map( (neighborhood, index) => {
-				return(
-	  	    <li key={`hood-${index}`}><a href="#" onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
-				)
-			})
 			return(
 				<div>				
-					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
-					<ul className="neighborhoods-list" >
-						{ names }
-					</ul>
+					<p>Based on your current neightborhood walkscore of {this.props.walkscore}, 
+						 we recommend {this.state.geoHood} which has a walkscore of {this.state.geoWalkscore}.</p>
 				</div>
 			)
 		}
 	}
+
+	// showNeighborhoods() {
+	// 	if(this.state.neighborhoods === null) {
+	// 		return(
+	// 			<div></div>
+	// 		)
+	// 	} else if (this.state.neighborhoods.names.length === 0 ) {
+	// 		return(
+	// 			<div>No neighborhoods, sorry</div>
+	// 		)
+	// 	} else {
+	// 		let names = this.state.neighborhoods.names.map( (neighborhood, index) => {
+	// 			return(
+	//   	    <li key={`hood-${index}`}><a href="#" onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
+	// 			)
+	// 		})
+	// 		return(
+	// 			<div>				
+	// 				<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
+	// 				<ul className="neighborhoods-list" >
+	// 					{ names }
+	// 				</ul>
+	// 			</div>
+	// 		)
+	// 	}
+	// }
 
 	shouldComponentUpdate(nextProps, nextState) {
 		return this.runUpdate;
@@ -133,13 +155,13 @@ class Move extends React.Component {
 				<div></div>
 			)
 		} else {
+			console.log(this.state.neighborhoods);
 			let hood = this.state.geoHood;
-			let index = this.state.neighborhoods.names.indexOf(hood);
-			let hood_lat = this.state.neighborhoods.lat[index];
-			let hood_long = this.state.neighborhoods.long[index];
+			let hood_lat = this.state.neighborhoods[hood].lat;
+			let hood_long = this.state.neighborhoods[hood].long;
 			return(
-				<div>				
-					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
+				<div>		
+					<Walkscore hood_lat={hood_lat} hood_long={hood_long}/>	
 					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
 				</div>
 			)
@@ -180,17 +202,14 @@ class Move extends React.Component {
 		}
 	}
 
-	render() {
+	showForm() {
 		let location = this.props.location;
 		let city = location.query.city;
 		let state = location.query.state || "";
-		return(
-			<div>
-				<h1 className="center">Move Component</h1>
-				<div className="container">
-					<p className="center">Current Walkscore: {this.props.walkscore}</p>
-					<p className="center">New City Walkscores: {this.state.scores}</p>
-			    <form onSubmit={this.selectRegion}>
+		if (this.state.geoWalkscore === null) {
+			return(
+				<div>
+					<form onSubmit={this.selectRegion}>
 						<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
 						<select ref='geoState' defaultValue={state}>
 				      <option value="" disabled>Choose your state</option>
@@ -246,17 +265,39 @@ class Move extends React.Component {
 							<option value="WI">Wisconsin</option>
 							<option value="WY">Wyoming</option>
 						</select>
-					    
 						<input type='submit' className='btn' />
 					</form>
-				{ this.showNeighborhoods() }
+				</div>
+			)
+		} else {
+			return(
+				<div>
+					<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>
+				</div>
+			)
+		}	
+	}
+
+	reload(e) {
+		e.preventDefault()
+		window.location.reload();
+	}
+
+	render() {
+		// let disabled = this.state.geoWalkscore ? true : false;
+		// let button = !disabled ? (<input type="submit" className='btn' />) : (<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>)
+		return(
+			<div>
+				<h1 className="center">Move Component</h1>
+				<div className="container">
+
+				{ this.showForm() }			    
+				{ this.showRecommendation() }
 				{ this.showCoordinates() }
-				{ this.showWalkscore() }
 				
 				<br />
 				<br />
 				
-				<Walkscore />
 				<CrimeRate />
 			  </div>
 			</div>

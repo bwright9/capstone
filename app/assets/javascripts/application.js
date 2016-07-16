@@ -19,7 +19,8 @@
 //!!!! DO NOT REMOVE
 var scriptCount = 0;
 var ws_wsid = '050485d93b8f484c94a5db141093f5f0';
-var ws_address = '2432 The Strand Northbrook, IL';
+var ws_lat="42.360763";
+var ws_lon="-71.0727024";
 var ws_width = '840';
 var ws_height = '700';
 var ws_layout = 'vertical';

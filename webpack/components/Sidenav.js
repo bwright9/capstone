@@ -97,7 +97,7 @@ class Sidenav extends React.Component {
         <ul id="slide-out" className="side-nav fixed">
           <li className="search">
             <div className="search-wrapper focused">
-              <input type="search" placeholder="search" />
+              <input id="search" type="search" placeholder="Search" />
             </div>
           </li>
           <li><Link to="/move">Move</Link></li>
@@ -113,7 +113,7 @@ class Sidenav extends React.Component {
 }
 
 const mapStateToProps = (state) => {
-  return { currentCity: state.profile.current_city, currentState: state.profile.current_state, walkscore: state.profile.walkscore }
+  return { currentCity: state.profile.current_city, currentState: state.profile.current_state }
 }
 
 export default connect(mapStateToProps)(Sidenav);

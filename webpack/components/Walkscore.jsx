@@ -3,7 +3,7 @@ import Move from './Move';
 
 class WalkScore extends React.Component {
     constructor(props) {
-        super(props); 
+      super(props); 
     }
 
     componentDidMount() {
@@ -13,10 +13,18 @@ class WalkScore extends React.Component {
     
     componentWillMount(city, geostate) {
       // address will come from this.props
-      ws_address = 'parkside, San Francisco, CA'     
+      ws_lat = this.props.hood_lat;
+      ws_lon = this.props.hood_long;
+    }
+
+    componentWillReceiveProps() {
+      ws_lat = this.props.hood_lat;
+      ws_lon = this.props.hood_long; 
+      this.addScript();
     }
 
     addScript() {
+      this.forceUpdate();
       ++scriptCount
       if (scriptCount === 1) {
         let script = document.createElement('script');
@@ -34,6 +42,5 @@ class WalkScore extends React.Component {
         )
     }
 }
-
 
 export default WalkScore;

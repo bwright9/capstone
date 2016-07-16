@@ -12,9 +12,10 @@ import ExploreNeighborhoods from './exploreNeighborhoods';
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null };
+		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null, capital: null };
 		this.showGeoState = this.showGeoState.bind(this);
 		this.calculateTax = this.calculateTax.bind(this);
+    this.findStateCapitals = this.findStateCapitals.bind(this);
 	}
 
 	componentWillMount() {
@@ -29,7 +30,7 @@ class Discover extends React.Component {
 	}
 
 	handleSelect(event, index, value) {
-		this.setState({stateSelect: value}, function afterStateUpdated() {
+    this.setState({stateSelect: value, capital: this.findStateCapitals(value)}, function afterStateUpdated() {
  	    this.calculateTax();    	
     });
   }
@@ -39,6 +40,65 @@ class Discover extends React.Component {
  	    this.calculateTax();    	
     });
   }
+
+
+
+  findStateCapitals(searchState) {
+    let capital = {
+      "alabama": "Birmingham",
+      "alaska": "Anchorage",
+      "arizona": "Phoenix",
+      "arkansas": "Little Rock",
+      "california": "Los Angeles",
+      "colorado": "Denver",
+      "connecticut": "Bridgeport",
+      "delaware": "Wilmington",
+      "districtofcolumbia": "District Of Columbia",
+      "florida": "Jacksonville",
+      "georgia": "Atlanta",
+      "hawaii": "Honolulu",
+      "idaho": "Boise",
+      "illinois": "Chicago",
+      "indiana": "Indianapolis",
+      "iowa": "Des Moines",
+      "kansas": "Wichita",
+      "kentucky": "Louisville",
+      "louisiana": "New Orleans",
+      "maine": "Portland",
+      "maryland": "Baltimore",
+      "massachusetts": "Boston",
+      "michigan": "Detroit",
+      "minnesota": "Minneapolis",
+      "mississippi": "Jackson",
+      "missouri": "Kansas City",
+      "montana": "Billings",
+      "nebraska": "Omaha",
+      "nevada": "Las Vegas",
+      "newhampshire": "Manchester",
+      "newjersey": "Newark",
+      "newmexico": "Albuquerque",
+      "newyork": "New York City",
+      "northcarolina": "Charlotte",
+      "northdakota": "Fargo",
+      "ohio": "Columbus",
+      "oklahoma": "Oklahoma City",
+      "oregon": "Portland",
+      "pennsylvania": "Philadephia",
+      "rhodeisland": "Providence",
+      "southcarolina": "Columbia",
+      "southdakota": "Sioux Falls",
+      "tennessee": "Nashville",
+      "texas": "Houston",
+      "utah": "Salt Lake City",
+      "vermont": "Burlington",
+      "virginia": "Virginia Beach",
+      "washington": "Seattle",
+      "westvirginia": "Charleston",
+      "wisconsin": "Milwaukee",
+      "wyoming": "Cheyenne"
+    }
+    return capital[searchState];
+  } 
 
   calculateTax() {
     let oldSalary = 0;
@@ -243,7 +303,7 @@ class Discover extends React.Component {
 							</div>
 
 							<div className="center">
-									<button className="btn">Show neighborhoods in {this.state.stateSelect}</button>
+                  <Link to={`/move?city=${this.state.capital}&state=${this.state.stateSelect}`} className='btn'>Show neighborhoods in {this.state.capital}, {this.state.stateSelect}</Link>
 							</div>							
 
 			      </div>
@@ -255,54 +315,54 @@ class Discover extends React.Component {
               <div className="row">
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/georgia.png' />
-                    <p>Atlanta, GA</p>
+                    <p><Link to='/move?city=Atlanta&state=GA'>Atlanta, GA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/texas.png' />
-                    <p>Austin, TX</p>
+                    <p><Link to='/move?city=Austin&state=TX'>Austin, TX</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/missouri.png' />
-                    <p>Kansas City, MO</p>
+                    <p><Link to='/move?city=Kansas%20City&state=MO'>Kansas City, MO</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/kansas.png' />
-                    <p>Kansas City, KS</p>
+                    <p><Link to='/move?city=Kansas%20City&state=KS'>Kansas City, KS</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/tennessee.png' />
-                    <p>Nashville, TN</p>
+                    <p><Link to='/move?city=Nashville&state=TN'>Nashville, TN</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/utah.png' />
-                    <p>Provo, UT</p>
+                    <p><Link to='/move?city=Provo&state=UT'>Provo, UT</Link></p>
                 </div>
               </div>
               <h3 className="fiber">Upcoming Cities</h3>
               <div className="row">
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/northcarolina.png' />
-                    <p>Charlotte, NC</p>
+                    <p><Link to='/move?city=Charlotte&state=NC'>Charlotte, NC</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/alabama.png' />
-                    <p>Huntsville, AL</p>
+                    <p><Link to='/move?city=Huntsville&state=AL'>Huntsville, AL</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/northcarolina.png' />
-                    <p>Raleigh-Durham, NC</p>
+                    <p><Link to='/move?city=Raleigh&state=NC'>Raleigh-Durham, NC</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/utah.png' />
-                    <p>Salt Lake City, UT</p>
+                    <p><Link to='/move?city=Salt%20Lake%20City&state=UT'>Salt Lake City, UT</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/texas.png' />
-                    <p>San Antonio, TX</p>
+                    <p><Link to='/move?city=San%20Antonio&state=TX'>San Antonio, TX</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/california.png' />
-                    <p>San Francisco, CA</p>
+                    <p><Link to='/move?city=San%20Francisco&state=CA'>San Francisco, CA</Link></p>
                 </div>
               </div>
             </div>
@@ -318,71 +378,71 @@ class Discover extends React.Component {
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/california.png' />
-                    <p>Los Angeles, CA</p>
+                    <p><Link to='/move?city=Los%20Angeles&state=CA'>Los Angeles, CA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/dc.png' />
-                    <p>Washington, D.C.</p>
+                    <p><Link to='/move?city=Washington&state=DC'>Washington D.C.</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/georgia.png' />
-                    <p>Atlanta, GA</p>
+                    <p><Link to='/move?city=Atlanta&state=GA'>Atlanta, GA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/massachusetts.png' />
-                    <p>Boston, MA</p>
+                    <p><Link to='/move?city=Boston&state=MA'>Boston, MA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/northcarolina.png' />
-                    <p>Charlotte, NC</p>
+                    <p><Link to='/move?city=Charlotte&state=NC'>Charlotte, NC</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/ohio.png' />
-                    <p>Cleveland, OH</p>
+                    <p><Link to='/move?city=Cleveland&state=OH'>Cleveland, OH</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/california.png' />
-                    <p>Costa Mesa, CA</p>
+                    <p><Link to='/move?city=Costa%20Mesa&state=CA'>Costa Mesa, CA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/colorado.png' />
-                    <p>Denver, CO</p>
+                    <p><Link to='/move?city=Denver&state=CO'>Denver, CO</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/iowa.png' />
-                    <p>Des Moines, IA</p>
+                    <p><Link to='/move?city=Des%20Moines&state=IA'>Des Moines, IA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/texas.png' />
-                    <p>Houston, TX</p>
+                    <p><Link to='/move?city=Houston&state=TX'>Houston, TX</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/nevada.png' />
-                    <p>Las Vegas, NV</p>
+                    <p><Link to='/move?city=Los%20Vegas&state=NV'>Las Vegas, NV</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/oregon.png' />
-                    <p>Portland, OR</p>
+                    <p><Link to='/move?city=Portland&state=OR'>Portland, OR</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/utah.png' />
-                    <p>Salt Lake City, UT</p>
+                    <p><Link to='/move?city=Salt%20Lake%20City&state=UT'>Salt Lake City, UT</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/california.png' />
-                    <p>San Diego, CA</p>
+                    <p><Link to='/move?city=San%20Diego&state=UT'>San Deigo, CA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/washington.png' />
-                    <p>Seattle, WA</p>
+                    <p><Link to='/move?city=Seattle&state=WA'>Seattle, WA</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/missouri.png' />
-                    <p>St. Louis, MO</p>
+                    <p><Link to='/move?city=Saint%20Louis&state=MO'>Saint Louis, MO</Link></p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='assets/states/arizona.png' />
-                    <p>Tempe, AZ</p>
+                    <p><Link to='/move?city=Tempe&state=AZ'>Tempe, AZ</Link></p>
                 </div>
               </div>                
             </div>

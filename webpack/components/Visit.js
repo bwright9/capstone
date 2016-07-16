@@ -95,12 +95,9 @@ class Visit extends React.Component {
 	render() {
 		return(
 			<div className="center">
-				<h1>Visit Component</h1>
-				<Walkscore />
 				<div>
 					<h1 className="center">Visit Component</h1>
 					<div className="container">
-				    
 				    <form onSubmit={this.selectRegion}>
 							<input ref='city' type='text' placeholder='Your city' />
 							<select ref='geoState'>
@@ -161,6 +158,8 @@ class Visit extends React.Component {
 						</form>
 						{ this.showNeighborhoods() }
 						{ this.showCoordinates() }
+						<Walkscore />
+						<CrimeRate />
 					</div>
 			  </div>
 			</div>

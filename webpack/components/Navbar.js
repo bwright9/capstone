@@ -30,13 +30,13 @@ class Navbar extends React.Component {
 	authLink() {
 		if(this.props.auth)
 			return(
-				[<li><Link className='profile' to="/profile">Profile</Link></li>,
+				[<li><Link className='profile-link' to="/profile">profile</Link></li>,
 				<li><a className='logo-header'href='#' onClick={this.logout.bind(this)}>logout</a></li>]
 			)
 		else {
 			return( 
-				[<li><Link to='login' className='login'>Login</Link></li>, 
-				<li><Link to='signup'>Sign Up</Link></li>]
+				[<li><Link to='login' className='login'>login</Link></li>, 
+				<li><Link to='signup' className='signup'>sign Up</Link></li>]
 			)
 		}
 	}
@@ -45,8 +45,8 @@ class Navbar extends React.Component {
 		if(this.props.auth) {
 			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right">arrow_drop_down</i></a></li>)
 		} else {
-			return([<li><Link to='signup'>Sign Up</Link></li>,
-				      <li><Link to='login' className='login'>Login</Link></li>])
+			return([<li><Link to='signup' className='signup'>sign up</Link></li>,
+				      <li><Link to='login' className='login'>login</Link></li>])
 		}
 	}
 

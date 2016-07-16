@@ -25,5 +25,6 @@ var ws_width = '840';
 var ws_height = '700';
 var ws_layout = 'vertical';
 var ws_commute = 'true';
+var ws_industry_type = "residential";
 var ws_transit_score = 'true';
 var ws_map_modules = 'all';

@@ -13,18 +13,13 @@ class WalkScore extends React.Component {
     
     componentWillMount(city, geostate) {
       // address will come from this.props
+      debugger
       ws_lat = this.props.hood_lat;
       ws_lon = this.props.hood_long;
-    }
-
-    componentWillReceiveProps() {
-      ws_lat = this.props.hood_lat;
-      ws_lon = this.props.hood_long; 
-      this.addScript();
+      ws_industry_type = this.props.industry;
     }
 
     addScript() {
-      this.forceUpdate();
       ++scriptCount
       if (scriptCount === 1) {
         let script = document.createElement('script');

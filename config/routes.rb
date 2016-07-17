@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   root 'home#index'
 
 	namespace :api do 
-		get "neighborhoods", to: "zillow#neighborhoods"
+		get "count", to: "zillow#count"
+    get "neighborhoods", to: "zillow#neighborhoods"
 		get 'maps_key', to: 'move#maps_key'
     get 'walkscore_map', to: 'move#walkscore_map'
     get 'user_profile', to: 'profiles#show'

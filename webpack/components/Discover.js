@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 class Discover extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null, capital: null };
+		this.state = { stateSelect: 'utah', salary: 35000, afterTaxCurrent: null, afterTaxNew: null, capital: "Salt Lake City" };
 		this.convertCurrentState = this.convertCurrentState.bind(this);
     this.showCurrentState = this.showCurrentState.bind(this);
     this.showGeoState = this.showGeoState.bind(this);
@@ -22,8 +22,7 @@ class Discover extends React.Component {
 
 	componentWillMount() {
 		let firstSalary = this.state.salary * 0.85;
-  	this.setState({afterTaxCurrent: firstSalary, afterTaxNew: firstSalary});
-  	this.calculateTax();
+    this.calculateTax();
 	}
 
 	componentDidMount() {
@@ -31,6 +30,12 @@ class Discover extends React.Component {
 	  $('select').material_select();
 	}
 
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.afterTaxCurrent) {
+      this.calculateTax();   
+    } 
+  }
+ 
 	handleSelect(event, index, value) {
     this.setState({stateSelect: value, capital: this.findStateCapitals(value)}, function afterStateUpdated() {
  	    this.calculateTax();    	
@@ -254,7 +259,7 @@ class Discover extends React.Component {
   }
 
   showCurrentState() {
-    if(this.state.stateSelect) {
+    if(this.props.currentState) {
       let imageState = this.convertCurrentState();
       return(
         <img className="tax-state" src={`assets/states/${imageState}.png`} />
@@ -367,7 +372,7 @@ class Discover extends React.Component {
 							<div className="row">
 								<div className="compare-states col s6 center">
 									{ this.showCurrentState() }
-									<p>After-Tax Income: ${Math.round(this.state.afterTaxCurrent).toLocaleString()}</p>
+                  <p>After-Tax Income: ${Math.round(this.state.afterTaxCurrent).toLocaleString()}</p>
 								</div>
 								<div className="compare-states col s6 center">
 									{ this.showGeoState() }

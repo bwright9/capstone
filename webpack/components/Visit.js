@@ -1,31 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router';
-import Walkscore from './Walkscore';
 import TextField from 'material-ui/TextField';
-import MoveMap from './MoveMap';
+import LinearProgress from 'material-ui/LinearProgress';
+import Walkscore from './Walkscore';
 
 class Visit extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, venue: null };
+		this.state = { city: null, geoState: '', count: null, neighborhoods: null, geoHood: null, scores: null,
+									 geoWalkscore: null, venues: null};
+		this.showForm = this.showForm.bind(this);
 		this.selectRegion = this.selectRegion.bind(this);
+		this.fetchCount = this.fetchCount.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
-		this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
 		this.showCoordinates = this.showCoordinates.bind(this);
-		this.showRex = this.showRex.bind(this);
-	}
-
-	componentWillMount() {
-    $.ajax({
-			url: "/api/foursquare",
-			type: 'GET',
-		}).done( venue => {
-			console.log(venue);
-			this.setState({ venue });
-		}).fail( data => {
-			console.log('did not work');
-		})
+		this.fetchWalkscore = this.fetchWalkscore.bind(this);
+		this.showWalkscore = this.showWalkscore.bind(this);
+		this.recommendNeighborhood = this.recommendNeighborhood.bind(this);
+		this.showCount = this.showCount.bind(this);
+		this.showRecommendation = this.showRecommendation.bind(this);
+		this.fetchVenues = this.fetchVenues.bind(this);
+		this.showVenueRex = this.showVenueRex.bind(this);
+		this.runUpdate = true;
 	}
 
 	componentDidMount() {
@@ -35,8 +32,25 @@ class Visit extends React.Component {
 	selectRegion(e) {
 		e.preventDefault();
 		let city = this.refs.city.value.replace(/[ ]+/g, "").trim();
+		this.runUpdate = false;
 		this.setState( { city: city, geoState: this.refs.geoState.value }, function stateUpdated () {
-			this.fetchNeighborhoods() 
+	  	this.fetchCount()
+		})
+	}
+
+	fetchCount() {
+		$.ajax({
+			url: "/api/count",
+			type: 'GET',
+			data: { city: this.state.city, geoState: this.state.geoState },
+			dataType: 'JSON'
+		}).done( count => {
+			this.runUpdate = true;
+			this.setState({ count }, function stateUpdated () {
+				this.fetchNeighborhoods(); 
+			})
+		}).fail( data => {
+			console.log(data);
 		})
 	}
 
@@ -47,44 +61,134 @@ class Visit extends React.Component {
 			data: { city: this.state.city, geoState: this.state.geoState },
 			dataType: 'JSON'
 		}).done( neighborhoods => {
-			console.log(neighborhoods)
-			this.setState({ neighborhoods });
+			this.runUpdate = true;
+			this.setState({ neighborhoods }, function stateUpdated () {
+				this.recommendNeighborhood(); 
+			})
 		}).fail( data => {
+			this.runUpdate = true;
 			console.log(data);
 		})
 	}
 
-
-	showNeighborhoods() {
-		if(this.state.neighborhoods === null) {
-			return(
-				<div></div>
-			)
-		} else if (this.state.neighborhoods.names.length === 0 ) {
-			return(
-				<div>No neighborhoods, sorry</div>
-			)
-		} else {
-			let names = this.state.neighborhoods.names.map( (neighborhood, index) => {
-				return(
-	  	    <li><a href="#" key={`hood-${index}`} onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
-				)
+	
+	recommendNeighborhood() {
+		let matchPoint = null;
+		let matchName = null;
+		let neighborhoods = this.state.neighborhoods;
+		let names = Object.keys(neighborhoods);
+		matchPoint = neighborhoods[names[names.length - 1]].score;
+		matchName = names[names.length-1]		
+		this.setState({ geoHood: matchName, geoWalkscore: matchPoint }, function stateUpdated () {
+				this.fetchVenues(); 
 			})
+	}
+
+	fetchVenues() {
+		$.ajax({
+			url: "/api/foursquare",
+			type: 'GET',
+		}).done( venues => {
+			this.setState({ venues });
+		}).fail( data => {
+			console.log('did not work');
+		})
+	}
+
+	showCount() {
+		if(this.state.count && this.state.geoHood === null) {
+			return(
+				<div>
+					<p>We are currently searching through {this.state.count} neighborhoods to find the best one to visit.</p>
+					 <LinearProgress mode="indeterminate" />
+				</div>
+			)
+		}	else {
 			return(
 				<div>				
-					<p>There are {this.state.neighborhoods.count} neighborhoods in {this.refs.city.value.trim()}, {this.state.geoState}.</p>
-					<ul className="neighborhoods-list" >
-						{ names }
-					</ul>
+					<p></p>
 				</div>
 			)
 		}
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		return this.runUpdate;
+	}
+
 	selectNeighborhood(e, neighborhood) {
 		e.preventDefault();
-		this.setState({geoHood: neighborhood});
+		this.setState({geoHood: neighborhood}, function stateUpdated () {
+			this.fetchWalkscore()
+		})
 	}
+
+	fetchWalkscore() {
+		if (this.state.geoHood) {
+			let index = this.state.neighborhoods.names.indexOf(this.state.geoHood);
+			let lat = this.state.neighborhoods.lat[index];
+			let long = this.state.neighborhoods.long[index];
+			$.ajax({
+				url: "/api/new_walkscore",
+				type: 'GET',
+				data: { lat , long },
+				dataType: 'JSON'
+			}).done( score => {
+				this.setState({ geoWalkscore: score });
+			}).fail( data => {
+				console.log(data);
+			});
+		} else {
+			console.log('could not find score');
+		}
+	}
+
+	showWalkscore() {
+		if(this.state.geoWalkscore === null) {
+			return(
+				<div></div>
+			)
+		} else {
+			return(
+				<div>				
+					<p>The walkscore of {this.state.geoHood} is {this.state.geoWalkscore}.</p>
+				</div>
+			)
+		}
+	}
+
+	
+	showRecommendation() {
+		if(this.state.geoHood === null) {
+			return(
+				<div></div>
+			)
+		} else {
+			return(
+				<div>				
+					<p>We recommend {this.state.geoHood} which has the highest walkscore of {this.state.geoWalkscore}.</p>
+				</div>
+			)
+		}
+	}
+
+	showVenueRex() {
+		if (this.state.venues) {
+			return(
+				<div>
+					<p>We recommend checking out:</p>
+					<p>{this.state.venues[0][0]} Rating: {this.state.venues[0][1]}</p>
+					<p>{this.state.venues[1][0]} Rating: {this.state.venues[1][1]}</p>
+					<p>{this.state.venues[2][0]} Rating: {this.state.venues[2][1]}</p>
+				</div>
+			)
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
 
 	showCoordinates() {
 		if(this.state.geoHood === null) {
@@ -92,47 +196,32 @@ class Visit extends React.Component {
 				<div></div>
 			)
 		} else {
+			let commercial = "commercial";
 			let hood = this.state.geoHood;
-			let index = this.state.neighborhoods.names.indexOf(hood);
-			let hood_lat = this.state.neighborhoods.lat[index];
-			let hood_long = this.state.neighborhoods.long[index];
+			let hood_lat = this.state.neighborhoods[hood].lat;
+			let hood_long = this.state.neighborhoods[hood].long;
 			return(
-				<div>				
-					<p>The coordinates of {this.state.geoHood} are {hood_lat}, {hood_long}.</p>
-					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
+				<div>		
+					<Walkscore industry={commercial} hood_lat={hood_lat} hood_long={hood_long}/>	
 				</div>
 			)
 		}
 	}
 
-	showRex() {
-		if (this.state.venue) {
-			return(
-				<div>
-					<p>We recommend checking out {this.state.venue}.</p>
-				</div>
-			)
-		} else {
-			return(
-				<div></div>
-			)
-		}
-	}
 
-	render() {
-		let commercial = "commercial";
+	showForm() {
 		let location = this.props.location;
 		let city = location.query.city;
 		let state = location.query.state || "";
-		return(
-			<div>
-				<h1 className="center">Visit Component</h1>
-				<div className="container">
-			    <form onSubmit={this.selectRegion}>
-						<input ref='city' type='text' placeholder='Your city' defaultValue={city} />
-						<select ref='geoState' defaultValue={state}>
-				      <option value="" disabled selected>Choose your state</option>
-				      <option value="alabama">Alabama</option>
+		if (this.state.city === null) {
+			return(
+				<div>
+					<div className="container">
+						<form onSubmit={this.selectRegion}>
+							<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
+							<select ref='geoState' defaultValue={state}>
+					      <option value="" disabled>Choose your state</option>
+					      <option value="alabama">Alabama</option>
 								<option value="alaska">Alaska</option>
 								<option value="arizona">Arizona</option>
 								<option value="arkansas">Arkansas</option>
@@ -183,17 +272,46 @@ class Visit extends React.Component {
 								<option value="westvirginia">West Virginia</option>
 								<option value="wisconsin">Wisconsin</option>
 								<option value="wyoming">Wyoming</option>
-						</select>
-						<input type='submit' className='btn' />
-					</form>
-					{ this.showNeighborhoods() }
+							</select>
+							<input type='submit' className='btn' />
+
+						</form>
+					</div>
+				</div>
+			)
+		} else {
+			return(
+				<div>
+					<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>
+					<Link to={`/visit?city=${this.state.city}&state=${this.state.geoState}`} className='btn'>Visit</Link>
+				</div>
+			)
+		}	
+	}
+
+	reload(e) {
+		e.preventDefault()
+		window.location.reload();
+	}
+
+	render() {
+		let location = this.props.location;
+		let city = location.query.city;
+		let state = location.query.state || "";
+		return(
+			<div>
+				<h1 className="center">Visit Component</h1>
+				<div className="container">
+
+					{ this.showForm() }
+					{ this.showCount() }
+					{ this.showRecommendation() }
+					{ this.showVenueRex() }
 					{ this.showCoordinates() }
-					{ this.showRex() }
 
 					<br />
 					<br />
 					
-					<Walkscore industry={commercial} />	
 				</div>
 			</div>
 		)

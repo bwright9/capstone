@@ -12,8 +12,8 @@ class Api::VisitController < ApplicationController
 	private
 
 	def foursquare_client
-		@client = Foursquare2::Client.new(:client_id => 'GYZIEV4BACCGYTWPI1K2DYHO501TPY3NL3L021WQG3NT4DJU', 
-																			:client_secret => 'CDBL53KFEPVDAHDRJRSK4L35S1RFVTIZKRRTGVQT4RSJJ0F2')
+		@client = Foursquare2::Client.new(:client_id => ENV['CLIENT_ID'], 
+																			:client_secret => ENV['CLIENT_SECRET'])
 	end
 
 end

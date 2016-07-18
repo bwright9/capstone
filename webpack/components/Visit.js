@@ -7,12 +7,25 @@ import MoveMap from './MoveMap';
 class Visit extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null };
+		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, venue: null };
 		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
 		this.showCoordinates = this.showCoordinates.bind(this);
+		this.showRex = this.showRex.bind(this);
+	}
+
+	componentWillMount() {
+    $.ajax({
+			url: "/api/foursquare",
+			type: 'GET',
+		}).done( venue => {
+			console.log(venue);
+			this.setState({ venue });
+		}).fail( data => {
+			console.log('did not work');
+		})
 	}
 
 	componentDidMount() {
@@ -92,6 +105,20 @@ class Visit extends React.Component {
 		}
 	}
 
+	showRex() {
+		if (this.state.venue) {
+			return(
+				<div>
+					<p>We recommend checking out {this.state.venue}.</p>
+				</div>
+			)
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
 	render() {
 		let commercial = "commercial";
 		let location = this.props.location;
@@ -161,6 +188,7 @@ class Visit extends React.Component {
 					</form>
 					{ this.showNeighborhoods() }
 					{ this.showCoordinates() }
+					{ this.showRex() }
 
 					<br />
 					<br />

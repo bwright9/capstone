@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     get "walkscore", to: "walkscore#score"
     get "new_walkscore", to: "walkscore#new_score"
     get "set_walkscore_arr", to: "walkscore#get_scores"
+    get "set_walkscore_arr", to: "walkscore#get_scores"
+    get "foursquare", to: "visit#index"
 		resources :profiles
   	resources :move
     get 'city_schrate', to: 'move#city_schrate'

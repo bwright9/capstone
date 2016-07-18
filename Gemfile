@@ -17,6 +17,7 @@ gem 'curb'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'geocoder'
+gem 'foursquare2'
 
 group :development, :test do
   gem 'pry'

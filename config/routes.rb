@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     get "set_walkscore_arr", to: "walkscore#get_scores"
     get "set_walkscore_arr", to: "walkscore#get_scores"
     get "foursquare", to: "visit#index"
+    put 'visit_preferences', to: "visit_preferences#update"
+    get 'visit_preferences', to: "visit_preferences#show"
 		resources :profiles
   	resources :move
     get 'city_schrate', to: 'move#city_schrate'

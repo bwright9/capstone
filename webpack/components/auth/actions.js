@@ -55,7 +55,7 @@ export const handleLogin = (email, password, redirect, history) => {
 			// dispatch the login action
 			getProfile(response, dispatch)
 		  // redirect
-		  history.push(redirect)
+		  history.push('discover')
 		}).fail( response => {
 			// TODO: hand this better
 			console.log(response);

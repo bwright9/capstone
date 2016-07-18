@@ -95,11 +95,6 @@ class Sidenav extends React.Component {
       <div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47oD2Sle3KuVFzOpPzDeQEnPRuR_qwOE?libraries=places"></script>
         <ul id="slide-out" className="side-nav fixed">
-          <li className="search">
-            <div className="search-wrapper focused">
-              <input id="search" type="search" placeholder="Search" />
-            </div>
-          </li>
           <li><Link to="/move">Move</Link></li>
           <li><Link to="/visit">Visit</Link></li>
           <li><Link to="/discover">Discover</Link></li>

@@ -82,6 +82,16 @@ nav {
   margin-top: 10px;
 }
 
+.dropdown-button {
+  letter-spacing: 5px;
+}
+
+.logo {
+  letter-spacing: 7px;
+  font-size: 30px;
+  margin-left: 2%;
+}
+
 
 /*
   ========================================
@@ -211,6 +221,9 @@ footer.page-footer {
   background-color: #4484CE;
 }
 
+.logged-footer {
+  margin-left: 50%;
+}
 
 /*
   ========================================
@@ -264,6 +277,46 @@ footer.page-footer {
 	columns: 100px 3;
 }
 
+/*
+  ========================================
+  Compare Cities
+  ========================================
+*/
+
+.category {
+  border: 1px solid black;
+  height: 240px;
+}
+
+.category-last {
+  border: 1px solid black;
+  height: 125px;
+}
+
+.category h5 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
+  background-color: #4484CE;
+}
+
+.category-last h5 {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  color: white;
+  background-color: #4484CE;
+}
+
+.compare {
+  border: 1px solid black;
+  margin-top: 50px;
+}
+
+.compare-btn {
+  margin-bottom: 15px;
+}
+
+
 
 /*
   ========================================
@@ -271,16 +324,6 @@ footer.page-footer {
   ========================================
 */
 
-.team {
-	border-radius: 50%;
-	display: block;
-	margin: auto;
-	width: 80%;
-}
-
-.team-members {
-	margin-top: 70px;
-}
 
 .footer-copyright {
 	margin-top: -20px;
@@ -293,19 +336,45 @@ footer.page-footer {
   float: left;
   display: block;
   margin: 15px 2% 0 2%;
-  max-width: 25%
 }
 
 .about {
   float: right;
   display: block;
-  margin: 40px 2% 0 2%;
+  margin: 20px 0 0 50px;
   max-width: 66%;
 }
 
 .about-title {
   float: right;
   margin-right: 25%;
+}
+
+/*
+  ========================================
+  Contact
+  ========================================
+*/
+
+.team {
+  border-radius: 25%;
+  display: block;
+  margin: auto;
+  width: 80%;
+  box-shadow: 5px 5px 5px #888888;
+}
+
+.team-members {
+  margin-top: 70px;
+}
+  
+.linkedin {
+  margin-right: 20px;
+  border-radius: 25%;
+}
+
+.github {
+  border-radius: 25%;
 }
 
 

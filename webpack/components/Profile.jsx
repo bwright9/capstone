@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link, browserHistory } from 'react-router';
 import { profileUpdate } from './auth/actions';
 import SelectField from 'material-ui/SelectField';
-import MenuItem from 'material-ui/MenuItem';
+import TextField from 'material-ui/TextField';
 
 class Profile extends React.Component {
 	constructor(props) {
@@ -90,7 +90,7 @@ class Profile extends React.Component {
 				<h1 className="center">Profile</h1>
 				<div className="container">
 					<form ref='addProfileForm' onSubmit={this.addProfile}>
-	          <input ref="currentAddress" placeholder="Current Address" />
+	          <input ref="currentAddress" utofocus='true' placeholder="Current Address" />
 						<input ref='currentCity' type='text' placeholder='Current City' />
 						<input ref='currentState' type='text' step='any' placeholder='Current State' />
 						<input ref='currentZipcode' type='number' step='any' placeholder='Current Zip Code' />
@@ -104,57 +104,49 @@ class Profile extends React.Component {
 
 	show() {
 		return (
-			<div>
-			<div className="card-panel grey lighten-2">
-		  	<div key={this.props.id} className="col s12 m6">
-			    <div className="card grey lighten-5">
-			      <div className="card-content">
-
-							<i className="medium material-icons profile_icon">perm_identity</i>
-			        <p>Current Address: {this.props.profile.address}</p>
-			        <p>Current City: {this.props.profile.current_city}</p>
-			        <p>Current State: {this.props.profile.current_state}</p>
-			        <p>Current Zipcode: {this.props.profile.current_zipcode}</p>
-			        <p>Age: {this.props.profile.age}</p>
-			      </div>
-			      <div className="card-action">
-			        <button className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Edit</button>
+			<div className="row">
+				<div className="col s12 m6">
+		  		<div key={this.props.id}>
+			    	<div className="card">
+			      	<div className="card-content">
+								<i className="medium material-icons profile_icon">perm_identity</i>
+			        	<p>Current Address: {this.props.profile.address}</p>
+			        	<p>Current City: {this.props.profile.current_city}</p>
+			        	<p>Current State: {this.props.profile.current_state}</p>
+			        	<p>Current Neighborhood: {this.props.profile.current_neighborhood}</p>
+			        	<p>Current Zipcode: {this.props.profile.current_zipcode}</p>
+			        	<p>Age: {this.props.profile.age}</p>
+			      	</div>
+			      	<div className="card-action">
+			        	<button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
 			    	</div>
 			    </div>
 			  </div>
 			</div>
 				<div className="row">
-					<div className='center'>
-				     <div class="col s12 m6">
-				       <div class="card blue-grey darken-1">
-				         <div class="card-content white-text">
-				         	<div className='profile_desc'>
-				            	<p>someThere helps you match your current neighborhood profile with other similar neighborhoods.
-				             	You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
-				         	</div>
-				         	<div class="card-action">
-				         	<div className="button_format">
-				         	<div className='profile_buttons'>
-				           <button className="btn z-depth-2">Current Neighborhood</button>  |  <button className="btn blue-grey white-text z-depth-2"><Link to={'/preferenceSelect'}><div className="white-text">Set Preferences</div></Link></button>
-				           </div>
-				           </div>
-				           </div>
-				         </div>
-				       </div>
-				     </div>
+				<div className='col s12 m9'>
+				  <div className='profile_desc'>
+				    <p>With the click of a button, someThere helps you match your current neighborhood with other similar neighborhoods.
+				    You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
+				  </div>
+				    <div className="button_format">
+				      <div className='profile_buttons'>
+				      	<button className="btn z-depth-2"><Link to={'/CompareCities'}><div className="white-text">Match Neighborhood</div></Link></button>  |  <button className="btn blue-grey white-text z-depth-2"><Link to={'/preferenceSelect'}><div className="white-text">Set Preferences</div></Link></button>
+				      </div>
+				   	</div>
 				   </div>
 				  </div>
-		</div>
+				</div>
 		)
 	}
 
 	edit() {
 		return (
 		  <div key={this.props.profile.id} className="col s12 m6">
-		    <div className="card grey lighten-3">
+		    <div className="card white">
 		      <div className="card-content">
 		        <form onSubmit={this.handleSubmit.bind(this)}>
- 		          <input ref="currentAddress" placeholder="Current Address" defaultValue={this.props.profile.address} />
+ 		          <input ref="currentAddress" autoFocus={true} placeholder="Current Address" defaultValue={this.props.profile.address} />
 		          <input ref="currentCity" placeholder="Current City" defaultValue={this.props.profile.current_city} />
 		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />	          
 		          <input ref="currentZipcode" placeholder="Current Zipcode" defaultValue={this.props.profile.current_zipcode} />

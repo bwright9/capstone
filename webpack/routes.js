@@ -21,7 +21,9 @@ import preferenceSelect from './components/preferenceSelect';
 import CompareCities from './components/CompareCities';
 import CompareSalary from './components/CompareSalary';
 import exploreNeighborhoods from './components/exploreNeighborhoods';
+import FeaturedNeighborhoods from './components/FeaturedNeighborhoods';
 import Austin from './components/Austin';
+import SilverLake from './components/SilverLake';
 
 const UserIsAuthenticated = UserAuthWrapper({
   authSelector: state => state.auth,
@@ -47,14 +49,16 @@ export default (
     	<Route path="favorites" component={Favorites}></Route>
       <Route path="CompareCities" component={CompareCities}></Route>
       <Route path="CompareSalary" component={CompareSalary}></Route>
-      <Route path="profile" component={UserIsAuthenticated(Profile)}></Route>
+      <Route path="profile" component={Profile}></Route>
       <Route path="movePreferences" component={UserIsAuthenticated(movePreferences)}></Route>
-      <Route path="travelPreferences" component={UserIsAuthenticated(travelPreferences)}></Route>
+      <Route path="travelPreferences" component={travelPreferences}></Route>
       <Route path="preferenceSelect" component={UserIsAuthenticated(preferenceSelect)}></Route>
       <Route path="exploreNeighborhoods" component={exploreNeighborhoods}></Route>
+      <Route path="FeaturedNeighborhoods" component={FeaturedNeighborhoods}></Route>
       <Route path="about" component={About}></Route>
       <Route path="contact" component={Contact}></Route>
       <Route path="austin" component={Austin}></Route>
+      <Route path="SilverLake" component={SilverLake}></Route>
     </Route>
     <Route path="*" status={404} component={NoMatch} />
   </Route>

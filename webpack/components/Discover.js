@@ -520,6 +520,7 @@ class Discover extends React.Component {
               </div>                
             </div>
           </li>
+
           <li>
             <div className="collapsible-header"><i className="material-icons">&#xE915;</i>Compare</div>
             <div className="collapsible-body">
@@ -531,6 +532,7 @@ class Discover extends React.Component {
             <div className="collapsible-body"><p><ExploreNeighborhoods /></p></div>
           </li>
 			  </ul>
+			  <ExploreNeighborhoods />
 			</div>
 		)
 	}

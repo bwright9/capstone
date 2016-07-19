@@ -1,6 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
+import ReactDOM from 'react-dom';
+import Slider from 'material-ui/Slider';
+
+
 
 class CompareSalary extends React.Component {
 	constructor(props) {
@@ -31,7 +35,7 @@ class CompareSalary extends React.Component {
 		    <form onSubmit={this.compareSal}>
 		    <div>
 					<input ref='city1' type='text' placeholder='Your Current city' />
-					<select ref='geoState1'>
+					<select  value={optionsState}ref='geoState1'>
 			      <option value="" disabled selected>Choose your state</option>
 			      <option value="AL">Alabama</option>
 						<option value="AK">Alaska</option>

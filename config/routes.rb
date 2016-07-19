@@ -17,7 +17,9 @@ Rails.application.routes.draw do
     get 'compare_salary', to: 'move#compare_salary'
 	end  
 
-  devise_for :users, controllers: { sessions: 'sessions', registrations: 'registrations' }
+  devise_for :users, controllers: { sessions: 'sessions', 
+                                    registrations: 'registrations',
+                                    passwords: 'passwords' }
   post 'facebook_login', to: 'third_party_auth#facebook'
 
   # keep this at the very bottom

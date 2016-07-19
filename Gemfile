@@ -17,14 +17,22 @@ gem 'curb'
 gem 'nokogiri'
 gem 'mechanize'
 gem 'geocoder'
+gem 'sendgrid'
+gem 'delayed_job'
+gem 'delayed_job_active_record'
+
 
 group :development, :test do
   gem 'pry'
+  gem 'rspec-rails'
+  gem 'shoulda-matchers'
+  gem 'database_cleaner'
 end
 
 group :development do
   gem 'web-console', '~> 2.0'
   gem 'spring'
+  gem 'letter_opener'
 end
 
 gem 'foreman'

@@ -4,6 +4,11 @@ class RegistrationsController < Devise::RegistrationsController
 	before_filter :sign_up_params, only: [:create]
 	before_filter :account_update_params, only: [:update]
 
+	def create
+		super
+		SignupMailer.new_signup(@user).deliver if @user
+	end
+
 	private 
 
 	def sign_up_params

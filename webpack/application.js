@@ -8,10 +8,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 
 injectTapEventPlugin();
 
-ReactDOM.render(
-  <Provider store={store}>
-    <Router history={history} routes={routes} />
-  </Provider>,
-  document.getElementById('app')
-);
+if($('#app').length) {
+	ReactDOM.render(
+	  <Provider store={store}>
+	    <Router history={history} routes={routes} />
+	  </Provider>,
+	  document.getElementById('app')
+	);
+}
 

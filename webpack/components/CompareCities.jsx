@@ -81,12 +81,12 @@ class CompareCities extends React.Component {
 		return(
 			<div className="container">
 				<div className="center">
-					<h2>Compare Two Cities </h2>
+					<h2>Compare Two Cities:</h2>
 			    <form onSubmit={this.compareStuffs}>
 			    <div>
 						<input ref='city1' type='text' placeholder='Current city' />
 						<select ref='geoState1'>
-				      <option value="" disabled selected>Choose your state</option>
+				      <option value="" disabled='true'>Choose your state</option>
 				      <option value="AL">Alabama</option>
 							<option value="AK">Alaska</option>
 							<option value="AZ">Arizona</option>
@@ -143,7 +143,7 @@ class CompareCities extends React.Component {
 					<div>
 							<input ref='city2' type='text' placeholder='City you want to move in' />
 							<select ref='geoState2'>
-					      <option value="" disabled selected>Choose your state</option>
+					      <option value="" disabled='true'>Choose your state</option>
 					      <option value="AL">Alabama</option>
 								<option value="AK">Alaska</option>
 								<option value="AZ">Arizona</option>

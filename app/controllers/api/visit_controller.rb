@@ -18,9 +18,7 @@ class Api::VisitController < ApplicationController
 			valid_rex = rex.inject(:merge).compact
 			sorted_rex[x] = valid_rex.sort_by {|key, value| value}.reverse.to_a.first(3)
 		end
-	
-		binding.pry
-		
+			
 		render json: sorted_rex
 	end
 

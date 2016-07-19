@@ -22,7 +22,13 @@ class Visit extends React.Component {
 		this.showRecommendation = this.showRecommendation.bind(this);
 		this.fetchPreferences = this.fetchPreferences.bind(this);
 		this.fetchVenues = this.fetchVenues.bind(this);
-		this.showVenueRex = this.showVenueRex.bind(this);
+		this.showVenuesFood = this.showVenuesFood.bind(this);
+		this.showVenuesDrinks = this.showVenuesDrinks.bind(this);
+		this.showVenuesCoffee = this.showVenuesCoffee.bind(this);
+		this.showVenuesShops = this.showVenuesShops.bind(this);
+		this.showVenuesArts = this.showVenuesArts.bind(this);
+		this.showVenuesOutdoors = this.showVenuesOutdoors.bind(this);
+		this.showVenuesSights = this.showVenuesSights.bind(this);
 		this.runUpdate = true;
 	}
 
@@ -107,7 +113,6 @@ class Visit extends React.Component {
 		let filtered = keys.filter(function(key) {
 		  return preferences[key]
 		});
-		console.log(filtered);
 		$.ajax({
 			url: "/api/foursquare",
 			type: 'GET',
@@ -180,7 +185,6 @@ class Visit extends React.Component {
 			)
 		}
 	}
-
 	
 	showRecommendation() {
 		if(this.state.geoHood === null) {
@@ -196,16 +200,18 @@ class Visit extends React.Component {
 		}
 	}
 
-	showVenueRex() {
+	showVenuesFood() {
 		if (this.state.venues) {
-			return(
-				<div>
-					<p>We recommend checking out:</p>
-					<p>{this.state.venues[0][0]} Rating: {this.state.venues[0][1]}</p>
-					<p>{this.state.venues[1][0]} Rating: {this.state.venues[1][1]}</p>
-					<p>{this.state.venues[2][0]} Rating: {this.state.venues[2][1]}</p>
-				</div>
-			)
+			if (this.state.venues.food) {
+				return(
+					<div>
+						<p>Since you selected food in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.food[0][0]}, Rating: {this.state.venues.food[0][1]}</p>
+						<p>{this.state.venues.food[1][0]}, Rating: {this.state.venues.food[1][1]}</p>
+						<p>{this.state.venues.food[2][0]}, Rating: {this.state.venues.food[2][1]}</p>
+					</div>
+				)
+			}
 		} else {
 			return(
 				<div></div>
@@ -213,6 +219,119 @@ class Visit extends React.Component {
 		}
 	}
 
+	showVenuesDrinks() {
+		if (this.state.venues) {
+			if (this.state.venues.drinks) {
+				return(
+					<div>
+						<p>Since you selected drinks in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.drinks[0][0]}, Rating: {this.state.venues.drinks[0][1]}</p>
+						<p>{this.state.venues.drinks[1][0]}, Rating: {this.state.venues.drinks[1][1]}</p>
+						<p>{this.state.venues.drinks[2][0]}, Rating: {this.state.venues.drinks[2][1]}</p>
+					</div>
+				)
+			}
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
+	showVenuesCoffee() {
+		if (this.state.venues) {
+			if (this.state.venues.coffee) {
+				return(
+					<div>
+						<p>Since you selected coffee in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.coffee[0][0]}, Rating: {this.state.venues.coffee[0][1]}</p>
+						<p>{this.state.venues.coffee[1][0]}, Rating: {this.state.venues.coffee[1][1]}</p>
+						<p>{this.state.venues.coffee[2][0]}, Rating: {this.state.venues.coffee[2][1]}</p>
+					</div>
+				)
+			}
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
+	showVenuesShops() {
+		if (this.state.venues) {
+			if (this.state.venues.shops) {
+				return(
+					<div>
+						<p>Since you selected shops in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.shops[0][0]}, Rating: {this.state.venues.shops[0][1]}</p>
+						<p>{this.state.venues.shops[1][0]}, Rating: {this.state.venues.shops[1][1]}</p>
+						<p>{this.state.venues.shops[2][0]}, Rating: {this.state.venues.shops[2][1]}</p>
+					</div>
+				)
+			}
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
+	showVenuesArts() {
+		if (this.state.venues) {
+			if (this.state.venues.arts) {
+				return(
+					<div>
+						<p>Since you selected arts in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.arts[0][0]}, Rating: {this.state.venues.arts[0][1]}</p>
+						<p>{this.state.venues.arts[1][0]}, Rating: {this.state.venues.arts[1][1]}</p>
+						<p>{this.state.venues.arts[2][0]}, Rating: {this.state.venues.arts[2][1]}</p>
+					</div>
+				)
+			}
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
+	showVenuesOutdoors() {
+		if (this.state.venues) {
+			if (this.state.venues.outdoors) {
+				return(
+					<div>
+						<p>Since you selected outdoors in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.outdoors[0][0]}, Rating: {this.state.venues.outdoors[0][1]}</p>
+						<p>{this.state.venues.outdoors[1][0]}, Rating: {this.state.venues.outdoors[1][1]}</p>
+						<p>{this.state.venues.outdoors[2][0]}, Rating: {this.state.venues.outdoors[2][1]}</p>
+					</div>
+				)
+			}
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
+
+	showVenuesSights() {
+		if (this.state.venues) {
+			if (this.state.venues.sights) {
+				return(
+					<div>
+						<p>Since you selected sights in your preferences, we recommend checking out:</p>
+						<p>{this.state.venues.sights[0][0]}, Rating: {this.state.venues.sights[0][1]}</p>
+						<p>{this.state.venues.sights[1][0]}, Rating: {this.state.venues.sights[1][1]}</p>
+						<p>{this.state.venues.sights[2][0]}, Rating: {this.state.venues.sights[2][1]}</p>
+					</div>
+				)
+			}
+		} else {
+			return(
+				<div></div>
+			)
+		}
+	}
 
 	showCoordinates() {
 		if(this.state.geoHood === null) {
@@ -231,7 +350,6 @@ class Visit extends React.Component {
 			)
 		}
 	}
-
 
 	showForm() {
 		let location = this.props.location;
@@ -304,7 +422,6 @@ class Visit extends React.Component {
 				</div>
 			)
 		} else {
-			console.log(this.state.neighborhoods)
 			return(
 				<div>
 					<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>
@@ -330,7 +447,13 @@ class Visit extends React.Component {
 					{ this.showForm() }
 					{ this.showCount() }
 					{ this.showRecommendation() }
-					{ this.showVenueRex() }
+					{ this.showVenuesFood() }
+					{ this.showVenuesDrinks() }
+					{ this.showVenuesCoffee() }
+					{ this.showVenuesShops() }
+					{ this.showVenuesArts() }
+					{ this.showVenuesOutdoors() }
+					{ this.showVenuesSights() }
 					{ this.showCoordinates() }
 
 					<br />

@@ -2,37 +2,30 @@ class Api::ZillowController < ApplicationController
 
 	def neighborhoods
 		neighborhood_data = {}
+		result = {}
 		http = Curl.get("http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=#{ENV['zillow_api_key']}&state=#{params[:geoState]}&city=#{params[:city]}&childtype=neighborhood")
 		names = Nokogiri::XML(http.body_str).search("name")
 		lat = Nokogiri::XML(http.body_str).search("list").search("latitude")
 		long = Nokogiri::XML(http.body_str).search("list").search("longitude")
-		neighborhood_data[:names] = []
-		neighborhood_data[:lat] = []
-		neighborhood_data[:long] = []
 		# copy = []
 
-		names.each do |name|
-			neighborhood_data[:names] << name.children.first.text
-			# copy += name.children.first.text
+		names.each_with_index do |name, i|
+			neighborhood_data[name.children.first.text] = {lat: lat[i].children.first.text.to_f, long: long[i].children.first.text.to_f}
 		end
 
-		lat.each do |lat|
-			neighborhood_data[:lat] << lat.children.first.text.to_f
-		end
+		neighborhood_data.keys.each_with_index { |hood, i| neighborhood_data.values[i][:score] = score_call(neighborhood_data[hood][:lat], neighborhood_data[hood][:long]) }
+		sorted = neighborhood_data.sort_by { |name, data| data[:score] }
 
-		long.each do |long|
-			neighborhood_data[:long] << long.children.first.text.to_f
-		end
+		sorted.each { |hood| result[hood.first] = hood.last }
 
-		neighborhood_data[:count] = Nokogiri::XML(http.body_str).search("count").children.first.text.to_i
+		render json: result
+	end
 
-		# copy = neighborhood_data[:names]
-		# arr = []
-		# names.length.times do |i|
-		# 	arr = neighborhood_data[:names][i] << ", " << neighborhood_data[:lat][i].to_s << ", " << neighborhood_data[:long][i].to_s
-		# end
+	private
 
-		render json: neighborhood_data
+	def score_call(lat, lng)
+		http = Curl.get("http://api.walkscore.com/score?format=xml&lat=#{lat}&lon=#{lng}&wsapikey=#{ENV['WALKSCORE_API_KEY']}")
+		Nokogiri::XML(http.body_str).search("walkscore").children.text.to_i
 	end
 end
 

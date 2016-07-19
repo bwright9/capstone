@@ -2,11 +2,11 @@
 body {
 	font-family: "AvenirNext-Regular";
 }
-
+/*
 header, main, footer {
   padding-left: 240px;
 }
-
+*/
 @media only screen and (max-width : 992px) {
   header, main, footer {
     padding-left: 0;
@@ -24,10 +24,15 @@ header, main, footer {
 
 .btn {
 	background-color: #F19F4D;
+  color: white;
 }
 
 .btn:hover {
 	background-color: #ec8800;
+}
+
+.btn a{
+  color: white;
 }
 
 
@@ -37,20 +42,16 @@ header, main, footer {
   ========================================
 */
 
-.brand-logo {
+nav .brand-logo {
 	margin-left: 30px;
 	letter-spacing: 10px;
+  font-size: 25px;
 }
 
 .login {
   letter-spacing: 5px;
 }
 
-.brand-logo {
-	letter-spacing: 10px;
-	margin-left: 30px;
-
-}
 
 .logo-img {
 	  width: 180px;
@@ -66,8 +67,11 @@ nav {
 	background-color: #4484CE;
 }
 
+.profile-link {
+  letter-spacing: 5px;
+}
 
-.profile {
+.signup {
   letter-spacing: 5px;
 }
 
@@ -139,31 +143,43 @@ nav {
 	top: 50px;
 	right: 5px;
 	padding: 10px;
-	font-size: 30px;
+	font-size: 25px;
 	letter-spacing: 15px;
 	text-shadow: 0px 2px 8px #4A4A4A;
 	text-align: right;
 }
 
 .card .card-image .btn {
-	position: absolute;
-	bottom: 20px;
-	letter-spacing: 10px;
-  margin-left: 70px;
+  position: absolute;
+  margin-left: 20%;
+  bottom: 20px;
+  letter-spacing: 10px;
+  padding: 0 10px;
+  -webkit-border-radius:2px;
+  -moz-border-radius:2px;
 }
+
+.close {
+  width: 215px;
+}
+
+
 
 .dialog-box {
 	background-color: rgba(0, 0, 0, 0.5);
 	position: absolute;
-	top: 200px;
-	bottom: 200px;
+	top: 130px;
+	bottom: 115px;
 	margin: 0 20px 0 20px;
+
 }
 
-.dialog-box h5 {
+.dialog-box h6 {
 	color: white;
-	margin: 100px 10px 0px 10px;
+	margin: 20px 5px 20px 5px;
 	text-shadow: 0px 2px 8px #4A4A4A;
+  font-size: 18px;
+  line-height: 25px;
 }
 
 
@@ -189,6 +205,10 @@ nav {
 
 footer.page-footer .footer-copyright {
 	background-color: #4484CE;
+}
+
+footer.page-footer {
+  background-color: #4484CE;
 }
 
 
@@ -227,6 +247,10 @@ footer.page-footer .footer-copyright {
 	width: 88.59px;
 }
 
+.tax-state {
+	height: 200px;
+}
+
 /*
   ========================================
   Move
@@ -260,6 +284,28 @@ footer.page-footer .footer-copyright {
 
 .footer-copyright {
 	margin-top: -20px;
+}
+
+.stein {
+  border: 0;
+  border-radius: 75%;
+  height: 400px;
+  float: left;
+  display: block;
+  margin: 15px 2% 0 2%;
+  max-width: 25%
+}
+
+.about {
+  float: right;
+  display: block;
+  margin: 40px 2% 0 2%;
+  max-width: 66%;
+}
+
+.about-title {
+  float: right;
+  margin-right: 25%;
 }
 
 

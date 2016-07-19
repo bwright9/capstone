@@ -38,6 +38,7 @@ end
 
 group :production do
   gem 'puma'
+  gem 'rails_12factor'
 end
 
 gem 'foreman'

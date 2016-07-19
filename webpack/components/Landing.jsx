@@ -3,21 +3,25 @@ import { Link } from 'react-router';
 import { handleLogout } from './auth/actions';
 import { handleLogin } from '../actions';
 import { connect } from 'react-redux';
-let balcony = document.createElement('img');
-balcony.src = require('../images/balcony.jpg');
-let discover = document.createElement('img');
-discover.src = require('../images/discover.jpg');
-let home = document.createElement('img');
-home.src = require('../images/home.jpg')
 
 class Landing extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { discoverDetail: false, travelDetail: false, moveDetail: false }
+		this.state = { discoverDetail: false, travelDetail: false, moveDetail: false, images: {} }
 		this.travelCard = this.travelCard.bind(this);
 		this.moveCard = this.moveCard.bind(this);
 		this.discoverCard = this.discoverCard.bind(this);
 
+	}
+
+	componentDidMount() {
+		$.ajax({
+			url: '/image_url',
+			type: 'GET',
+			data: { images: ['balcony.jpg', 'discover.jpg', 'home.jpg'] }
+		}).done( images => {
+			this.setState({ images })
+		})
 	}
 
 	
@@ -26,7 +30,7 @@ class Landing extends React.Component {
 			return(
 				<div className="card">
  				  <div className="card-image" >
- 				    <img className='responsive-img landing_img' src={disover.src} />
+ 				    <img className='responsive-img landing_img' src={this.state.images.discover} />
  				    <h4 className="card-title">DISCOVER</h4>
  				    <div className="dialog-box center">
  				    	<h6 className='center'>
@@ -43,7 +47,7 @@ class Landing extends React.Component {
 			return(
 				<div className="card hoverable">
  				  <div className="card-image" >
- 				    <img className='responsive-img landing_img' src={discover.src} />
+ 				    <img className='responsive-img landing_img' src={this.state.images.discover} />
  				    <h4 className="card-title">DISCOVER</h4>
  				    <button className='btn z-depth-5' onClick={() => this.setState( {discoverDetail: !this.state.discoverDetail }) }>learn more</button>
  				  </div>
@@ -57,7 +61,7 @@ class Landing extends React.Component {
 			return(
 				<div className="card">
  				  <div className="card-image" >
- 				    <img className='responsive-img landing_img' src={balcony.src} />
+ 				    <img className='responsive-img landing_img' src={this.state.images.balcony} />
  				    <h2 className="card-title">VISIT</h2>
  				    <div className="dialog-box center">
  				    	<h6 className='center'>
@@ -72,7 +76,7 @@ class Landing extends React.Component {
 			return(
 				<div className="card hoverable">
  				  <div className="card-image" >
- 				    <img className='responsive-img landing_img' src={balcony.src} />
+ 				    <img className='responsive-img landing_img' src={this.state.images.balcony} />
  				    <h2 className="card-title">VISIT</h2>
  				    <button className='btn z-depth-5' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>learn more</button>
  				  </div>
@@ -86,7 +90,7 @@ class Landing extends React.Component {
 			return(
 				<div className="card">
  				  <div className="card-image" >
- 				    <img className='responsive-img landing_img' src={home.src} />
+ 				    <img className='responsive-img landing_img' src={this.state.images.home} />
  				    <h2 className="card-title">MOVE</h2>
  				    <div className="dialog-box center">
  				    	<h6 className='center'>
@@ -103,7 +107,7 @@ class Landing extends React.Component {
 			return (
 				<div className="card hoverable">
  				  <div className="card-image" >
- 				    <img className='responsive-img landing_img' src={home.src} />
+ 				    <img className='responsive-img landing_img' src={this.state.images.home} />
  				    <h2 className="card-title">MOVE</h2>
  				    <button className='btn z-depth-5' onClick={() => this.setState( {moveDetail: !this.state.moveDetail }) }>learn more</button>
  				  </div>

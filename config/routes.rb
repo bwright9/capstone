@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root 'home#index'
 
+  get 'image_url', to: 'image_url#get_image'
+
 	namespace :api do 
 		get "count", to: "zillow#count"
     get "neighborhoods", to: "zillow#neighborhoods"

@@ -36,6 +36,4 @@ import { Link } from 'react-router';
 	  </div>
 	)
 
-
-
 export default Austin;

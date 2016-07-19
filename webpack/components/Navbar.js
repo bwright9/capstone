@@ -30,23 +30,23 @@ class Navbar extends React.Component {
 	authLink() {
 		if(this.props.auth)
 			return(
-				[<li key="profile"><Link className='profile' to="/profile">Profile</Link></li>,
-				<li key="logout"><a className='logo-header'href='#' onClick={this.logout.bind(this)}>logout</a></li>]
+				[<li key="profile"><Link className='sm-spaced' to="/profile">profile</Link></li>,
+				<li key="logout"><a className='sm-spaced'href='#' onClick={this.logout.bind(this)}>logout</a></li>]
 			)
 		else {
 			return( 
-				[<li key="profile"><Link to='login' className='login'>Login</Link></li>, 
-				<li key="logout"><Link to='signup'>Sign Up</Link></li>]
+				[<li key="profile"><Link to='login' className='sm-spaced'>login</Link></li>, 
+				<li key="logout"><Link to='signup' className='sm-spaced'>sign up</Link></li>]
 			)
 		}
 	}
 
 	dropDownButton() {
 		if(this.props.auth) {
-			return(<li><a className="dropdown-button" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right">arrow_drop_down</i></a></li>)
+			return(<li><a className="dropdown-button sm-spaced" href="#!" data-activates="dropdown1">{`${this.props.firstName} ${this.props.lastName}`}<i className="material-icons right">arrow_drop_down</i></a></li>)
 		} else {
-			return([<li key="signup"><Link to='signup'>Sign Up</Link></li>,
-				      <li key="login"><Link to='login' className='login'>Login</Link></li>])
+			return([<li key="signup"><Link to='signup' className='sm-spaced'>sign up</Link></li>,
+				      <li key="login"><Link to='login' className='sm-spaced'>login</Link></li>])
 		}
 	}
 
@@ -60,7 +60,7 @@ class Navbar extends React.Component {
 				<div className='navbar-fixed z-depth-1'>
 					<nav>
 					  <div className="nav-wrapper">
-					   <Link to='/'><img className='logo3' src="assets/Logo3.png" /></Link>
+					   <Link to='/' className='logo'>someThere</Link>
 					    <ul className="right hide-on-med-and-down">
 					      { this.dropDownButton() }
 					    </ul>

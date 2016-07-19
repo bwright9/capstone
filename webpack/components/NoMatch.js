@@ -1,13 +1,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-const NoMatch = () => (
-  <div className="container">
-  	<div>
-  		<h4 className="red-text">OOPS.. Page Not Found!!</h4>
-  		<p> Click <Link to='/'>Back</Link> to visit the Homepage.</p>
-  	</div>
 
+const NoMatch = () => (
+  <div>    
+    <h1 className='center'>Are you lost? </h1>
+    <div className="container">
+      <img src="/assets/lost.gif" alt='tag' className='lost'/>
+      <br />
+      <Link to='/' className='btn back'>Go Back</Link>
+    </div>
   </div>
 )
 

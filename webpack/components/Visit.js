@@ -96,7 +96,7 @@ class Visit extends React.Component {
 		let commercial = "commercial";
 		return(
 			<div>
-				<h1 className="center">Visit Component</h1>
+				<h1 className="center spaced">visit</h1>
 				<div className="container">
 			    <form onSubmit={this.selectRegion}>
 						<input ref='city' type='text' placeholder='Your city' />

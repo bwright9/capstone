@@ -21,15 +21,20 @@ class Discover extends React.Component {
 	}
 
 	componentWillMount() {
-		let firstSalary = this.state.salary * 0.85;
-  	this.setState({afterTaxCurrent: firstSalary, afterTaxNew: firstSalary});
-  	this.calculateTax();
-	}
-
-	componentDidMount() {
-	  $('.collapsible').collapsible();
-	  $('select').material_select();
-	}
+    let firstSalary = this.state.salary * 0.85;
+    this.calculateTax();   
+  }
+  
+  componentDidMount() {
+    $('.collapsible').collapsible();
+    $('select').material_select();
+  }
+  
+  componentDidUpdate(prevProps, prevState) {
+    if (!this.state.afterTaxCurrent) {
+      this.calculateTax();   
+    } 
+  }
 
 	handleSelect(event, index, value) {
     this.setState({stateSelect: value, capital: this.findStateCapitals(value)}, function afterStateUpdated() {
@@ -285,6 +290,7 @@ class Discover extends React.Component {
 	render() {
 		return(
 			<div>
+        <h1 className="center spaced">discover</h1>
 				<ul className="collapsible" data-collapsible="accordion">
 			    <li>
 			      <div className="collapsible-header"><i className="material-icons">local_atm</i>Take-Home Pay Calculator</div>
@@ -530,7 +536,7 @@ class Discover extends React.Component {
 
           <li>
             <div className="collapsible-header"><i className="material-icons">home</i>Featured Neighborhoods</div>
-            <div className="collapsible-body"><p><ExploreNeighborhoods /></p></div>
+            <div className="collapsible-body"><ExploreNeighborhoods /></div>
           </li>
 
 			  </ul>

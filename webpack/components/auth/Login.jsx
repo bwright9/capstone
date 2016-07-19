@@ -19,8 +19,9 @@ class Login extends React.Component {
 		e.preventDefault();
 		const email = this.refs.email.value;
 		const password = this.refs.password.value;
+		const redirectLocation = '/discover'
 		// TODO: dispatch login action
-		this.props.dispatch(handleLogin(email, password, this.props.history));
+		this.props.dispatch(handleLogin(email, password, redirectLocation, this.props.history));
 	}
 
 	render() {

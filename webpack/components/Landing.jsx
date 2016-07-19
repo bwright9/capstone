@@ -52,12 +52,10 @@ class Landing extends React.Component {
 				<div className="card">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/balcony.jpg" />
- 				    <h2 className="card-title">TRAVEL</h2>
+ 				    <h2 className="card-title">VISIT</h2>
  				    <div className="dialog-box center">
  				    	<h6 className='center'>
- 				    		Taking a trip and not sure where to stay? Looking for a place close to the theaters? 
- 				    		Or maybe you want to have a wide variety of restaurants right outside your door. 
- 				    		Complete a list of travel preferences and someThere Visit will match you with a neighborhood that meets your needs.  
+ 				    		Taking a trip and not sure where to stay? Want to know where the most popular restaurants, sights, or coffee shops are? Use the someThere Visit search to plan your next trip!  
  				    	</h6>
  				    </div>
  				    <button className='btn z-depth-5 close' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>close</button>
@@ -69,7 +67,7 @@ class Landing extends React.Component {
 				<div className="card hoverable">
  				  <div className="card-image" >
  				    <img className='responsive-img landing_img' src="assets/balcony.jpg" />
- 				    <h2 className="card-title">TRAVEL</h2>
+ 				    <h2 className="card-title">VISIT</h2>
  				    <button className='btn z-depth-5' onClick={() => this.setState( {travelDetail: !this.state.travelDetail }) }>learn more</button>
  				  </div>
  				</div>
@@ -87,8 +85,7 @@ class Landing extends React.Component {
  				    <div className="dialog-box center">
  				    	<h6 className='center'>
  				    		Relocating and want to find somewhere that feels like home? 
- 				    		If you like your current neighborhood, the Move search tool will find neighborhood with a similar vibe and amenities in your new city. 
- 				    		If you are looking for something different, complete a search based on a list preferences you set.
+ 				    		The Move search tool will find neighborhood with a similar vibe and amenities to your current neighborhood in your new city. 
  				    		Leave the worry to us. SomeThere Move will help you find a home there.
  				    	</h6>
  				    </div>

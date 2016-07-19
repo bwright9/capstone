@@ -1,10 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router';
-import { Parallax } from 'react-parallax';
+// import { Parallax } from 'react-parallax';
 		 
 	const Austin = () => (
 		<div>
-	  	<Parallax bgImage="https://a0.muscache.com/locations/uploads/photo/image/22319/0_4200_0_2800_one_cafe-sunglasses-indoor-devon0011.jpg" strength={200}>
+	  	{/*<Parallax bgImage="https://a0.muscache.com/locations/uploads/photo/image/22319/0_4200_0_2800_one_cafe-sunglasses-indoor-devon0011.jpg" strength={200}>
 	   		<div style={{width: '100vw', height: '70vh', marginTop: 1 }}>
 	   		  <br />
 	   		  <br />
@@ -32,7 +32,7 @@ import { Parallax } from 'react-parallax';
 	   		  </div>
 	   		<Parallax bgImage="https://a1.muscache.com/locations/uploads/photo/image/22341/0_4200_0_2800_one_silver-lake-reservoir-devon0075.jpg" strength={200}>
 	   		        <div style={{width: 800, height: 425 }}></div>
-	   		      </Parallax>
+	   		      </Parallax>*/}
 	  </div>
 	)
 

@@ -8,7 +8,7 @@ import TextField from 'material-ui/TextField';
 class Profile extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = { edit: false }
+		this.state = { edit: false };
 		this.addProfile = this.addProfile.bind(this);
 		this.fetchWalkscore = this.fetchWalkscore.bind(this);
 	}

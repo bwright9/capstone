@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
+import LinearProgress from 'material-ui/LinearProgress';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
 import { connect } from 'react-redux';
@@ -8,9 +9,11 @@ import { connect } from 'react-redux';
 class Move extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = { city: null, geoState: '', neighborhoods: null, geoHood: null, scores: null, ws_lat: null, ws_lon: null, geoWalkscore: null, average: null, crimerate: null };
+		this.state = { city: null, geoState: '', count: null, neighborhoods: null, geoHood: null, scores: null,
+									 ws_lat: null, ws_lon: null, geoWalkscore: null, average: null, crimerate: null, completed: 0};
 		this.showForm = this.showForm.bind(this);
 		this.selectRegion = this.selectRegion.bind(this);
+		this.fetchCount = this.fetchCount.bind(this);
 		this.fetchNeighborhoods = this.fetchNeighborhoods.bind(this);
 		// this.showNeighborhoods = this.showNeighborhoods.bind(this);
 		this.selectNeighborhood = this.selectNeighborhood.bind(this);
@@ -21,8 +24,8 @@ class Move extends React.Component {
 		this.showWalkscore = this.showWalkscore.bind(this);
 		// this.fetchAllWalkscores = this.fetchAllWalkscores.bind(this);
 		this.recommendNeighborhood = this.recommendNeighborhood.bind(this);
+		this.showCount = this.showCount.bind(this);
 		this.showRecommendation = this.showRecommendation.bind(this);
-
 		this.runUpdate = true;
 	}
 
@@ -36,9 +39,24 @@ class Move extends React.Component {
 		let city = this.refs.city.value.replace(/[ ]+/g, "").trim();
 		this.runUpdate = false;
 		this.setState( { city: city, geoState: this.refs.geoState.value }, function stateUpdated () {
-		  this.fetchNeighborhoods()
-			this.fetchSchRate()
-		  this.fetchCrimeRate()
+	  	this.fetchCount()
+		})
+	}
+
+	fetchCount() {
+		$.ajax({
+			url: "/api/count",
+			type: 'GET',
+			data: { city: this.state.city, geoState: this.state.geoState },
+			dataType: 'JSON'
+		}).done( count => {
+			this.runUpdate = true;
+			console.log(count);
+			this.setState({ count }, function stateUpdated () {
+				this.fetchNeighborhoods(); 
+			})
+		}).fail( data => {
+			console.log(data);
 		})
 	}
 
@@ -73,7 +91,7 @@ class Move extends React.Component {
 		})
 	}
 
-	ShowSchoolRate() {
+	showSchoolRate() {
 		if(this.state.average === null) {
 			return(
 				<div></div>
@@ -108,7 +126,7 @@ class Move extends React.Component {
 		})
 	}
 
-	ShowCrimeRate() {
+	showCrimeRate() {
 		if(this.state.crimerate === null) {
 			return(
 				<div></div>
@@ -157,11 +175,11 @@ class Move extends React.Component {
 		let names = Object.keys(neighborhoods);
 		for(var i = 0; i < names.length; i++){
 	    if (point === neighborhoods[names[i]].score) {
-	    	matchPoint = i;
 	    	matchName = names[i]
+	    	matchPoint = this.state.neighborhoods[matchName].score
 	    } else if (matchPoint == null && neighborhoods[names[i]].score > point ) {
-	    	matchPoint = i 
 	    	matchName = names[i]
+	    	matchPoint = this.state.neighborhoods[matchName].score
 	    }
 		}
 		if (matchPoint === null) {
@@ -171,17 +189,29 @@ class Move extends React.Component {
 		this.setState({ geoHood: matchName, geoWalkscore: matchPoint });
 	}
 
+	showCount() {
+		if(this.state.count && this.state.geoHood === null) {
+			return(
+				<div>
+					<p>We are currently searching through {this.state.count} neighborhoods to find your perfect match.</p>
+					 <LinearProgress mode="indeterminate" />
+				</div>
+			)
+		}	else {
+			return(
+				<div>				
+					<p></p>
+				</div>
+			)
+		}
+	}
+
 	showRecommendation() {
 		if(this.state.geoHood === null) {
 			return(
 				<div></div>
 			)
 		} else {
-			// let names = this.state.neighborhoods.names.map( (neighborhood, index) => {
-			// 	return(
-	  // 	    <li key={`hood-${index}`}><a href="#" onClick={(e) => this.selectNeighborhood(e, neighborhood)}>{neighborhood}</a></li>
-			// 	)
-			// })
 			return(
 				<div>				
 					<p>Based on your current neightborhood walkscore of {this.props.walkscore}, 
@@ -234,7 +264,6 @@ class Move extends React.Component {
 				<div></div>
 			)
 		} else {
-			console.log(this.state.neighborhoods);
 			let hood = this.state.geoHood;
 			let hood_lat = this.state.neighborhoods[hood].lat;
 			let hood_long = this.state.neighborhoods[hood].long;
@@ -285,7 +314,7 @@ class Move extends React.Component {
 		let location = this.props.location;
 		let city = location.query.city;
 		let state = location.query.state || "";
-		if (this.state.geoWalkscore === null) {
+		if (this.state.city === null) {
 			return(
 				<div>
 					<div className="container">
@@ -346,6 +375,7 @@ class Move extends React.Component {
 								<option value="wyoming">Wyoming</option>
 							</select>
 							<input type='submit' className='btn' />
+
 						</form>
 					</div>
 				</div>
@@ -354,6 +384,7 @@ class Move extends React.Component {
 			return(
 				<div>
 					<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>
+					<Link to={`/visit?city=${this.state.city}&state=${this.state.geoState}`} className='btn'>Visit</Link>
 				</div>
 			)
 		}	
@@ -365,8 +396,6 @@ class Move extends React.Component {
 	}
 
 	render() {
-		// let disabled = this.state.geoWalkscore ? true : false;
-		// let button = !disabled ? (<input type="submit" className='btn' />) : (<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>)
 		return(
 			<div>
 				<h1 className="center spaced">move</h1>
@@ -433,10 +462,11 @@ class Move extends React.Component {
 					</form>
 				{ this.showNeighborhoods() }
 				{ this.showForm() }
+				{ this.showCount() }
 				{ this.showRecommendation() }
 				{ this.showCoordinates() }
-				{ this.ShowSchoolRate() }
-				{ this.ShowCrimeRate() }
+				{ this.showSchoolRate() }
+				{ this.showCrimeRate() }
 				
 				<br />
 				<br />

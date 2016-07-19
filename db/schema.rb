@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160718203338) do
+ActiveRecord::Schema.define(version: 20160718213232) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,8 +101,15 @@ ActiveRecord::Schema.define(version: 20160718203338) do
     t.boolean  "parks_nature"
     t.boolean  "walk_score"
     t.integer  "profile_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.boolean  "food",         default: false
+    t.boolean  "drinks",       default: false
+    t.boolean  "coffee",       default: false
+    t.boolean  "shops",        default: false
+    t.boolean  "arts",         default: false
+    t.boolean  "outdoors",     default: false
+    t.boolean  "sights",       default: false
   end
 
   add_index "visit_preferences", ["profile_id"], name: "index_visit_preferences_on_profile_id", using: :btree

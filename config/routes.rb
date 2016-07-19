@@ -2,13 +2,18 @@ Rails.application.routes.draw do
   root 'home#index'
 
 	namespace :api do 
-		get "neighborhoods", to: "zillow#neighborhoods"
+		get "count", to: "zillow#count"
+    get "neighborhoods", to: "zillow#neighborhoods"
 		get 'maps_key', to: 'move#maps_key'
     get 'walkscore_map', to: 'move#walkscore_map'
     get 'user_profile', to: 'profiles#show'
     get "walkscore", to: "walkscore#score"
     get "new_walkscore", to: "walkscore#new_score"
     get "set_walkscore_arr", to: "walkscore#get_scores"
+    get "set_walkscore_arr", to: "walkscore#get_scores"
+    get "foursquare", to: "visit#index"
+    put 'visit_preferences', to: "visit_preferences#update"
+    get 'visit_preferences', to: "visit_preferences#show"
 		resources :profiles
   	resources :move
     get 'city_schrate', to: 'move#city_schrate'

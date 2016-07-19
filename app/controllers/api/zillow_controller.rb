@@ -1,5 +1,11 @@
 class Api::ZillowController < ApplicationController
 
+	def count
+		http = Curl.get("http://www.zillow.com/webservice/GetRegionChildren.htm?zws-id=#{ENV['zillow_api_key']}&state=#{params[:geoState]}&city=#{params[:city]}&childtype=neighborhood")
+		count = Nokogiri::XML(http.body_str).search("count").children.first.text.to_i
+		render json: count
+	end
+
 	def neighborhoods
 		neighborhood_data = {}
 		result = {}

@@ -20,6 +20,7 @@ gem 'geocoder'
 gem 'sendgrid'
 gem 'delayed_job'
 gem 'delayed_job_active_record'
+gem 'foursquare2'
 
 
 group :development, :test do

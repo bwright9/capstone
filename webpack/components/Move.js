@@ -270,7 +270,6 @@ class Move extends React.Component {
 			return(
 				<div>		
 					<Walkscore hood_lat={hood_lat} hood_long={hood_long}/>	
-					<MoveMap hood_lat={hood_lat} hood_long={hood_long} />
 				</div>
 			)
 		}

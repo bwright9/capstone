@@ -95,10 +95,9 @@ class Sidenav extends React.Component {
       <div>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC47oD2Sle3KuVFzOpPzDeQEnPRuR_qwOE?libraries=places"></script>
         <ul id="slide-out" className="side-nav fixed">
-          <li><Link to="/move">Move</Link></li>
-          <li><Link to="/visit">Visit</Link></li>
-          <li><Link to="/discover">Discover</Link></li>
-          <li><Link to="/favorites">Favorites</Link></li>
+          <li><Link to="/move" className='nav-tab sm-spaced'>MOVE</Link></li>
+          <li><Link to="/visit" className='nav-tab sm-spaced'>VISIT</Link></li>
+          <li><Link to="/discover" className='nav-tab sm-spaced'>DISCOVER</Link></li>
           { this.cityStateDisplay() }
         </ul>
         <a href="#" data-activates="slide-out" className="button-collapse"><i className="mdi-navigation-menu"></i></a>

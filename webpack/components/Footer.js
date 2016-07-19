@@ -17,9 +17,9 @@ class Footer extends React.Component {
         <footer className='page-footer z-depth-1'>
         <div className="footer-copyright">
           <div className="container footer logged-footer">
-            <Link to="/about" className='white-links'> about </Link>|
-            <Link to="/contact" className='white-links'> contact </Link>|
-            <a href="https://github.com/bwright9/capstone" className='white-links' target='_blank'> github</a>
+            <Link to="/about" className='white-links sm-spaced'> about </Link>|
+            <Link to="/contact" className='white-links sm-spaced'> contact </Link>|
+            <a href="https://github.com/bwright9/capstone" className='white-links sm-spaced' target='_blank'> github</a>
           </div>
         </div>
         </footer>
@@ -29,9 +29,9 @@ class Footer extends React.Component {
         <footer className='page-footer z-depth-1 center'>
         <div className="footer-copyright">
           <div className="container footer">
-            <Link to="/about" className='white-links'> about </Link>|
-            <Link to="/contact" className='white-links'> contact </Link>|
-            <a href="https://github.com/bwright9/capstone" className='white-links' target='_blank'> github</a>
+            <Link to="/about" className='white-links sm-spaced'> about </Link>|
+            <Link to="/contact" className='white-links sm-spaced'> contact </Link>|
+            <a href="https://github.com/bwright9/capstone" className='white-links sm-spaced' target='_blank'> github</a>
           </div>
         </div>
         </footer>

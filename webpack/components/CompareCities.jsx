@@ -1,24 +1,45 @@
 import React from 'react';
 import { Link } from 'react-router';
 import TextField from 'material-ui/TextField';
+import LinearProgress from 'material-ui/LinearProgress';
+
+
 
 class CompareCities extends React.Component {
 	constructor(props) {
 		super(props);
 
-		this.state = { city1: null, geoState1: '', city2: null, geoState2: '', compare: null };
+		this.state = { city1: null, geoState1: '', city2: null, geoState2: '', compare: null, loading: false };
 		this.compareStuffs = this.compareStuffs.bind(this);
 		this.fetchComparisons = this.fetchComparisons.bind(this);
+		this.loadingBar = this.loadingBar.bind(this);
 	}
 
 	compareStuffs(e) {
 		e.preventDefault();
 		let city1 = this.refs.city1.value.replace(/[ ]+/g, "_").trim();
 		let city2 = this.refs.city2.value.replace(/[ ]+/g, "_").trim();
-		this.setState( { city1: city1, geoState1: this.refs.geoState1.value, city2: city2, geoState2: this.refs.geoState2.value }, function stateUpdated () {
+		this.setState( { city1: city1, geoState1: this.refs.geoState1.value, city2: city2, geoState2: this.refs.geoState2.value, loading: true }, function stateUpdated () {
 		this.fetchComparisons()
 
 		})
+	}
+
+	loadingBar() {
+		if(this.state.loading === true) {
+			let city1 = this.state.city1.replace(/[_]+/g, " ").replace(/\b[a-z]/g, function(f){return f.toUpperCase();})
+			let city2 = this.state.city2.replace(/[_]+/g, " ").replace(/\b[a-z]/g, function(f){return f.toUpperCase();})
+			return(
+				<div className='wait'>
+					 <p> Please wait as we compare {city1} to {city2} </p>
+					 <LinearProgress mode="indeterminate" />
+				</div>
+			)
+		}	else {
+			return(
+				<div></div>
+			)
+		}
 	}
 
 
@@ -30,7 +51,7 @@ class CompareCities extends React.Component {
 			dataType: 'JSON'
 		}).done( compare => {
 			console.log(compare)
-			this.setState({ compare });
+			this.setState({ compare, loading: false });
 		}).fail( data => {
 			console.log(data);
 		})
@@ -100,7 +121,7 @@ class CompareCities extends React.Component {
 			    	<div className='col s12 m6'>
 							<input ref='city1' type='text' placeholder='Current city' />
 							<select ref='geoState1'>
-				  	    <option value="" disble selected>Choose your state</option>
+				  	    <option value="" disbled selected>Choose your state</option>
 				  	    <option value="AL">Alabama</option>
 								<option value="AK">Alaska</option>
 								<option value="AZ">Arizona</option>
@@ -212,9 +233,10 @@ class CompareCities extends React.Component {
 							</select>
 						</div>
 					</div>
-					<input type='submit' className='btn compare-btn' />
+					<input type='submit' className='btn compare-btn'/>
 					</form>
-					{ this.ShowComparisons() }
+						{ this.loadingBar() }
+						{ this.ShowComparisons() }
 				</div>
 			</div>
 		)

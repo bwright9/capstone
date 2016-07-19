@@ -290,6 +290,7 @@ class Discover extends React.Component {
 	render() {
 		return(
 			<div>
+        <h1 className="center spaced">discover</h1>
 				<ul className="collapsible" data-collapsible="accordion">
 			    <li>
 			      <div className="collapsible-header"><i className="material-icons">local_atm</i>Take-Home Pay Calculator</div>

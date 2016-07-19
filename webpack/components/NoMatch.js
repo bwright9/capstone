@@ -1,12 +1,17 @@
 import React from 'react';
+import { Link } from 'react-router';
+
+
+
 
 const NoMatch = () => (
-  <div className="container">
-  	<div>
-  		<img src="assets/tag" alt='tag' />
-  		<h1 className="red-text">OOPS.. Page Not Found!!</h1>
-  	</div>
-
+  <div>    
+    <h1 className='center'>Are you lost? </h1>
+    <div className="container">
+      <img src="/assets/lost.gif" alt='tag' className='lost'/>
+      <br />
+      <Link to='/' className='btn back'>Go Back</Link>
+    </div>
   </div>
 )
 

@@ -368,7 +368,7 @@ class Move extends React.Component {
 		// let button = !disabled ? (<input type="submit" className='btn' />) : (<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>)
 		return(
 			<div>
-				<h1 className="center">Move Component</h1>
+				<h1 className="center spaced">move</h1>
 				<div className="container">
 
 				{ this.showForm() }

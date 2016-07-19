@@ -35,6 +35,14 @@ header, main, footer {
   color: white;
 }
 
+.spaced {
+  letter-spacing: 10px;
+}
+
+.sm-spaced {
+  letter-spacing: 5px;
+}
+
 
 /*
   ========================================
@@ -42,37 +50,15 @@ header, main, footer {
   ========================================
 */
 
-nav .brand-logo {
-	margin-left: 30px;
-	letter-spacing: 10px;
-  font-size: 25px;
-}
-
-.login {
-  letter-spacing: 5px;
-}
-
-
 .logo-img {
 	  width: 180px;
     height: 45px;
     margin-top: 10px;
 }
 
-.logo-header {
-	letter-spacing: 5px;
-}
 
 nav {
 	background-color: #4484CE;
-}
-
-.profile-link {
-  letter-spacing: 5px;
-}
-
-.signup {
-  letter-spacing: 5px;
 }
 
 .logo3 {
@@ -82,9 +68,6 @@ nav {
   margin-top: 10px;
 }
 
-.dropdown-button {
-  letter-spacing: 5px;
-}
 
 .logo {
   letter-spacing: 7px;
@@ -110,7 +93,7 @@ nav {
 
 .home-state {
 	width: 200px;	
-	margin-top: 85px;
+	margin-top: 110px;
 }
 
 #city {
@@ -123,6 +106,10 @@ nav {
 
 .btn-large:hover {
 	background-color: #ee8c2b;
+}
+
+.nav-tab {
+  margin-top: 30px;
 }
 
 /*
@@ -199,17 +186,11 @@ nav {
   ========================================
 */
 
-.footer-copyright {
-	margin-top: -20px;
-	background-color: #4484CE;
-}
-
 .white-links {
 	color: white;
 }
 
 .footer {
-	letter-spacing: 5px;
 	background-color: #4484CE;
 }
 
@@ -277,6 +258,10 @@ footer.page-footer {
 	columns: 100px 3;
 }
 
+.add-favorites {
+  margin-left: 15%;
+}
+
 /*
   ========================================
   Compare Cities
@@ -316,6 +301,10 @@ footer.page-footer {
   margin-bottom: 15px;
 }
 
+.wait {
+  margin-bottom: 30px;
+}
+
 
 
 /*
@@ -324,14 +313,13 @@ footer.page-footer {
   ========================================
 */
 
-
 .footer-copyright {
 	margin-top: -20px;
 }
 
 .stein {
   border: 0;
-  border-radius: 75%;
+  border-radius: 25%;
   height: 400px;
   float: left;
   display: block;
@@ -343,11 +331,12 @@ footer.page-footer {
   display: block;
   margin: 20px 0 0 50px;
   max-width: 66%;
+  text-align: center;
 }
 
 .about-title {
   float: right;
-  margin-right: 25%;
+  margin-right: 15%;
 }
 
 /*
@@ -375,6 +364,10 @@ footer.page-footer {
 
 .github {
   border-radius: 25%;
+}
+
+.team-names {
+  font-size: 30px;
 }
 
 
@@ -441,3 +434,27 @@ footer.page-footer {
 	padding-bottom: 140px;
 }
 
+/*
+  ========================================
+  404 
+  ========================================
+*/
+
+.lost {
+  margin-left: 25%;
+}
+
+.back {
+  margin-left: 45%;
+  margin-top: 15px;
+}
+
+/*
+  ========================================
+  Favorites
+  ========================================
+*/
+
+.favorite {
+  background-color: #D9D9D9;
+}

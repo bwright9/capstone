@@ -40,9 +40,9 @@ export default (
     	<IndexRoute component={LandingSwitch} />
       <Route path="signup" component={Signup} />
       <Route path="landing" component={LandingSwitch}></Route>
-    	<Route path="move" component={Move} onEnter={resetScriptCount}></Route>
+    	<Route path="move" component={UserIsAuthenticated(Move)} onEnter={resetScriptCount}></Route>
       <Route path="login" component={Login} />
-    	<Route path="visit" component={Visit} onEnter={resetScriptCount}d></Route>
+    	<Route path="visit" component={UserIsAuthenticated(Visit)} onEnter={resetScriptCount}d></Route>
     	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>
       <Route path="CompareCities" component={CompareCities}></Route>

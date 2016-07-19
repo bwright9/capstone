@@ -73,7 +73,7 @@ class Sidenav extends React.Component {
         <div>
           <li>
             <div className="center">
-              <img className="home-state" src={`assets/states/${imageState}.png`} />
+              <img className="home-state" src={`http://res.cloudinary.com/somethereapp/image/upload/v1468963062/${imageState}.png`} />
             </div>
           </li>
           <li>

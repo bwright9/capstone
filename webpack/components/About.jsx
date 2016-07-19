@@ -11,7 +11,7 @@ class About extends React.Component {
 				<h2 className='about-title spaced'>about someThere</h2>
 				<div className="row">
 					<div className='col s12 m4'>
-						<img className='stein' src='/assets/stein.jpg' />
+						<img className='stein' src='http://res.cloudinary.com/somethereapp/image/upload/v1468965913/stein.jpg' />
 					</div>
 					<div className='about col s12 m8'>
 						<p>

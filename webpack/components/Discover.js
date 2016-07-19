@@ -262,7 +262,7 @@ class Discover extends React.Component {
     if(this.props.currentState) {
       let imageState = this.convertCurrentState();
       return(
-        <img className="tax-state" src={`assets/states/${imageState}.png`} />
+        <img className="tax-state" src={`http://res.cloudinary.com/somethereapp/image/upload/v1468963062/${imageState}.png`} />
       )
     } else {
       return(
@@ -276,7 +276,7 @@ class Discover extends React.Component {
   showGeoState() {
     if(this.state.stateSelect) {
       return(
-        <img className="tax-state" src={`assets/states/${this.state.stateSelect}.png`} />
+        <img className="tax-state" src={`http://res.cloudinary.com/somethereapp/image/upload/v1468963062/${this.state.stateSelect}.png`} />
       )
     } else {
       return(
@@ -393,54 +393,54 @@ class Discover extends React.Component {
               <h3 className="fiber">Current Cities</h3>
               <div className="row">
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/georgia.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/georgia.png' />
                     <p><Link to='/move?city=Atlanta&state=georgia'>Atlanta, GA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/texas.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/texas.png' />
                     <p><Link to='/move?city=Austin&state=texas'>Austin, TX</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/missouri.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/missouri.png' />
                     <p><Link to='/move?city=Kansas%20City&state=missouri'>Kansas City, MO</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/kansas.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/kansas.png' />
                     <p><Link to='/move?city=Kansas%20City&state=kansas'>Kansas City, KS</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/tennessee.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/tennessee.png' />
                     <p><Link to='/move?city=Nashville&state=tennessee'>Nashville, TN</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/utah.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/utah.png' />
                     <p><Link to='/move?city=Provo&state=utah'>Provo, UT</Link></p>
                 </div>
               </div>
               <h3 className="fiber">Upcoming Cities</h3>
               <div className="row">
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/northcarolina.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/northcarolina.png' />
                     <p><Link to='/move?city=Charlotte&state=northcarolina'>Charlotte, NC</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/alabama.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/alabama.png' />
                     <p><Link to='/move?city=Huntsville&state=alabama'>Huntsville, AL</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/northcarolina.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/northcarolina.png' />
                     <p><Link to='/move?city=Raleigh&state=northcarolina'>Raleigh-Durham, NC</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/utah.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/utah.png' />
                     <p><Link to='/move?city=Salt%20Lake%20City&state=utah'>Salt Lake City, UT</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/texas.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/texas.png' />
                     <p><Link to='/move?city=San%20Antonio&state=texas'>San Antonio, TX</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/california.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/california.png' />
                     <p><Link to='/move?city=San%20Francisco&state=california'>San Francisco, CA</Link></p>
                 </div>
               </div>
@@ -452,75 +452,75 @@ class Discover extends React.Component {
             <div className="collapsible-body">
               <div className="row hamilton-cities">
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/california.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/california.png' />
                     <p><Link to='/move?city=San%20Francisco&state=california'>San Francisco, CA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/california.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/california.png' />
                     <p><Link to='/move?city=Los%20Angeles&state=california'>Los Angeles, CA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/dc.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/dc.png' />
                     <p><Link to='/move?city=Washington&state=districtofcolumbia'>Washington D.C.</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/georgia.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/georgia.png' />
                     <p><Link to='/move?city=Atlanta&state=georgia'>Atlanta, GA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/massachusetts.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/massachusetts.png' />
                     <p><Link to='/move?city=Boston&state=massachusetts'>Boston, MA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/northcarolina.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/northcarolina.png' />
                     <p><Link to='/move?city=Charlotte&state=northcarolina'>Charlotte, NC</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/ohio.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/ohio.png' />
                     <p><Link to='/move?city=Cleveland&state=ohio'>Cleveland, OH</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/california.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/california.png' />
                     <p><Link to='/move?city=Costa%20Mesa&state=california'>Costa Mesa, CA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/colorado.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/colorado.png' />
                     <p><Link to='/move?city=Denver&state=colorado'>Denver, CO</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/iowa.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/iowa.png' />
                     <p><Link to='/move?city=Des%20Moines&state=iowa'>Des Moines, IA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/texas.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/texas.png' />
                     <p><Link to='/move?city=Houston&state=texas'>Houston, TX</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/nevada.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/nevada.png' />
                     <p><Link to='/move?city=Los%20Vegas&state=nevada'>Las Vegas, NV</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/oregon.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/oregon.png' />
                     <p><Link to='/move?city=Portland&state=oregon'>Portland, OR</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/utah.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/utah.png' />
                     <p><Link to='/move?city=Salt%20Lake%20City&state=utah'>Salt Lake City, UT</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/california.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/california.png' />
                     <p><Link to='/move?city=San%20Diego&state=california'>San Deigo, CA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/washington.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/washington.png' />
                     <p><Link to='/move?city=Seattle&state=washington'>Seattle, WA</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/missouri.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/missouri.png' />
                     <p><Link to='/move?city=Saint%20Louis&state=missouri'>Saint Louis, MO</Link></p>
                 </div>
                 <div className="col s4 center">
-                    <img className= 'state' src='assets/states/arizona.png' />
+                    <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/arizona.png' />
                     <p><Link to='/move?city=Tempe&state=arizona'>Tempe, AZ</Link></p>
                 </div>
               </div>                

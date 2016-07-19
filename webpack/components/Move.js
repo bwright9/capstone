@@ -8,7 +8,6 @@ import TextField from 'material-ui/TextField';
 import MoveMap from './MoveMap';
 import Walkscore from './Walkscore';
 import { connect } from 'react-redux';
-import CrimeRate from './CrimeRate'; 
 
 
 class Move extends React.Component {
@@ -31,7 +30,7 @@ class Move extends React.Component {
 
 	selectRegion(e) {
 		e.preventDefault();
-		let city = this.refs.city.value.replace(/[ ]+/g, "").trim();
+		let city = this.refs.city.value.replace(/[ ]+/g, "_").trim();
 		this.setState( { city: city, geoState: this.refs.geoState.value }, function stateUpdated () {
 		  this.fetchNeighborhoods()
 			this.fetchSchRate()
@@ -205,57 +204,57 @@ class Move extends React.Component {
 						<input ref='city' type='text' placeholder='Choose your city' defaultValue={city} />
 						<select ref='geoState' defaultValue={state}>
 				      <option value="" disabled selected>Choose your state</option>
-				      <option value="AL">Alabama</option>
-							<option value="AK">Alaska</option>
-							<option value="AZ">Arizona</option>
-							<option value="AR">Arkansas</option>
-							<option value="CA">California</option>
-							<option value="CO">Colorado</option>
-							<option value="CT">Connecticut</option>
-							<option value="DE">Delaware</option>
-							<option value="DC">District Of Columbia</option>
-							<option value="FL">Florida</option>
-							<option value="GA">Georgia</option>
-							<option value="HI">Hawaii</option>
-							<option value="ID">Idaho</option>
-							<option value="IL">Illinois</option>
-							<option value="IN">Indiana</option>
-							<option value="IA">Iowa</option>
-							<option value="KS">Kansas</option>
-							<option value="KY">Kentucky</option>
-							<option value="LA">Louisiana</option>
-							<option value="ME">Maine</option>
-							<option value="MD">Maryland</option>
-							<option value="MA">Massachusetts</option>
-							<option value="MI">Michigan</option>
-							<option value="MN">Minnesota</option>
-							<option value="MS">Mississippi</option>
-							<option value="MO">Missouri</option>
-							<option value="MT">Montana</option>
-							<option value="NE">Nebraska</option>
-							<option value="NV">Nevada</option>
-							<option value="NH">New Hampshire</option>
-							<option value="NJ">New Jersey</option>
-							<option value="NM">New Mexico</option>
-							<option value="NY">New York</option>
-							<option value="NC">North Carolina</option>
-							<option value="ND">North Dakota</option>
-							<option value="OH">Ohio</option>
-							<option value="OK">Oklahoma</option>
-							<option value="OR">Oregon</option>
-							<option value="PA">Pennsylvania</option>
-							<option value="RI">Rhode Island</option>
-							<option value="SC">South Carolina</option>
-							<option value="SD">South Dakota</option>
-							<option value="TN">Tennessee</option>
-							<option value="TX">Texas</option>
-							<option value="UT">Utah</option>
-							<option value="VT">Vermont</option>
-							<option value="VA">Virginia</option>
-							<option value="WA">Washington</option>
-							<option value="WV">West Virginia</option>
-							<option value="WI">Wisconsin</option>
-							<option value="WY">Wyoming</option>
+				      <option value="alabama">Alabama</option>
+							<option value="alaska">Alaska</option>
+							<option value="arizona">Arizona</option>
+							<option value="arkansas">Arkansas</option>
+							<option value="california">California</option>
+							<option value="colorado">Colorado</option>
+							<option value="connecticut">Connecticut</option>
+							<option value="delaware">Delaware</option>
+							<option value="district_of_columbia">District Of Columbia</option>
+							<option value="florida">Florida</option>
+							<option value="georgia">Georgia</option>
+							<option value="hawaii">Hawaii</option>
+							<option value="idaho">Idaho</option>
+							<option value="illinois">Illinois</option>
+							<option value="indiana">Indiana</option>
+							<option value="iowa">Iowa</option>
+							<option value="kansas">Kansas</option>
+							<option value="kentucky">Kentucky</option>
+							<option value="louisiana">Louisiana</option>
+							<option value="maine">Maine</option>
+							<option value="maryland">Maryland</option>
+							<option value="massachusetts">Massachusetts</option>
+							<option value="michigan">Michigan</option>
+							<option value="minnesota">Minnesota</option>
+							<option value="mississippi">Mississippi</option>
+							<option value="missouri">Missouri</option>
+							<option value="montana">Montana</option>
+							<option value="nebraska">Nebraska</option>
+							<option value="nevada">Nevada</option>
+							<option value="new_hampshire">New Hampshire</option>
+							<option value="new _jersey">New Jersey</option>
+							<option value="new_mexico">New Mexico</option>
+							<option value="new_york">New York</option>
+							<option value="north_carolina">North Carolina</option>
+							<option value="north_dakota">North Dakota</option>
+							<option value="ohio">Ohio</option>
+							<option value="oklahoma">Oklahoma</option>
+							<option value="oregon">Oregon</option>
+							<option value="pennsylvania">Pennsylvania</option>
+							<option value="rhode_island">Rhode Island</option>
+							<option value="south_carolina">South Carolina</option>
+							<option value="south_dakota">South Dakota</option>
+							<option value="tennessee">Tennessee</option>
+							<option value="texas">Texas</option>
+							<option value="utah">Utah</option>
+							<option value="vermont">Vermont</option>
+							<option value="virginia">Virginia</option>
+							<option value="washington">Washington</option>
+							<option value="west_virginia">West Virginia</option>
+							<option value="wisconsin">Wisconsin</option>
+							<option value="wyoming">Wyoming</option>
 						</select>
 					    
 						<input type='submit' className='btn' />

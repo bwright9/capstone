@@ -44,6 +44,10 @@ class Login extends React.Component {
 			    cssClass="btn blue"
 			    icon="fa-facebook"
 			    callback={this.responseFacebook} />
+
+			   <div>
+			  	<a href='users/password/new'>Forgot Password?</a>
+			  </div>
 			</div>
 		)
 	}

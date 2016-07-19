@@ -45,7 +45,7 @@ export default (
     	<Route path="visit" component={Visit} onEnter={resetScriptCount}d></Route>
     	<Route path="discover" component={Discover} ></Route>
     	<Route path="favorites" component={Favorites}></Route>
-      <Route path="CompareCities" component={CompareCities}></Route>
+      <Route path="comparecities" component={CompareCities}></Route>
       <Route path="CompareSalary" component={CompareSalary}></Route>
       <Route path="profile" component={UserIsAuthenticated(Profile)}></Route>
       <Route path="movePreferences" component={UserIsAuthenticated(movePreferences)}></Route>

@@ -26,7 +26,7 @@ class Api::MoveController < ApplicationController
 			count += 1
 		end
 		average = numbers/count
-		render json: average
+		render json: average.round(2)
  	end
 
  	def city_crimerate
@@ -34,7 +34,7 @@ class Api::MoveController < ApplicationController
 
  		state = params[:state]
 		city = params[:city]
-
+		binding.pry
 		page =  agent.get("http://www.bestplaces.net/crime/city/#{state}/#{city}")
 		crimerate = []
 		@table = []

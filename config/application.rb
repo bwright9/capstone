@@ -24,5 +24,6 @@ module Capstone
     config.active_record.raise_in_transactional_callbacks = true
 
     config.active_job.queue_adapter = :delayed_job
+    config.assets.version = '1.3'
   end
 end

@@ -387,7 +387,6 @@ class Discover extends React.Component {
               </div>                
             </div>
           </li>
-<<<<<<< HEAD
 
           <li>
             <div className="collapsible-header"><i className="material-icons">&#xE915;</i>Compare</div>
@@ -395,14 +394,12 @@ class Discover extends React.Component {
               <CompareCities />
             </div>
           </li>
-
-=======
           <li>
             <div className="collapsible-header"><i className="material-icons">home</i>Featured Neighborhoods</div>
             <div className="collapsible-body"><p><ExploreNeighborhoods /></p></div>
           </li>
->>>>>>> new
 			  </ul>
+			  <ExploreNeighborhoods />
 			</div>
 		)
 	}

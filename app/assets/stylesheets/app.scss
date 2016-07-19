@@ -1,6 +1,7 @@
 /* general document */
 body {
 	font-family: "AvenirNext-Regular";
+	background-color: #eeeeee; 
 }
 
 header, main, footer {
@@ -270,18 +271,15 @@ footer.page-footer .footer-copyright {
 */
 
 
-.profile {
-
-}
 
 .profile_desc {
-	padding-top: 40px;
-	margin-left: 20px;
+	padding-top: 10px;
+	margin-left: 10px;
 	padding-bottom: 20px;
 }
 
 .button_format {
-	padding-left: 20px;
+	padding-left: 10px;
 }
 
 .profile_icon {
@@ -296,8 +294,6 @@ footer.page-footer .footer-copyright {
 
 .preference_select {
 	padding-top: 70px;
-	height: 300px;
-
 
 }
 
@@ -313,8 +309,8 @@ footer.page-footer .footer-copyright {
 }
 
 .button_spacing {
-	padding-top: 40px;
-	padding-bottom: 60px;
+	padding-bottom: 110px;
+	padding-top: 30px;
 }
 
 .move_button {
@@ -325,4 +321,52 @@ footer.page-footer .footer-copyright {
 .profile_buttons {
 	padding-bottom: 140px;
 }
+
+.pref_desc {
+	padding-bottom: 30px;
+}
+
+/*
+  ========================================
+  Neighborhoods  
+  ========================================
+*/
+
+.austin_map {
+	height: 400px;
+	width: 950px;
+	padding-top: 20px;
+	padding-right: 180px;
+	float: left; 
+}
+
+.hyde_park1 {
+	height: 300px;
+	width: 500px;
+}
+
+.hyde_park2 {
+	height: 300px;
+	width: 500px;
+}
+
+.silver_lake_map {
+	height: 400px;
+	width: 950px;
+	padding-top: 20px;
+	padding-right: 180px;
+	float: left;
+}
+
+
+.grid-cell {
+	border: 2px solid;
+	height: 100px;
+	margin: 1.5%;
+	background-color: grey;
+	color: blue;
+	text-align: center;
+	font-size: 30px
+}
+
 

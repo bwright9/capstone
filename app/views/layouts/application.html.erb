@@ -5,7 +5,9 @@
   <%= stylesheet_link_tag    'application', media: 'all' %>
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
-  <script src="http://localhost:3808/webpack-dev-server.js"></script>
+  <% if Rails.env.development? %>
+     <script src="http://localhost:3808/webpack-dev-server.js"></script>
+  <% end %>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>

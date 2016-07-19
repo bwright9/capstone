@@ -43,25 +43,25 @@ const tilesData = [
     img: "assets/neighborhoods/queen_anne.jpg", 
     title: 'Seattle',
     author: 'Queen Anne',
-    url: 'austin',
+    url: 'queenanne',
   },
    {
     img: "assets/neighborhoods/castro.jpg", 
     title: 'San Francisco',
     author: 'The Castro',
-    url: 'austin',
+    url: 'thecastro',
   },
   {
-    img: "assets/neighborhoods/providence.jpg",
+    img: "assets/neighborhoods/federal_hill.jpg",
     title: 'Providence',
     author: 'Federal Hill',
-    url: 'austin',
+    url: 'federalhill',
   },
   {
     img: "assets/neighborhoods/harvard_square.jpg",
     title: 'Boston',
     author: 'Harvard Square',
-    url: 'austin',
+    url: 'harvardsquare',
   },
 ];
 
@@ -80,7 +80,7 @@ const ExploreNeighborhoods = () => (
           subtitle={<span><b>{tile.author}</b></span>}
           actionIcon={<IconButton><StarBorder color="white" /></IconButton>}
         >
-          <img src={tile.img} style={styles.tile_img} />
+          <img src={tile.img} style={styles.tile_img}/>
         </GridTile>
         </Link>
       ))}

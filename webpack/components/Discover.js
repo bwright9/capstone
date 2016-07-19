@@ -533,12 +533,6 @@ class Discover extends React.Component {
               <CompareCities />
             </div>
           </li>
-
-          <li>
-            <div className="collapsible-header"><i className="material-icons">home</i>Featured Neighborhoods</div>
-            <div className="collapsible-body"><ExploreNeighborhoods /></div>
-          </li>
-
 			  </ul>
 			  <ExploreNeighborhoods />
 			</div>

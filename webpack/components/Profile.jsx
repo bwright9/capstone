@@ -110,12 +110,12 @@ class Profile extends React.Component {
 			    	<div className="card">
 			      	<div className="card-content">
 								<i className="medium material-icons profile_icon">perm_identity</i>
-			        	<p>Current Address: {this.props.profile.address}</p>
-			        	<p>Current City: {this.props.profile.current_city}</p>
-			        	<p>Current State: {this.props.profile.current_state}</p>
-			        	<p>Current Neighborhood: {this.props.profile.current_neighborhood}</p>
-			        	<p>Current Zipcode: {this.props.profile.current_zipcode}</p>
-			        	<p>Age: {this.props.profile.age}</p>
+			        	<p>Current Address: <span className="profile_bold">{this.props.profile.address}</span></p>
+			        	<p>Current City: <span className="profile_bold">{this.props.profile.current_city}</span></p>
+			        	<p>Current State: <span className="profile_bold">{this.props.profile.current_state}</span></p>
+			        	<p>Current Neighborhood: <span className="profile_bold">{this.props.profile.current_neighborhood}</span></p>
+			        	<p>Current Zipcode: <span className="profile_bold">{this.props.profile.current_zipcode}</span></p>
+			        	<p>Age: <span className="profile_bold">{this.props.profile.age}</span></p>
 			      	</div>
 			      	<div className="card-action">
 			        	<button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>

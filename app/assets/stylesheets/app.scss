@@ -394,6 +394,10 @@ footer.page-footer {
 	float: right; 
 }
 
+.profile_bold {
+	font-weight: 900;
+}
+
 /*
   ========================================
   Preference Select  
@@ -477,6 +481,25 @@ footer.page-footer {
 	text-align: center;
 	font-size: 30px
 }
+
+.textimg{
+	position: relative; 
+  margin-top: '2'; 
+}
+
+.title-sub {
+	position: absolute; 
+  margin-left: 400px;
+  color:  white;
+  text-shadow: 2px 2px 13px #262626;
+}
+
+.austin-bold {
+	font-weight: 900;
+	font-size: 16px;
+	color: #e68a00;
+}
+
 
 /*
   ========================================

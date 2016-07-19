@@ -19,3 +19,5 @@
 /config/walkscore.yml
 /config/sendgrid.yml
 /config/foursquare.yml
+
+.DS_Store

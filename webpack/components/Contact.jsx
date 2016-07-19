@@ -33,7 +33,7 @@ class Contact extends React.Component {
       				<a href="https://github.com/rkprows" target="_blank"><img src='/assets/github.png' className='github'/></a>
 						</div>
 						<div className='col m3 center'>
-							<img className='team' src='assets/team/Brant.jpg' />
+							<img className='team' src='assets/team/brant.jpg' />
 							<h4 className='center team-names'>Brant Wright</h4>
               <p>Texas native, world traveler, and tennis addict. Film buff and amateur Scooby Do impersonator.</p>
       				<a href="https://www.linkedin.com/in/bwright9" target="_blank"><img src='/assets/linkedin-icon.png' className='linkedin' /></a>

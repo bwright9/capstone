@@ -88,7 +88,9 @@ class travelPreferences extends React.Component {
 			)	
 		} else {
 			return(
-				<div>loading preferences</div>
+				<div className='container'>
+					<p>Loading preferences</p>
+				</div>
 			)
 		}
 	}

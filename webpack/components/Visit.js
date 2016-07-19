@@ -8,7 +8,7 @@ class Visit extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = { city: null, geoState: '', count: null, neighborhoods: null, geoHood: null, scores: null,
-									 geoWalkscore: null, venues: null};
+									 geoWalkscore: null, venues: null, preferences: null};
 		this.showForm = this.showForm.bind(this);
 		this.selectRegion = this.selectRegion.bind(this);
 		this.fetchCount = this.fetchCount.bind(this);
@@ -20,6 +20,7 @@ class Visit extends React.Component {
 		this.recommendNeighborhood = this.recommendNeighborhood.bind(this);
 		this.showCount = this.showCount.bind(this);
 		this.showRecommendation = this.showRecommendation.bind(this);
+		this.fetchPreferences = this.fetchPreferences.bind(this);
 		this.fetchVenues = this.fetchVenues.bind(this);
 		this.showVenueRex = this.showVenueRex.bind(this);
 		this.runUpdate = true;
@@ -71,7 +72,6 @@ class Visit extends React.Component {
 		})
 	}
 
-	
 	recommendNeighborhood() {
 		let matchPoint = null;
 		let matchName = null;
@@ -80,14 +80,38 @@ class Visit extends React.Component {
 		matchPoint = neighborhoods[names[names.length - 1]].score;
 		matchName = names[names.length-1]		
 		this.setState({ geoHood: matchName, geoWalkscore: matchPoint }, function stateUpdated () {
-				this.fetchVenues(); 
+				this.fetchPreferences(); 
 			})
 	}
 
+	fetchPreferences() {
+		$.ajax({
+	    url: "/api/visit_preferences",
+	    type: 'GET',
+	    dataType: 'JSON',
+	  }).done( visitPreferences => {
+	  	this.setState({ preferences: visitPreferences }, function stateUpdated () {
+				this.fetchVenues(); 
+			})
+	  }).fail( data => {
+	  	console.log('oh no!')
+	  });
+	}
+
 	fetchVenues() {
+		let hood = this.state.geoHood;
+		let lat = this.state.neighborhoods[hood].lat;
+		let long = this.state.neighborhoods[hood].long;
+		let preferences = this.state.preferences
+		let keys = Object.keys(preferences);
+		let filtered = keys.filter(function(key) {
+		  return preferences[key]
+		});
+		console.log(filtered);
 		$.ajax({
 			url: "/api/foursquare",
 			type: 'GET',
+			data: { lat, long, filtered }
 		}).done( venues => {
 			this.setState({ venues });
 		}).fail( data => {
@@ -280,10 +304,10 @@ class Visit extends React.Component {
 				</div>
 			)
 		} else {
+			console.log(this.state.neighborhoods)
 			return(
 				<div>
 					<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>
-					<Link to={`/visit?city=${this.state.city}&state=${this.state.geoState}`} className='btn'>Visit</Link>
 				</div>
 			)
 		}	

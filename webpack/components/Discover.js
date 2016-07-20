@@ -406,7 +406,7 @@ class Discover extends React.Component {
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/kansas.png' />
-                    <p><Link to='/move?city=Kansas%20City&state=kansas'>Kansas City, KS</Link></p>
+                    <p>Kansas City, KS</p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/tennessee.png' />
@@ -414,7 +414,7 @@ class Discover extends React.Component {
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/utah.png' />
-                    <p><Link to='/move?city=Provo&state=utah'>Provo, UT</Link></p>
+                    <p>Provo, UT</p>
                 </div>
               </div>
               <h3 className="fiber">Upcoming Cities</h3>
@@ -425,7 +425,7 @@ class Discover extends React.Component {
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/alabama.png' />
-                    <p><Link to='/move?city=Huntsville&state=alabama'>Huntsville, AL</Link></p>
+                    <p>Huntsville, AL</p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/northcarolina.png' />
@@ -481,7 +481,7 @@ class Discover extends React.Component {
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/california.png' />
-                    <p><Link to='/move?city=Costa%20Mesa&state=california'>Costa Mesa, CA</Link></p>
+                    <p>Costa Mesa, CA</p>
                 </div>
                 <div className="col s4 center">
                     <img className= 'state' src='http://res.cloudinary.com/somethereapp/image/upload/v1468963062/colorado.png' />

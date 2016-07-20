@@ -71,7 +71,7 @@ const ExploreNeighborhoods = () => (
       cellHeight={250}
       style={styles.gridList}
       >
-      <Subheader><h5 className="center"><i className="tiny material-icons">grade</i>Feautured Neighborhoods<i className="tiny material-icons">grade</i></h5></Subheader>
+      <Subheader><h5 className="center"><i className="tiny material-icons">grade</i>Featured Neighborhoods<i className="tiny material-icons">grade</i></h5></Subheader>
       {tilesData.map((tile) => (
         <Link to={tile.url}>
         <GridTile

@@ -383,7 +383,7 @@ class Move extends React.Component {
 			return(
 				<div>
 					<button type="button" className="btn" onClick={(e) => this.reload(e)}>Search Again</button>
-					<Link to={`/visit?city=${this.state.city}&state=${this.state.geoState}`} className='btn'>Visit</Link>
+					<Link to={`/visit?city=${this.state.city}&state=${this.state.geoState}`} className='btn second-btn'>Visit</Link>
 				</div>
 			)
 		}	

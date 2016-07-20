@@ -113,7 +113,7 @@ class Profile extends React.Component {
 			        	<p>Age: {this.props.profile.age}</p>
 			      	</div>
 			      	<div className="card-action">
-			        	<button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
+			        	<button className="btn" onClick={this.toggleEdit.bind(this)}>Edit</button>
 			    	</div>
 			    </div>
 			  </div>
@@ -126,7 +126,7 @@ class Profile extends React.Component {
 				  </div>
 				    <div className="button_format">
 				      <div className='profile_buttons'>
-				      	<button className="btn blue-grey white-text z-depth-2"><Link to={'/travelPreferences'}><div className="white-text">Visit Preferences</div></Link></button>
+				      	<button className="btn white-text z-depth-2"><Link to={'/travelPreferences'}><div className="white-text">Visit Preferences</div></Link></button>
 				      </div>
 				   	</div>
 				   </div>
@@ -146,7 +146,7 @@ class Profile extends React.Component {
 		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />	          
 		          <input ref="age" placeholder="Age" defaultValue={this.props.profile.age} />
 		          <button type="submit" className="btn z-depth-2">Update</button>
-		          <button type="button" className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Cancel</button>
+		          <button type="button" className="btn grey second-btn z-depth-2" onClick={this.toggleEdit.bind(this)}>Cancel</button>
 		        </form>
 		      </div>
 		    </div>

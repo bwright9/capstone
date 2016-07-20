@@ -37,7 +37,7 @@ class Login extends React.Component {
  				<hr />
 
  				<FacebookLogin
-			    appId="851814724953105"
+			    appId="1065294750231075"
 			    autoLoad={false}
 			    fields="name,email"
 			    cssClass="btn blue"

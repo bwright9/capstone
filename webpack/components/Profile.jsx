@@ -121,8 +121,7 @@ class Profile extends React.Component {
 				<div className="row">
 				<div className='col s12 m9'>
 				  <div className='profile_desc'>
-				    <p>With the click of a button, someThere helps you match your current neighborhood with other similar neighborhoods.
-				    You can also customize your own preferences to match other neighborhoods based on those preferences.</p> 
+				    <p>Set your Visit Preferences to see the top spots in the cities you are visiting.</p> 
 				  </div>
 				    <div className="button_format">
 				      <div className='profile_buttons'>

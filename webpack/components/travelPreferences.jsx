@@ -80,7 +80,9 @@ class travelPreferences extends React.Component {
 					 		  	</TableBody>
 					 		 	</Table>
 					 		 	<div className='button_spacing'>
+					 		 		<button className='btn'><Link to={'/profile'}><div className="white-text">Save</div></Link></button>
 					 		 		<button className='btn grey'><Link to={'/profile'}><div className="white-text">Back</div></Link></button>
+
 					 			</div>
 					 		</div>
 					 		</div>

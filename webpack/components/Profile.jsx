@@ -31,14 +31,13 @@ class Profile extends React.Component {
  		let address = this.refs.currentAddress.value
 	  let current_city = this.refs.currentCity.value
 	  let current_state = this.refs.currentState.value
-	  let current_zipcode = this.refs.currentZipcode.value
 	  let age = this.refs.age.value
 	  this.toggleEdit();
 	  $.ajax({
 	    url: `/api/profiles/${this.props.id}`,
 	    type: 'PUT',
 	    dataType: 'JSON',
-	    data: { profile: { address, current_city, current_state, current_zipcode, age } }
+	    data: { profile: { address, current_city, current_state, age } }
 	  }).done( profile => {
 	  	this.props.dispatch(profileUpdate(profile));
 			this.fetchWalkscore();
@@ -71,13 +70,12 @@ class Profile extends React.Component {
 		let address = this.refs.currentAddress.value
 		let current_city = this.refs.currentCity.value
 		let current_state = this.refs.currentState.value
-		let current_zipcode = this.refs.currentZipcode.value
 		let age = this.refs.age.value
 		$.ajax({
 			url: `/api/profiles`,
 			type: 'POST',
 			dataType: 'JSON',
-			data: { profile: { address, current_city, current_state, current_zipcode, age, user_id: this.props.id } }
+			data: { profile: { address, current_city, current_state, age, user_id: this.props.id } }
 		}).done( profile => {
 	  	this.props.dispatch(profileUpdate(profile));
 		})
@@ -93,7 +91,6 @@ class Profile extends React.Component {
 	          <input ref="currentAddress" utofocus='true' placeholder="Current Address" />
 						<input ref='currentCity' type='text' placeholder='Current City' />
 						<input ref='currentState' type='text' step='any' placeholder='Current State' />
-						<input ref='currentZipcode' type='number' step='any' placeholder='Current Zip Code' />
 						<input ref='age' type='number' step='any' placeholder='Age' />
 						<button type='submit' className='btn'>Create Profile</button>
 					</form>
@@ -110,12 +107,10 @@ class Profile extends React.Component {
 			    	<div className="card">
 			      	<div className="card-content">
 								<i className="medium material-icons profile_icon">perm_identity</i>
-			        	<p>Current Address: <span className="profile_bold">{this.props.profile.address}</span></p>
-			        	<p>Current City: <span className="profile_bold">{this.props.profile.current_city}</span></p>
-			        	<p>Current State: <span className="profile_bold">{this.props.profile.current_state}</span></p>
-			        	<p>Current Neighborhood: <span className="profile_bold">{this.props.profile.current_neighborhood}</span></p>
-			        	<p>Current Zipcode: <span className="profile_bold">{this.props.profile.current_zipcode}</span></p>
-			        	<p>Age: <span className="profile_bold">{this.props.profile.age}</span></p>
+			        	<p>Current Address: {this.props.profile.address}</p>
+			        	<p>Current City: {this.props.profile.current_city}</p>
+			        	<p>Current State: {this.props.profile.current_state}</p>
+			        	<p>Age: {this.props.profile.age}</p>
 			      	</div>
 			      	<div className="card-action">
 			        	<button className="btn blue-grey" onClick={this.toggleEdit.bind(this)}>Edit</button>
@@ -131,7 +126,7 @@ class Profile extends React.Component {
 				  </div>
 				    <div className="button_format">
 				      <div className='profile_buttons'>
-				      	<button className="btn z-depth-2"><Link to={'/CompareCities'}><div className="white-text">Match Neighborhood</div></Link></button>  |  <button className="btn blue-grey white-text z-depth-2"><Link to={'/preferenceSelect'}><div className="white-text">Set Preferences</div></Link></button>
+				      	<button className="btn blue-grey white-text z-depth-2"><Link to={'/travelPreferences'}><div className="white-text">Visit Preferences</div></Link></button>
 				      </div>
 				   	</div>
 				   </div>
@@ -149,7 +144,6 @@ class Profile extends React.Component {
  		          <input ref="currentAddress" autoFocus={true} placeholder="Current Address" defaultValue={this.props.profile.address} />
 		          <input ref="currentCity" placeholder="Current City" defaultValue={this.props.profile.current_city} />
 		          <input ref="currentState" placeholder="Current State" defaultValue={this.props.profile.current_state} />	          
-		          <input ref="currentZipcode" placeholder="Current Zipcode" defaultValue={this.props.profile.current_zipcode} />
 		          <input ref="age" placeholder="Age" defaultValue={this.props.profile.age} />
 		          <button type="submit" className="btn z-depth-2">Update</button>
 		          <button type="button" className="btn blue-grey z-depth-2" onClick={this.toggleEdit.bind(this)}>Cancel</button>

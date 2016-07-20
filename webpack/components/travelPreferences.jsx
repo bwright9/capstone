@@ -80,7 +80,7 @@ class travelPreferences extends React.Component {
 					 		  	</TableBody>
 					 		 	</Table>
 					 		 	<div className='button_spacing'>
-					 		 		<button className='btn offset-s2'>Match Neighborhood!</button>  |   <button className='btn grey'><Link to={'/preferenceSelect'}><div className="white-text">Back</div></Link></button>
+					 		 		<button className='btn grey'><Link to={'/profile'}><div className="white-text">Back</div></Link></button>
 					 			</div>
 					 		</div>
 					 		</div>

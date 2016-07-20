@@ -204,9 +204,9 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.food) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected food in your preferences, we recommend checking out:</p>
-						<p>{this.state.venues.food[0][0]}, Rating: {this.state.venues.food[0][1]}</p>
+						<p>{this.state.venues.food[0][0]} ({this.state.venues.food[0][1]}/10)</p>
 						<p>{this.state.venues.food[1][0]}, Rating: {this.state.venues.food[1][1]}</p>
 						<p>{this.state.venues.food[2][0]}, Rating: {this.state.venues.food[2][1]}</p>
 					</div>
@@ -223,7 +223,7 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.drinks) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected drinks in your preferences, we recommend checking out:</p>
 						<p>{this.state.venues.drinks[0][0]}, Rating: {this.state.venues.drinks[0][1]}</p>
 						<p>{this.state.venues.drinks[1][0]}, Rating: {this.state.venues.drinks[1][1]}</p>
@@ -242,7 +242,7 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.coffee) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected coffee in your preferences, we recommend checking out:</p>
 						<p>{this.state.venues.coffee[0][0]}, Rating: {this.state.venues.coffee[0][1]}</p>
 						<p>{this.state.venues.coffee[1][0]}, Rating: {this.state.venues.coffee[1][1]}</p>
@@ -261,7 +261,7 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.shops) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected shops in your preferences, we recommend checking out:</p>
 						<p>{this.state.venues.shops[0][0]}, Rating: {this.state.venues.shops[0][1]}</p>
 						<p>{this.state.venues.shops[1][0]}, Rating: {this.state.venues.shops[1][1]}</p>
@@ -280,7 +280,7 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.arts) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected arts in your preferences, we recommend checking out:</p>
 						<p>{this.state.venues.arts[0][0]}, Rating: {this.state.venues.arts[0][1]}</p>
 						<p>{this.state.venues.arts[1][0]}, Rating: {this.state.venues.arts[1][1]}</p>
@@ -299,7 +299,7 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.outdoors) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected outdoors in your preferences, we recommend checking out:</p>
 						<p>{this.state.venues.outdoors[0][0]}, Rating: {this.state.venues.outdoors[0][1]}</p>
 						<p>{this.state.venues.outdoors[1][0]}, Rating: {this.state.venues.outdoors[1][1]}</p>
@@ -318,7 +318,7 @@ class Visit extends React.Component {
 		if (this.state.venues) {
 			if (this.state.venues.sights) {
 				return(
-					<div>
+					<div className="col s12 m6">
 						<p>Since you selected sights in your preferences, we recommend checking out:</p>
 						<p>{this.state.venues.sights[0][0]}, Rating: {this.state.venues.sights[0][1]}</p>
 						<p>{this.state.venues.sights[1][0]}, Rating: {this.state.venues.sights[1][1]}</p>
@@ -447,13 +447,18 @@ class Visit extends React.Component {
 					{ this.showForm() }
 					{ this.showCount() }
 					{ this.showRecommendation() }
-					{ this.showVenuesFood() }
-					{ this.showVenuesDrinks() }
-					{ this.showVenuesCoffee() }
-					{ this.showVenuesShops() }
-					{ this.showVenuesArts() }
-					{ this.showVenuesOutdoors() }
-					{ this.showVenuesSights() }
+
+					<div className="row">
+						{ this.showVenuesFood() }
+						{ this.showVenuesDrinks() }
+						{ this.showVenuesCoffee() }
+						{ this.showVenuesShops() }
+						{ this.showVenuesArts() }
+						{ this.showVenuesOutdoors() }
+						{ this.showVenuesSights() }
+					</div>
+
+
 					{ this.showCoordinates() }
 
 					<br />

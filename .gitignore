@@ -20,23 +20,4 @@
 /config/sendgrid.yml
 /config/foursquare.yml
 
-app/assets/images/castro_map.jpg
-app/assets/images/hyde_park_map.jpg
-app/assets/images/neighborhoods/castro_main.jpg
-app/assets/images/neighborhoods/federal_hill.jpg
-app/assets/images/neighborhoods/federal_hill_map.jpg
-app/assets/images/neighborhoods/federal_hill_secondary.jpg
-app/assets/images/neighborhoods/harvard_square_map.jpg
-app/assets/images/neighborhoods/harvard_square_primary.jpg
-app/assets/images/neighborhoods/harvard_square_secondary.jpg
-app/assets/images/neighborhoods/hyde_park_primary.jpg
-app/assets/images/neighborhoods/hyde_park_secondary.jpg
-app/assets/images/neighborhoods/queen_anne_map.jpg
-app/assets/images/neighborhoods/queen_anne_primary.jpg
-app/assets/images/neighborhoods/queen_anne_secondary.jpg
-app/assets/images/neighborhoods/silver_lake_main.jpg
-app/assets/images/neighborhoods/silver_lake_secondary.jpg
-webpack/components/FederalHill.jsx
-webpack/components/HarvardSquare.jsx
-webpack/components/QueenAnne.jsx
-webpack/components/TheCastro.jsx
+

@@ -84,7 +84,7 @@ class Sidenav extends React.Component {
     } else {
       return(
         <div>
-          <Link to='/profile'>Create Profile</Link>
+          <Link to='/profile' id='create-profile'>CREATE PROFILE</Link>
         </div>
       )
     }
